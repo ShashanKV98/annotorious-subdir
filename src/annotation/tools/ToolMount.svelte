@@ -16,7 +16,6 @@
   let toolComponent: SvelteComponent;
 
   $: if (toolComponent) toolComponent.$set({ transform });
-
   $: if (toolComponent) toolComponent.$set({ viewportScale });
 
   onMount(() => {
