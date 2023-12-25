@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" lang="ts">
   import type { DrawingStyle } from '@annotorious/core';
   import { createEventDispatcher, onMount, type SvelteComponent } from 'svelte';
   import type { ImageAnnotation, Shape } from '../../model';
