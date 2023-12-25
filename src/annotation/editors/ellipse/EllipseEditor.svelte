@@ -1,4 +1,4 @@
-<script type="ts">
+<script type="ts" lang="ts">
   import { Editor, Handle } from '..';
   import type { Ellipse } from '../../../model';
   import type { Transform } from '../../Transform';
