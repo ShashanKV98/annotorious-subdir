@@ -15,7 +15,6 @@
   },
   "scripts": {
     "start": "vite",
-    "prepare": "vite build",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest"
