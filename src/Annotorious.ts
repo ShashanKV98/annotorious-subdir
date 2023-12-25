@@ -127,7 +127,7 @@ export const createImageAnnotator = <E extends unknown = ImageAnnotation>(
 
   const setDrawingTool = (name: DrawingTool) => {
     // Validate that the tool exists
-    console.log(listdrawingtools())
+    console.log(listDrawingTools())
     const toolSpec = getTool(name);
     if (!toolSpec)
       throw `No drawing tool named ${name}`;
