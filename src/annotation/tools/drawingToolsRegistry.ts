@@ -14,7 +14,7 @@ export type DrawingToolOpts = {
 
 }
 
-const REGISTERED = new Map<DrawingTool, { tool: typeof SvelteComponent, opts?: DrawingToolOpts }>([
+export const REGISTERED = new Map<DrawingTool, { tool: typeof SvelteComponent, opts?: DrawingToolOpts }>([
   ['rectangle', { tool: RubberbandRectangle }],
   ['polygon', { tool: RubberbandPolygon }],
   ['ellipse', { tool: RubberbandEllipse }],
