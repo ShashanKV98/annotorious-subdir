@@ -1,4 +1,4 @@
-<script type="ts">
+<script type="ts" lang="ts">
   import { onMount, type SvelteComponent } from 'svelte';
   import { v4 as uuidv4 } from 'uuid';
   import type { DrawingStyle, StoreChangeEvent, User } from '@annotorious/core';
