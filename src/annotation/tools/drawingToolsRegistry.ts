@@ -20,7 +20,13 @@ const REGISTERED = new Map<DrawingTool, { tool: typeof SvelteComponent, opts?: D
   ['ellipse', { tool: RubberbandEllipse }],
 ]);
 
+console.log("registered", REGISTERED)
+
+console.log("keys", [...REGISTERED.keys()])
+
 export const listDrawingTools = () => [...REGISTERED.keys()];
+
+console.log("drawing tools",listDrawingTools)
 
 export const getTool = (name: string) => REGISTERED.get(name);
   
