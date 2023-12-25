@@ -1,4 +1,4 @@
-<script type="ts">
+<script type="ts" lang="ts">
   import type { Rectangle } from '../../../model';
   import type { Transform } from '../../Transform';
   import { Editor, Handle } from '..';
