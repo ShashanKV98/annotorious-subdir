@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "ignoreDeprecations": "5.0",
     // "importsNotUsedAsValues": "error",
-    "verbatimModuleSyntax": "true",
+    "verbatimModuleSyntax": true,
     "incremental": true,
     "isolatedModules": true,
     "module": "ESNext",
