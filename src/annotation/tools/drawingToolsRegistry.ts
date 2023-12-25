@@ -4,7 +4,7 @@ import { RubberbandPolygon } from './polygon';
 import { RubberbandEllipse } from './ellipse';
 import type { DrawingMode } from '../../AnnotoriousOpts';
 
-export type DrawingTool = 'rectangle' | 'polygon' | string;
+export type DrawingTool = 'rectangle' | 'polygon' | 'ellipse' | string;
 
 export type DrawingToolOpts = {
 
