@@ -133,7 +133,7 @@ export const createImageAnnotator = <E extends unknown = ImageAnnotation>(
     console.log('registered', REGISTERED)
     console.log(toolSpec)
     if (!toolSpec)
-      throw `No drawing tool named ${name}`;
+      throw `No such tool named ${name}`;
 
     annotationLayer.$set({ toolName: name })
   }
