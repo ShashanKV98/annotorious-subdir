@@ -1,4 +1,4 @@
-<script lang="ts">
+<script type="ts" lang="ts">
   import { createEventDispatcher, onMount, type SvelteComponent } from 'svelte';
   import type { Transform } from '../Transform';
   import type { Shape } from 'src/model';
