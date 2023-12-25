@@ -1,4 +1,4 @@
-<script type="ts">
+<script type="ts" lang="ts">
   import { createEventDispatcher, onMount } from 'svelte';
   import type { DrawingMode } from '../../../AnnotoriousOpts';
   import type { Transform } from '../..';
