@@ -1,4 +1,4 @@
-<script type="ts">
+<script type="ts" lang="ts">
   import { boundsFromPoints } from '../../../model';
   import type { Polygon } from '../../../model';
   import type { Transform } from '../../Transform';
