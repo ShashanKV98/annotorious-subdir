@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "vite",
-    "prepare": "npm run build",
+    "prepare": "vite build",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest"
