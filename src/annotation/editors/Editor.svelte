@@ -1,4 +1,4 @@
-<script type="ts">
+<script type="ts" lang="ts">
   import { createEventDispatcher } from 'svelte';
   import type { Shape } from '../../model';
   import type { Handle } from './Handle';
