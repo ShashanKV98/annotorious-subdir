@@ -37,7 +37,7 @@
     "./src": "./src/index.ts"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^2.5.3",
+    "@sveltejs/vite-plugin-svelte": "^3.0.1",
     "@tsconfig/svelte": "^5.0.2",
     "@types/rbush": "^3.0.0",
     "jsdom": "^23.0.1",
