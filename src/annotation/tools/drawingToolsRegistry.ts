@@ -3,7 +3,7 @@ import { RubberbandRectangle } from './rectangle';
 import { RubberbandPolygon } from './polygon';
 import type { DrawingMode } from '../../AnnotoriousOpts';
 
-export type DrawingTool = 'rectangle' | 'polygon' | 'ellipse' | string;
+export type DrawingTool = 'rectangle' | 'polygon' | string;
 
 export type DrawingToolOpts = {
 
@@ -15,7 +15,7 @@ export type DrawingToolOpts = {
 
 const REGISTERED = new Map<DrawingTool, { tool: typeof SvelteComponent, opts?: DrawingToolOpts }>([
   ['rectangle', { tool: RubberbandRectangle }],
-  ['polygon', { tool: RubberbandPolygon }],
+  ['polygon', { tool: RubberbandPolygon }]
 ]);
 
 export const listDrawingTools = () => [...REGISTERED.keys()];
