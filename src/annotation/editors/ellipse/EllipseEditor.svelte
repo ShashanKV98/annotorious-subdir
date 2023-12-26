@@ -1,7 +1,9 @@
 <script type="ts" lang="ts">
-  import { Handle, Editor } from '@annotorious/annotorious/src';
-  import type { Ellipse, Transform } from '@annotorious/annotorious';
-  
+  import { Handle, Editor } from '..';
+  import type { Transform } from '../../Transform';
+  import type { Ellipse } from '../../../model';
+  import type { Transform } from '../../Transform';
+
   export let shape: Ellipse;
 
   export let transform: Transform;
