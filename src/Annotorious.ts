@@ -2,7 +2,7 @@ import type { SvelteComponent } from 'svelte';
 import { PointerSelectAction, type Annotator, type DrawingStyle, type Filter, type User } from '@annotorious/core';
 import { createAnonymousGuest, createBaseAnnotator, createLifecyleObserver, createUndoStack } from '@annotorious/core';
 import { registerEditor } from './annotation/editors';
-import { getTool, registerTool, listDrawingTools, REGISTERED, type DrawingTool } from './annotation/tools';
+import { getTool, registerTool, listDrawingTools, type DrawingTool } from './annotation/tools';
 import { SVGAnnotationLayer } from './annotation';
 import type { DrawingToolOpts, SVGAnnotationLayerPointerEvent } from './annotation';
 import type { ImageAnnotation, ShapeType } from './model';
@@ -128,9 +128,7 @@ export const createImageAnnotator = <E extends unknown = ImageAnnotation>(
   const setDrawingTool = (name: DrawingTool) => {
     // Validate that the tool exists
     console.log(listDrawingTools())
-    // const toolSpec = getTool(name);
-    const toolSpec = REGISTERED.get(name)
-    console.log('registered', REGISTERED)
+    const toolSpec = getTool(name);
     console.log(toolSpec)
     if (!toolSpec)
       throw `No such tool named ${name}`;
