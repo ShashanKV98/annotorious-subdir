@@ -1,7 +1,8 @@
 <script type="ts">
   import { createEventDispatcher, onMount } from 'svelte';
-  import { ShapeType } from '@annotorious/annotorious';
-  import type { Ellipse, DrawingMode, Transform } from '@annotorious/annotorious';
+  import type { DrawingMode } from '../../../AnnotoriousOpts';
+  import { ShapeType, type Ellipse } from '../../../model';
+  import type { Transform } from '../..';
 
   const dispatch = createEventDispatcher<{ create: Ellipse }>();
   
