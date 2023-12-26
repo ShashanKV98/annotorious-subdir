@@ -82,6 +82,7 @@ export const createImageAnnotator = <E extends unknown = ImageAnnotation>(
     props: { 
       drawingEnabled: opts.drawingEnabled, 
       image: img, 
+      toolName: undefined,
       preferredDrawingMode: opts.drawingMode,
       state, 
       style: opts.style, 
