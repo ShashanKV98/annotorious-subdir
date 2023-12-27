@@ -82,7 +82,6 @@ export const createImageAnnotator = <E extends unknown = ImageAnnotation>(
     props: { 
       drawingEnabled: opts.drawingEnabled, 
       image: img, 
-      toolName: undefined,
       preferredDrawingMode: opts.drawingMode,
       state, 
       style: opts.style, 
@@ -128,11 +127,9 @@ export const createImageAnnotator = <E extends unknown = ImageAnnotation>(
 
   const setDrawingTool = (name: DrawingTool) => {
     // Validate that the tool exists
-    console.log(listDrawingTools())
     const toolSpec = getTool(name);
-    console.log(toolSpec)
     if (!toolSpec)
-      throw `No such tool named ${name}`;
+      throw `No drawing tool named ${name}`;
 
     annotationLayer.$set({ toolName: name })
   }
