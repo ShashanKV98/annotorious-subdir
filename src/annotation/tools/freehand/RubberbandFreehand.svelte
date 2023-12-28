@@ -98,6 +98,29 @@
       }
     }
   }
+
+  const onDblClick = () => {
+    // Require min 3 points (incl. cursor) and minimum
+    // polygon area
+    const p = [...points, cursor];
+
+    const shape: Polygon = {
+      type: ShapeType.POLYGON, 
+      geometry: {
+        bounds: boundsFromPoints(p),
+        points: p
+      }
+    }
+
+    const area = computeArea(shape);
+    if (area > 4) {
+      points = [];
+      cursor = null;
+    
+      dispatch('create', shape);
+    }
+  }
+
   const stopDrawing = () => {
     const shape: Polygon = {
       type: ShapeType.POLYGON, 
