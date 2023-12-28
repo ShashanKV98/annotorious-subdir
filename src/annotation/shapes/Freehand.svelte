@@ -2,7 +2,7 @@
   import type { DrawingStyle } from '@annotorious/core';
   import type { Geometry, ImageAnnotation, PolygonGeometry } from '../../model';
   import { computeStyle } from '../utils/styling';
-  import { getSvgPathFromStroke } from '../utils/path';
+  import { getSmoothPathData, options } from '../utils/path';
   
   /** Props **/
   export let annotation: ImageAnnotation;
@@ -12,16 +12,12 @@
   $: computedStyle = computeStyle(annotation, style);
 
   const { points } = geom as PolygonGeometry;
+  
 </script>
 
 <g data-id={annotation.id}>
-  <polygon 
-    class="a9s-outer"
-    style={computedStyle ? 'display:none;' : undefined}
-    points={points.map(xy => xy.join(',')).join(' ')} />
-
-  <polygon 
+  <path 
     class="a9s-inner"
     style={computedStyle}
-    points={points.map(xy => xy.join(',')).join(' ')} />
+    d={getSmoothPathData(points,options)} />
 </g>
