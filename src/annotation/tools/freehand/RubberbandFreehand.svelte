@@ -3,6 +3,7 @@
   import type { DrawingMode } from '../../../AnnotoriousOpts';
   import { boundsFromPoints, computeArea, ShapeType, type Polygon } from '../../../model';
   import { distance } from '../../utils';
+  import { getSmoothPathData, options } from '../../utils/path';
   import type { Transform } from '../..';
 
   const dispatch = createEventDispatcher<{ create: Polygon }>();
