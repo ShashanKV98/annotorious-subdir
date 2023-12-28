@@ -16,8 +16,6 @@ export enum ShapeType {
 
   RECTANGLE = 'RECTANGLE',
 
-  FREEHAND = 'FREEHAND',
-
 }
 
 export interface Geometry {
