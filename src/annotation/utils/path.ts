@@ -1,6 +1,6 @@
 import { getStroke } from "perfect-freehand";
 
-const options = {
+export const options = {
   size: 6,
   thinning: 0.5,
   smoothing: 0.5,
@@ -34,7 +34,7 @@ export function getSvgPathFromStroke(stroke) {
   return d.join(" ")
 }
 
-export function getSmoothPathData(points) {
+export function getSmoothPathData(points,options) {
   const stroke = getStroke(points, options);
   const pathData = getSvgPathFromStroke(stroke);
   return pathData
