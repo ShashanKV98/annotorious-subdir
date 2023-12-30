@@ -16,11 +16,9 @@
 
   let lastPointerDown: { timeStamp: number, offsetX: number, offsetY: number };
 
-  let points: [number, number, number][] = [];
+  $: points = [];
   
   let cursor: [number, number] = null;
-
-  let isClosable: boolean = false;
 
   $: handleSize = 10 / viewportScale;
 
@@ -76,10 +74,10 @@
 
 <g class="a9s-annotation a9s-rubberband">
   {#if cursor}
-    {#if points.length > 0}
+    <!-- {#if points.length > 0} -->
         <path 
           class="a9s-inner"
           d={pathData} />
-    {/if}
+    <!-- {/if} -->
   {/if}
 </g>
