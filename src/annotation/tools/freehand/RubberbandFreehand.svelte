@@ -20,6 +20,10 @@
   
   let cursor: [number, number] = null;
 
+  let pathData : string = ''
+
+  let isDrawing: Boolean = false;
+
   $: handleSize = 10 / viewportScale;
 
   const onPointerDown = (evt: PointerEvent) => {
@@ -28,23 +32,28 @@
     lastPointerDown = { timeStamp, offsetX, offsetY };
 
     if (drawingMode === 'drag') {
+      isDrawing = true
       if (points.length === 0) {
         const point = transform.elementToImage(evt.offsetX, evt.offsetY);
-        points.push([...point,evt.pressure]);
-
+        points = [...point,evt.pressure];
+        pathData = getSmoothPathData(points,options)
         cursor = point;
       }
     }
   }
 
   const onPointerMove = (evt: PointerEvent) => {
-    const point = transform.elementToImage(evt.offsetX, evt.offsetY);
-    points = [...points, [...point,evt.pressure]];
+    if (isDrawing){
+      const point = transform.elementToImage(evt.offsetX, evt.offsetY);
+      points = [...points, [...point,evt.pressure]];
+      pathData = getSmoothPathData(points,options)
+    }
   }
 
   const onPointerUp = (evt: PointerEvent) => {
       // Stop click event from propagating if we're drawing
-      evt.stopImmediatePropagation();
+      // evt.stopImmediatePropagation();
+      isDrawing = false
       stopDrawing();
   }
 
@@ -63,7 +72,8 @@
     dispatch('create', shape);
   }
 
-  $: pathData = getSmoothPathData(points,options)
+  pathData = getSmoothPathData(points,options)
+  
 
   onMount(() => {
     addEventListener('pointerdown', onPointerDown, true);
