@@ -351,19 +351,19 @@ const Cn = (e, t = !1) => {
     throw new Error("Unsupported MediaFragment: " + n);
   if (l && l !== "pixel")
     throw new Error(`Unsupported MediaFragment unit: ${l}`);
-  const [m, d, g, b] = [a, u, h, f].map(parseFloat);
+  const [m, d, g, p] = [a, u, h, f].map(parseFloat);
   return {
     type: j.RECTANGLE,
     geometry: {
       x: m,
       y: d,
       w: g,
-      h: b,
+      h: p,
       bounds: {
         minX: m,
-        minY: t ? d - b : d,
+        minY: t ? d - p : d,
         maxX: m + g,
-        maxY: t ? d : d + b
+        maxY: t ? d : d + p
       }
     }
   };
@@ -442,14 +442,14 @@ function Kn(e, t = {}) {
   let { size: n = 16, smoothing: o = 0.5, thinning: i = 0.5, simulatePressure: r = !0, easing: s = (H) => H, start: l = {}, end: a = {}, last: u = !1 } = t, { cap: h = !0, easing: f = (H) => H * (2 - H) } = l, { cap: m = !0, easing: d = (H) => --H * H * H + 1 } = a;
   if (e.length === 0 || n <= 0)
     return [];
-  let g = e[e.length - 1].runningLength, b = l.taper === !1 ? 0 : l.taper === !0 ? Math.max(n, g) : l.taper, E = a.taper === !1 ? 0 : a.taper === !0 ? Math.max(n, g) : a.taper, w = Math.pow(n * o, 2), p = [], S = [], T = e.slice(0, 10).reduce((H, O) => {
+  let g = e[e.length - 1].runningLength, p = l.taper === !1 ? 0 : l.taper === !0 ? Math.max(n, g) : l.taper, A = a.taper === !1 ? 0 : a.taper === !0 ? Math.max(n, g) : a.taper, b = Math.pow(n * o, 2), y = [], S = [], T = e.slice(0, 10).reduce((H, O) => {
     let V = O.pressure;
     if (r) {
       let N = Be(1, O.distance / n), le = Be(1, 1 - N);
       V = Be(1, H + (le - H) * (N * Pt));
     }
     return (H + V) / 2;
-  }, e[0].pressure), M = vt(n, i, e[e.length - 1].pressure, s), D, U = e[0].vector, y = e[0].point, _ = y, A = y, L = _, P = !1;
+  }, e[0].pressure), M = vt(n, i, e[e.length - 1].pressure, s), D, U = e[0].vector, _ = e[0].point, w = _, E = _, L = w, P = !1;
   for (let H = 0; H < e.length; H++) {
     let { pressure: O } = e[H], { point: V, vector: N, distance: le, runningLength: K } = e[H];
     if (H < e.length - 1 && g - K < 3)
@@ -463,45 +463,45 @@ function Kn(e, t = {}) {
     } else
       M = n / 2;
     D === void 0 && (D = M);
-    let me = K < b ? f(K / b) : 1, ve = g - K < E ? d((g - K) / E) : 1;
+    let me = K < p ? f(K / p) : 1, ve = g - K < A ? d((g - K) / A) : 1;
     M = Math.max(0.01, M * Math.min(me, ve));
     let Oe = (H < e.length - 1 ? e[H + 1] : e[H]).vector, $ = H < e.length - 1 ? Ot(N, Oe) : 1, ke = Ot(N, U) < 0 && !P, Ae = $ !== null && $ < 0;
     if (ke || Ae) {
       let J = ae(Ue(U), M);
       for (let be = 1 / 13, ge = 0; ge <= 1; ge += be)
-        A = Ve(ie(V, J), V, Ge * ge), p.push(A), L = Ve(ce(V, J), V, Ge * -ge), S.push(L);
-      y = A, _ = L, Ae && (P = !0);
+        E = Ve(ie(V, J), V, Ge * ge), y.push(E), L = Ve(ce(V, J), V, Ge * -ge), S.push(L);
+      _ = E, w = L, Ae && (P = !0);
       continue;
     }
     if (P = !1, H === e.length - 1) {
       let J = ae(Ue(N), M);
-      p.push(ie(V, J)), S.push(ce(V, J));
+      y.push(ie(V, J)), S.push(ce(V, J));
       continue;
     }
     let Ie = ae(Ue(gt(Oe, N, $)), M);
-    A = ie(V, Ie), (H <= 1 || kt(y, A) > w) && (p.push(A), y = A), L = ce(V, Ie), (H <= 1 || kt(_, L) > w) && (S.push(L), _ = L), T = O, U = N;
+    E = ie(V, Ie), (H <= 1 || kt(_, E) > b) && (y.push(E), _ = E), L = ce(V, Ie), (H <= 1 || kt(w, L) > b) && (S.push(L), w = L), T = O, U = N;
   }
   let Y = e[0].point.slice(0, 2), R = e.length > 1 ? e[e.length - 1].point.slice(0, 2) : ce(e[0].point, [1, 1]), X = [], se = [];
   if (e.length === 1) {
-    if (!(b || E) || u) {
+    if (!(p || A) || u) {
       let H = It(Y, un(Ue(ie(Y, R))), -(D || M)), O = [];
       for (let V = 1 / 13, N = V; N <= 1; N += V)
         O.push(Ve(H, Y, Ge * 2 * N));
       return O;
     }
   } else {
-    if (!(b || E && e.length === 1))
+    if (!(p || A && e.length === 1))
       if (h)
         for (let O = 1 / 13, V = O; V <= 1; V += O) {
           let N = Ve(S[0], Y, Ge * V);
           X.push(N);
         }
       else {
-        let O = ie(p[0], S[0]), V = ae(O, 0.5), N = ae(O, 0.51);
+        let O = ie(y[0], S[0]), V = ae(O, 0.5), N = ae(O, 0.51);
         X.push(ie(Y, V), ie(Y, N), ce(Y, N), ce(Y, V));
       }
     let H = Ue(Vn(e[e.length - 1].vector));
-    if (E || b && e.length === 1)
+    if (A || p && e.length === 1)
       se.push(R);
     else if (m) {
       let O = It(R, H, M);
@@ -510,14 +510,14 @@ function Kn(e, t = {}) {
     } else
       se.push(ce(R, ae(H, M)), ce(R, ae(H, M * 0.99)), ie(R, ae(H, M * 0.99)), ie(R, ae(H, M)));
   }
-  return p.concat(se, S.reverse(), X);
+  return y.concat(se, S.reverse(), X);
 }
 function Wn(e, t = {}) {
   var n;
   let { streamline: o = 0.5, size: i = 16, last: r = !1 } = t;
   if (e.length === 0)
     return [];
-  let s = 0.15 + (1 - o) * 0.85, l = Array.isArray(e[0]) ? e : e.map(({ x: d, y: g, pressure: b = 0.5 }) => [d, g, b]);
+  let s = 0.15 + (1 - o) * 0.85, l = Array.isArray(e[0]) ? e : e.map(({ x: d, y: g, pressure: p = 0.5 }) => [d, g, p]);
   if (l.length === 2) {
     let d = l[1];
     l = l.slice(0, -1);
@@ -530,13 +530,13 @@ function Wn(e, t = {}) {
     let g = r && d === m ? l[d].slice(0, 2) : gt(f.point, l[d], s);
     if (Hn(f.point, g))
       continue;
-    let b = jn(g, f.point);
-    if (h += b, d < m && !u) {
+    let p = jn(g, f.point);
+    if (h += p, d < m && !u) {
       if (h < i)
         continue;
       u = !0;
     }
-    f = { point: g, pressure: l[d][2] >= 0 ? l[d][2] : 0.5, vector: un(ie(f.point, g)), distance: b, runningLength: h }, a.push(f);
+    f = { point: g, pressure: l[d][2] >= 0 ? l[d][2] : 0.5, vector: un(ie(f.point, g)), distance: p, runningLength: h }, a.push(f);
   }
   return a[0].vector = ((n = a[1]) == null ? void 0 : n.vector) || [0, 0], a;
 }
@@ -769,8 +769,8 @@ const st = { selected: [] }, co = (e, t = "EDIT") => {
     } else
       console.warn("Invalid selection: " + f);
   }, u = (f, m = !0) => {
-    const d = Array.isArray(f) ? f : [f], g = d.map((b) => e.getAnnotation(b)).filter((b) => b);
-    o({ selected: g.map(({ id: b }) => ({ id: b, editable: m })) }), g.length !== d.length && console.warn("Invalid selection", f);
+    const d = Array.isArray(f) ? f : [f], g = d.map((p) => e.getAnnotation(p)).filter((p) => p);
+    o({ selected: g.map(({ id: p }) => ({ id: p, editable: m })) }), g.length !== d.length && console.warn("Invalid selection", f);
   }, h = (f) => {
     if (i.selected.length === 0)
       return !1;
@@ -849,7 +849,7 @@ const yo = (e, t) => {
     ...(e.updated || []).filter(({ newValue: f }) => !r.has(f.id)).map((f) => {
       const { oldValue: m, newValue: d } = f;
       if (s.has(d.id)) {
-        const g = t.updated.find((b) => b.oldValue.id === d.id).newValue;
+        const g = t.updated.find((p) => p.oldValue.id === d.id).newValue;
         return mn(m, g);
       } else
         return f;
@@ -858,188 +858,188 @@ const yo = (e, t) => {
   ];
   return { created: a, deleted: u, updated: h };
 }, wo = (e) => e.id !== void 0, bo = () => {
-  const e = /* @__PURE__ */ new Map(), t = /* @__PURE__ */ new Map(), n = [], o = (y, _ = {}) => n.push({ onChange: y, options: _ }), i = (y) => {
-    const _ = n.findIndex((A) => A.onChange == y);
-    _ > -1 && n.splice(_, 1);
-  }, r = (y, _) => {
-    const A = {
-      origin: y,
+  const e = /* @__PURE__ */ new Map(), t = /* @__PURE__ */ new Map(), n = [], o = (_, w = {}) => n.push({ onChange: _, options: w }), i = (_) => {
+    const w = n.findIndex((E) => E.onChange == _);
+    w > -1 && n.splice(w, 1);
+  }, r = (_, w) => {
+    const E = {
+      origin: _,
       changes: {
-        created: _.created || [],
-        updated: _.updated || [],
-        deleted: _.deleted || []
+        created: w.created || [],
+        updated: w.updated || [],
+        deleted: w.deleted || []
       },
       state: [...e.values()]
     };
     n.forEach((L) => {
-      yo(L, A) && L.onChange(A);
+      yo(L, E) && L.onChange(E);
     });
-  }, s = (y, _ = Q.LOCAL) => {
-    if (e.get(y.id))
-      throw Error(`Cannot add annotation ${y.id} - exists already`);
-    e.set(y.id, y), y.bodies.forEach((A) => t.set(A.id, y.id)), r(_, { created: [y] });
-  }, l = (y, _) => {
-    const A = typeof y == "string" ? _ : y, L = typeof y == "string" ? y : y.id, P = e.get(L);
+  }, s = (_, w = Q.LOCAL) => {
+    if (e.get(_.id))
+      throw Error(`Cannot add annotation ${_.id} - exists already`);
+    e.set(_.id, _), _.bodies.forEach((E) => t.set(E.id, _.id)), r(w, { created: [_] });
+  }, l = (_, w) => {
+    const E = typeof _ == "string" ? w : _, L = typeof _ == "string" ? _ : _.id, P = e.get(L);
     if (P) {
-      const Y = mn(P, A);
-      return L === A.id ? e.set(L, A) : (e.delete(L), e.set(A.id, A)), P.bodies.forEach((R) => t.delete(R.id)), A.bodies.forEach((R) => t.set(R.id, A.id)), Y;
+      const Y = mn(P, E);
+      return L === E.id ? e.set(L, E) : (e.delete(L), e.set(E.id, E)), P.bodies.forEach((R) => t.delete(R.id)), E.bodies.forEach((R) => t.set(R.id, E.id)), Y;
     } else
       console.warn(`Cannot update annotation ${L} - does not exist`);
-  }, a = (y, _ = Q.LOCAL, A = Q.LOCAL) => {
-    const L = wo(_) ? A : _, P = l(y, _);
+  }, a = (_, w = Q.LOCAL, E = Q.LOCAL) => {
+    const L = wo(w) ? E : w, P = l(_, w);
     P && r(L, { updated: [P] });
-  }, u = (y, _ = Q.LOCAL) => {
-    const A = y.reduce((L, P) => {
+  }, u = (_, w = Q.LOCAL) => {
+    const E = _.reduce((L, P) => {
       const Y = l(P);
       return Y ? [...L, Y] : L;
     }, []);
-    A.length > 0 && r(_, { updated: A });
-  }, h = (y, _ = Q.LOCAL) => {
-    const A = e.get(y.annotation);
-    if (A) {
+    E.length > 0 && r(w, { updated: E });
+  }, h = (_, w = Q.LOCAL) => {
+    const E = e.get(_.annotation);
+    if (E) {
       const L = {
-        ...A,
-        bodies: [...A.bodies, y]
+        ...E,
+        bodies: [...E.bodies, _]
       };
-      e.set(A.id, L), t.set(y.id, L.id), r(_, { updated: [{
-        oldValue: A,
+      e.set(E.id, L), t.set(_.id, L.id), r(w, { updated: [{
+        oldValue: E,
         newValue: L,
-        bodiesCreated: [y]
+        bodiesCreated: [_]
       }] });
     } else
-      console.warn(`Attempt to add body to missing annotation: ${y.annotation}`);
-  }, f = () => [...e.values()], m = (y = Q.LOCAL) => {
-    const _ = [...e.values()];
-    e.clear(), t.clear(), r(y, { deleted: _ });
-  }, d = (y, _ = !0, A = Q.LOCAL) => {
-    if (_) {
+      console.warn(`Attempt to add body to missing annotation: ${_.annotation}`);
+  }, f = () => [...e.values()], m = (_ = Q.LOCAL) => {
+    const w = [...e.values()];
+    e.clear(), t.clear(), r(_, { deleted: w });
+  }, d = (_, w = !0, E = Q.LOCAL) => {
+    if (w) {
       const L = [...e.values()];
-      e.clear(), t.clear(), y.forEach((P) => {
+      e.clear(), t.clear(), _.forEach((P) => {
         e.set(P.id, P), P.bodies.forEach((Y) => t.set(Y.id, P.id));
-      }), r(A, { created: y, deleted: L });
+      }), r(E, { created: _, deleted: L });
     } else {
-      const L = y.reduce((P, Y) => {
+      const L = _.reduce((P, Y) => {
         const R = e.get(Y.id);
         return R ? [...P, R] : P;
       }, []);
       if (L.length > 0)
         throw Error(`Bulk insert would overwrite the following annotations: ${L.map((P) => P.id).join(", ")}`);
-      y.forEach((P) => {
+      _.forEach((P) => {
         e.set(P.id, P), P.bodies.forEach((Y) => t.set(Y.id, P.id));
-      }), r(A, { created: y });
+      }), r(E, { created: _ });
     }
-  }, g = (y) => {
-    const _ = typeof y == "string" ? y : y.id, A = e.get(_);
-    if (A)
-      return e.delete(_), A.bodies.forEach((L) => t.delete(L.id)), A;
-    console.warn(`Attempt to delete missing annotation: ${_}`);
-  }, b = (y, _ = Q.LOCAL) => {
-    const A = g(y);
-    A && r(_, { deleted: [A] });
-  }, E = (y, _ = Q.LOCAL) => {
-    const A = y.reduce((L, P) => {
+  }, g = (_) => {
+    const w = typeof _ == "string" ? _ : _.id, E = e.get(w);
+    if (E)
+      return e.delete(w), E.bodies.forEach((L) => t.delete(L.id)), E;
+    console.warn(`Attempt to delete missing annotation: ${w}`);
+  }, p = (_, w = Q.LOCAL) => {
+    const E = g(_);
+    E && r(w, { deleted: [E] });
+  }, A = (_, w = Q.LOCAL) => {
+    const E = _.reduce((L, P) => {
       const Y = g(P);
       return Y ? [...L, Y] : L;
     }, []);
-    A.length > 0 && r(_, { deleted: A });
-  }, w = (y, _ = Q.LOCAL) => {
-    const A = e.get(y.annotation);
-    if (A) {
-      const L = A.bodies.find((P) => P.id === y.id);
+    E.length > 0 && r(w, { deleted: E });
+  }, b = (_, w = Q.LOCAL) => {
+    const E = e.get(_.annotation);
+    if (E) {
+      const L = E.bodies.find((P) => P.id === _.id);
       if (L) {
         t.delete(L.id);
         const P = {
-          ...A,
-          bodies: A.bodies.filter((Y) => Y.id !== y.id)
+          ...E,
+          bodies: E.bodies.filter((Y) => Y.id !== _.id)
         };
-        e.set(A.id, P), r(_, { updated: [{
-          oldValue: A,
+        e.set(E.id, P), r(w, { updated: [{
+          oldValue: E,
           newValue: P,
           bodiesDeleted: [L]
         }] });
       } else
-        console.warn(`Attempt to delete missing body ${y.id} from annotation ${y.annotation}`);
+        console.warn(`Attempt to delete missing body ${_.id} from annotation ${_.annotation}`);
     } else
-      console.warn(`Attempt to delete body from missing annotation ${y.annotation}`);
-  }, p = (y) => {
-    const _ = e.get(y);
-    return _ ? { ..._ } : void 0;
-  }, S = (y) => {
-    const _ = t.get(y);
-    if (_) {
-      const A = p(_).bodies.find((L) => L.id === y);
-      if (A)
-        return A;
-      console.error(`Store integrity error: body ${y} in index, but not in annotation`);
+      console.warn(`Attempt to delete body from missing annotation ${_.annotation}`);
+  }, y = (_) => {
+    const w = e.get(_);
+    return w ? { ...w } : void 0;
+  }, S = (_) => {
+    const w = t.get(_);
+    if (w) {
+      const E = y(w).bodies.find((L) => L.id === _);
+      if (E)
+        return E;
+      console.error(`Store integrity error: body ${_} in index, but not in annotation`);
     } else
-      console.warn(`Attempt to retrieve missing body: ${y}`);
-  }, T = (y, _) => {
-    if (y.annotation !== _.annotation)
+      console.warn(`Attempt to retrieve missing body: ${_}`);
+  }, T = (_, w) => {
+    if (_.annotation !== w.annotation)
       throw "Annotation integrity violation: annotation ID must be the same when updating bodies";
-    const A = e.get(y.annotation);
-    if (A) {
-      const L = A.bodies.find((Y) => Y.id === y.id), P = {
-        ...A,
-        bodies: A.bodies.map((Y) => Y.id === L.id ? _ : Y)
+    const E = e.get(_.annotation);
+    if (E) {
+      const L = E.bodies.find((Y) => Y.id === _.id), P = {
+        ...E,
+        bodies: E.bodies.map((Y) => Y.id === L.id ? w : Y)
       };
-      return e.set(A.id, P), L.id !== _.id && (t.delete(L.id), t.set(_.id, P.id)), {
-        oldValue: A,
+      return e.set(E.id, P), L.id !== w.id && (t.delete(L.id), t.set(w.id, P.id)), {
+        oldValue: E,
         newValue: P,
-        bodiesUpdated: [{ oldBody: L, newBody: _ }]
+        bodiesUpdated: [{ oldBody: L, newBody: w }]
       };
     } else
-      console.warn(`Attempt to add body to missing annotation ${y.annotation}`);
-  }, M = (y, _, A = Q.LOCAL) => {
-    const L = T(y, _);
-    r(A, { updated: [L] });
-  }, D = (y, _ = Q.LOCAL) => {
-    const A = y.map((L) => T({ id: L.id, annotation: L.annotation }, L));
-    r(_, { updated: A });
-  }, U = (y) => {
-    const _ = e.get(y.annotation);
-    if (_) {
-      const A = {
-        ..._,
+      console.warn(`Attempt to add body to missing annotation ${_.annotation}`);
+  }, M = (_, w, E = Q.LOCAL) => {
+    const L = T(_, w);
+    r(E, { updated: [L] });
+  }, D = (_, w = Q.LOCAL) => {
+    const E = _.map((L) => T({ id: L.id, annotation: L.annotation }, L));
+    r(w, { updated: E });
+  }, U = (_) => {
+    const w = e.get(_.annotation);
+    if (w) {
+      const E = {
+        ...w,
         target: {
-          ..._.target,
-          ...y
+          ...w.target,
+          ..._
         }
       };
-      return e.set(_.id, A), {
-        oldValue: _,
-        newValue: A,
+      return e.set(w.id, E), {
+        oldValue: w,
+        newValue: E,
         targetUpdated: {
-          oldTarget: _.target,
-          newTarget: y
+          oldTarget: w.target,
+          newTarget: _
         }
       };
     } else
-      console.warn(`Attempt to update target on missing annotation: ${y.annotation}`);
+      console.warn(`Attempt to update target on missing annotation: ${_.annotation}`);
   };
   return {
     addAnnotation: s,
     addBody: h,
     all: f,
     bulkAddAnnotation: d,
-    bulkDeleteAnnotation: E,
+    bulkDeleteAnnotation: A,
     bulkUpdateAnnotation: u,
     bulkUpdateBodies: D,
-    bulkUpdateTargets: (y, _ = Q.LOCAL) => {
-      const A = y.map(U).filter((L) => L);
-      A.length > 0 && r(_, { updated: A });
+    bulkUpdateTargets: (_, w = Q.LOCAL) => {
+      const E = _.map(U).filter((L) => L);
+      E.length > 0 && r(w, { updated: E });
     },
     clear: m,
-    deleteAnnotation: b,
-    deleteBody: w,
-    getAnnotation: p,
+    deleteAnnotation: p,
+    deleteBody: b,
+    getAnnotation: y,
     getBody: S,
     observe: o,
     unobserve: i,
     updateAnnotation: a,
     updateBody: M,
-    updateTarget: (y, _ = Q.LOCAL) => {
-      const A = U(y);
-      A && r(_, { updated: [A] });
+    updateTarget: (_, w = Q.LOCAL) => {
+      const E = U(_);
+      E && r(w, { updated: [E] });
     }
   };
 }, Eo = (e) => ({
@@ -1069,14 +1069,14 @@ const So = 250, To = (e) => {
   let o = -1, i = !1, r = 0;
   const s = (d) => {
     if (!i) {
-      const { changes: g } = d, b = performance.now();
-      if (b - r > So)
+      const { changes: g } = d, p = performance.now();
+      if (p - r > So)
         n.splice(o + 1), n.push(g), o = n.length - 1;
       else {
-        const E = n.length - 1;
-        n[E] = _o(n[E], g);
+        const A = n.length - 1;
+        n[A] = _o(n[A], g);
       }
-      r = b;
+      r = p;
     }
     i = !1;
   };
@@ -1090,15 +1090,15 @@ const So = 250, To = (e) => {
     redo: () => {
       if (n.length - 1 > o) {
         i = !0;
-        const { created: d, updated: g, deleted: b } = n[o + 1];
-        a(d), h(g), m(b), t.emit("redo", n[o + 1]), o += 1;
+        const { created: d, updated: g, deleted: p } = n[o + 1];
+        a(d), h(g), m(p), t.emit("redo", n[o + 1]), o += 1;
       }
     },
     undo: () => {
       if (o > -1) {
         i = !0;
-        const { created: d, updated: g, deleted: b } = n[o];
-        l(d), u(g), f(b), t.emit("undo", n[o]), o -= 1;
+        const { created: d, updated: g, deleted: p } = n[o];
+        l(d), u(g), f(p), t.emit("undo", n[o]), o -= 1;
       }
     }
   };
@@ -1111,39 +1111,39 @@ const So = 250, To = (e) => {
 }, Lo = (e, t, n, o) => {
   const { store: i, selection: r, hover: s, viewport: l } = e, a = /* @__PURE__ */ new Map();
   let u = [], h, f;
-  const m = (w, p) => {
-    a.has(w) ? a.get(w).push(p) : a.set(w, [p]);
-  }, d = (w, p) => {
-    const S = a.get(w);
-    S && S.indexOf(p) > 0 && S.splice(S.indexOf(p), 1);
-  }, g = (w, p, S) => {
-    a.has(w) && setTimeout(() => {
-      a.get(w).forEach((T) => {
+  const m = (b, y) => {
+    a.has(b) ? a.get(b).push(y) : a.set(b, [y]);
+  }, d = (b, y) => {
+    const S = a.get(b);
+    S && S.indexOf(y) > 0 && S.splice(S.indexOf(y), 1);
+  }, g = (b, y, S) => {
+    a.has(b) && setTimeout(() => {
+      a.get(b).forEach((T) => {
         if (n) {
-          const M = Array.isArray(p) ? p.map((U) => n.serialize(U)) : n.serialize(p), D = S ? S instanceof PointerEvent ? S : n.serialize(S) : void 0;
+          const M = Array.isArray(y) ? y.map((U) => n.serialize(U)) : n.serialize(y), D = S ? S instanceof PointerEvent ? S : n.serialize(S) : void 0;
           T(M, D);
         } else
-          T(p, S);
+          T(y, S);
       });
     }, 1);
-  }, b = () => {
-    const { selected: w } = r, p = w.map(({ id: S }) => i.getAnnotation(S));
-    p.forEach((S) => {
+  }, p = () => {
+    const { selected: b } = r, y = b.map(({ id: S }) => i.getAnnotation(S));
+    y.forEach((S) => {
       const T = u.find((M) => M.id === S.id);
       (!T || !Te(T, S)) && g("updateAnnotation", S, T);
-    }), u = u.map((S) => p.find(({ id: M }) => M === S.id) || S);
+    }), u = u.map((S) => y.find(({ id: M }) => M === S.id) || S);
   };
-  r.subscribe(({ selected: w }) => {
-    if (!(u.length === 0 && w.length === 0)) {
-      if (u.length === 0 && w.length > 0)
-        u = w.map(({ id: p }) => i.getAnnotation(p));
-      else if (u.length > 0 && w.length === 0)
-        u.forEach((p) => {
-          const S = i.getAnnotation(p.id);
-          S && !Te(S, p) && g("updateAnnotation", S, p);
+  r.subscribe(({ selected: b }) => {
+    if (!(u.length === 0 && b.length === 0)) {
+      if (u.length === 0 && b.length > 0)
+        u = b.map(({ id: y }) => i.getAnnotation(y));
+      else if (u.length > 0 && b.length === 0)
+        u.forEach((y) => {
+          const S = i.getAnnotation(y.id);
+          S && !Te(S, y) && g("updateAnnotation", S, y);
         }), u = [];
       else {
-        const p = new Set(u.map((T) => T.id)), S = new Set(w.map(({ id: T }) => T));
+        const y = new Set(u.map((T) => T.id)), S = new Set(b.map(({ id: T }) => T));
         u.filter((T) => !S.has(T.id)).forEach((T) => {
           const M = i.getAnnotation(T.id);
           M && !Te(M, T) && g("updateAnnotation", M, T);
@@ -1151,17 +1151,17 @@ const So = 250, To = (e) => {
           // Remove annotations that were deselected
           ...u.filter((T) => S.has(T.id)),
           // Add editable annotations that were selected
-          ...w.filter(({ id: T }) => !p.has(T)).map(({ id: T }) => i.getAnnotation(T))
+          ...b.filter(({ id: T }) => !y.has(T)).map(({ id: T }) => i.getAnnotation(T))
         ];
       }
       g("selectionChanged", u);
     }
-  }), s.subscribe((w) => {
-    !h && w ? g("mouseEnterAnnotation", i.getAnnotation(w)) : h && !w ? g("mouseLeaveAnnotation", i.getAnnotation(h)) : h && w && (g("mouseLeaveAnnotation", i.getAnnotation(h)), g("mouseEnterAnnotation", i.getAnnotation(w))), h = w;
-  }), l == null || l.subscribe((w) => g("viewportIntersect", w.map(i.getAnnotation))), i.observe((w) => {
-    o && (f && clearTimeout(f), f = setTimeout(b, 1e3));
-    const { created: p, deleted: S } = w.changes;
-    p.forEach((T) => g("createAnnotation", T)), S.forEach((T) => g("deleteAnnotation", T)), w.changes.updated.filter((T) => [
+  }), s.subscribe((b) => {
+    !h && b ? g("mouseEnterAnnotation", i.getAnnotation(b)) : h && !b ? g("mouseLeaveAnnotation", i.getAnnotation(h)) : h && b && (g("mouseLeaveAnnotation", i.getAnnotation(h)), g("mouseEnterAnnotation", i.getAnnotation(b))), h = b;
+  }), l == null || l.subscribe((b) => g("viewportIntersect", b.map(i.getAnnotation))), i.observe((b) => {
+    o && (f && clearTimeout(f), f = setTimeout(p, 1e3));
+    const { created: y, deleted: S } = b.changes;
+    y.forEach((T) => g("createAnnotation", T)), S.forEach((T) => g("deleteAnnotation", T)), b.changes.updated.filter((T) => [
       ...T.bodiesCreated || [],
       ...T.bodiesDeleted || [],
       ...T.bodiesUpdated || []
@@ -1169,17 +1169,17 @@ const So = 250, To = (e) => {
       const D = u.find((U) => U.id === T.id) || T;
       u = u.map((U) => U.id === T.id ? M : U), g("updateAnnotation", M, D);
     });
-  }, { origin: Q.LOCAL }), i.observe((w) => {
+  }, { origin: Q.LOCAL }), i.observe((b) => {
     if (u) {
-      const p = new Set(u.map((T) => T.id)), S = w.changes.updated.filter(({ newValue: T }) => p.has(T.id)).map(({ newValue: T }) => T);
+      const y = new Set(u.map((T) => T.id)), S = b.changes.updated.filter(({ newValue: T }) => y.has(T.id)).map(({ newValue: T }) => T);
       S.length > 0 && (u = u.map((T) => S.find((D) => D.id === T.id) || T));
     }
   }, { origin: Q.REMOTE });
-  const E = (w) => (p) => {
-    const { created: S, deleted: T, updated: M } = p;
-    S.forEach((D) => g("createAnnotation", D)), T.forEach((D) => g("deleteAnnotation", D)), w ? M.forEach((D) => g("updateAnnotation", D.oldValue, D.newValue)) : M.forEach((D) => g("updateAnnotation", D.newValue, D.oldValue));
+  const A = (b) => (y) => {
+    const { created: S, deleted: T, updated: M } = y;
+    S.forEach((D) => g("createAnnotation", D)), T.forEach((D) => g("deleteAnnotation", D)), b ? M.forEach((D) => g("updateAnnotation", D.oldValue, D.newValue)) : M.forEach((D) => g("updateAnnotation", D.newValue, D.oldValue));
   };
-  return t.on("undo", E(!0)), t.on("redo", E(!1)), { on: m, off: d, emit: g };
+  return t.on("undo", A(!0)), t.on("redo", A(!1)), { on: m, off: d, emit: g };
 }, vo = (e) => (t) => t.reduce((n, o) => {
   const { parsed: i, error: r } = e.parse(o);
   return r ? {
@@ -1190,42 +1190,42 @@ const So = 250, To = (e) => {
     failed: n.failed
   };
 }, { parsed: [], failed: [] }), Oo = (e, t, n) => {
-  const { store: o, selection: i } = e, r = (E) => {
+  const { store: o, selection: i } = e, r = (A) => {
     if (n) {
-      const { parsed: w, error: p } = n.parse(E);
-      w ? o.addAnnotation(w, Q.REMOTE) : console.error(p);
+      const { parsed: b, error: y } = n.parse(A);
+      b ? o.addAnnotation(b, Q.REMOTE) : console.error(y);
     } else
-      o.addAnnotation(E, Q.REMOTE);
-  }, s = () => i.clear(), l = () => o.clear(), a = (E) => {
-    const w = o.getAnnotation(E);
-    return n && w ? n.serialize(w) : w;
+      o.addAnnotation(A, Q.REMOTE);
+  }, s = () => i.clear(), l = () => o.clear(), a = (A) => {
+    const b = o.getAnnotation(A);
+    return n && b ? n.serialize(b) : b;
   }, u = () => n ? o.all().map(n.serialize) : o.all(), h = () => {
-    var E;
-    const w = (((E = i.selected) == null ? void 0 : E.map((p) => p.id)) || []).map((p) => o.getAnnotation(p));
-    return n ? w.map(n.serialize) : w;
-  }, f = (E) => fetch(E).then((w) => w.json()).then((w) => (d(w), w)), m = (E) => {
-    if (typeof E == "string") {
-      const w = o.getAnnotation(E);
-      return o.deleteAnnotation(E), n ? n.serialize(w) : w;
+    var A;
+    const b = (((A = i.selected) == null ? void 0 : A.map((y) => y.id)) || []).map((y) => o.getAnnotation(y));
+    return n ? b.map(n.serialize) : b;
+  }, f = (A) => fetch(A).then((b) => b.json()).then((b) => (d(b), b)), m = (A) => {
+    if (typeof A == "string") {
+      const b = o.getAnnotation(A);
+      return o.deleteAnnotation(A), n ? n.serialize(b) : b;
     } else {
-      const w = n ? n.parse(E).parsed : E;
-      return o.deleteAnnotation(w), E;
+      const b = n ? n.parse(A).parsed : A;
+      return o.deleteAnnotation(b), A;
     }
-  }, d = (E) => {
+  }, d = (A) => {
     if (n) {
-      const { parsed: w, failed: p } = vo(n)(E);
-      p.length > 0 && console.warn(`Discarded ${p.length} invalid annotations`, p), o.bulkAddAnnotation(w, !0, Q.REMOTE);
+      const { parsed: b, failed: y } = vo(n)(A);
+      y.length > 0 && console.warn(`Discarded ${y.length} invalid annotations`, y), o.bulkAddAnnotation(b, !0, Q.REMOTE);
     } else
-      o.bulkAddAnnotation(E, !0, Q.REMOTE);
-  }, g = (E) => {
-    E ? i.setSelected(E) : i.clear();
-  }, b = (E) => {
+      o.bulkAddAnnotation(A, !0, Q.REMOTE);
+  }, g = (A) => {
+    A ? i.setSelected(A) : i.clear();
+  }, p = (A) => {
     if (n) {
-      const w = n.parse(E).parsed, p = n.serialize(o.getAnnotation(w.id));
-      return o.updateAnnotation(w), p;
+      const b = n.parse(A).parsed, y = n.serialize(o.getAnnotation(b.id));
+      return o.updateAnnotation(b), y;
     } else {
-      const w = o.getAnnotation(E.id);
-      return o.updateAnnotation(E), w;
+      const b = o.getAnnotation(A.id);
+      return o.updateAnnotation(A), b;
     }
   };
   return {
@@ -1243,7 +1243,7 @@ const So = 250, To = (e) => {
     setAnnotations: d,
     setSelected: g,
     undo: t.undo,
-    updateAnnotation: b
+    updateAnnotation: p
   };
 };
 let ko = (e) => crypto.getRandomValues(new Uint8Array(e)), Io = (e, t, n) => {
@@ -1421,8 +1421,8 @@ function Uo(e) {
     },
     m(d, g) {
       I(d, t, g), I(d, i, g), I(d, r, g), I(d, l, g);
-      for (let b = 0; b < m.length; b += 1)
-        m[b] && m[b].m(d, g);
+      for (let p = 0; p < m.length; p += 1)
+        m[p] && m[p].m(d, g);
       I(d, a, g), u || (h = [
         Z(t, "pointerdown", function() {
           W(
@@ -1455,13 +1455,13 @@ function Uo(e) {
       1048) {
         f = /*geom*/
         e[4].points;
-        let b;
-        for (b = 0; b < f.length; b += 1) {
-          const E = Yt(e, f, b);
-          m[b] ? m[b].p(E, g) : (m[b] = Rt(E), m[b].c(), m[b].m(a.parentNode, a));
+        let p;
+        for (p = 0; p < f.length; p += 1) {
+          const A = Yt(e, f, p);
+          m[p] ? m[p].p(A, g) : (m[p] = Rt(A), m[p].c(), m[p].m(a.parentNode, a));
         }
-        for (; b < m.length; b += 1)
-          m[b].d(1);
+        for (; p < m.length; p += 1)
+          m[p].d(1);
         m.length = f.length;
       }
     },
@@ -1537,11 +1537,11 @@ function Vo(e) {
 const Xt = (e) => e.join(","), Ct = (e) => e.join(",");
 function Go(e, t, n) {
   let o, i, { shape: r } = t, { computedStyle: s = void 0 } = t, { transform: l } = t, { viewportScale: a = 1 } = t;
-  const u = (d, g, b) => {
-    let E;
-    g === v.SHAPE ? E = d.geometry.points.map(([p, S]) => [p + b[0], S + b[1]]) : E = d.geometry.points.map(([p, S], T) => g === v(T) ? [p + b[0], S + b[1]] : [p, S]);
-    const w = Me(E);
-    return { ...d, geometry: { points: E, bounds: w } };
+  const u = (d, g, p) => {
+    let A;
+    g === v.SHAPE ? A = d.geometry.points.map(([y, S]) => [y + p[0], S + p[1]]) : A = d.geometry.points.map(([y, S], T) => g === v(T) ? [y + p[0], S + p[1]] : [y, S]);
+    const b = Me(A);
+    return { ...d, geometry: { points: A, bounds: b } };
   };
   function h(d) {
     re.call(this, e, d);
@@ -1582,10 +1582,10 @@ class Ho extends oe {
   }
 }
 function Fo(e) {
-  let t, n, o, i, r, s, l, a, u, h, f, m, d, g, b, E, w, p, S, T, M, D, U, y, _, A, L, P, Y, R, X, se, H, O, V, N, le, K, me, ve, Oe, $, ke, Ae, Ie, J, be, ge, ot, Et;
+  let t, n, o, i, r, s, l, a, u, h, f, m, d, g, p, A, b, y, S, T, M, D, U, _, w, E, L, P, Y, R, X, se, H, O, V, N, le, K, me, ve, Oe, $, ke, Ae, Ie, J, be, ge, ot, Et;
   return {
     c() {
-      t = C("rect"), l = te(), a = C("rect"), d = te(), g = C("rect"), p = te(), S = C("rect"), U = te(), y = C("rect"), P = te(), Y = C("rect"), H = te(), O = C("rect"), le = te(), K = C("rect"), Oe = te(), $ = C("rect"), Ie = te(), J = C("rect"), c(t, "class", "a9s-outer"), c(t, "style", n = /*computedStyle*/
+      t = C("rect"), l = te(), a = C("rect"), d = te(), g = C("rect"), y = te(), S = C("rect"), U = te(), _ = C("rect"), P = te(), Y = C("rect"), H = te(), O = C("rect"), le = te(), K = C("rect"), Oe = te(), $ = C("rect"), Ie = te(), J = C("rect"), c(t, "class", "a9s-outer"), c(t, "style", n = /*computedStyle*/
       e[1] ? "display:none;" : void 0), c(t, "x", o = /*geom*/
       e[4].x), c(t, "y", i = /*geom*/
       e[4].y), c(t, "width", r = /*geom*/
@@ -1599,17 +1599,17 @@ function Fo(e) {
       e[4].x), c(a, "y", h = /*geom*/
       e[4].y), c(a, "width", f = /*geom*/
       e[4].w), c(a, "height", m = /*geom*/
-      e[4].h), c(g, "class", "a9s-edge-handle a9s-edge-handle-top"), c(g, "x", b = /*geom*/
-      e[4].x), c(g, "y", E = /*geom*/
-      e[4].y), c(g, "height", 1), c(g, "width", w = /*geom*/
+      e[4].h), c(g, "class", "a9s-edge-handle a9s-edge-handle-top"), c(g, "x", p = /*geom*/
+      e[4].x), c(g, "y", A = /*geom*/
+      e[4].y), c(g, "height", 1), c(g, "width", b = /*geom*/
       e[4].w), c(S, "class", "a9s-edge-handle a9s-edge-handle-right"), c(S, "x", T = /*geom*/
       e[4].x + /*geom*/
       e[4].w), c(S, "y", M = /*geom*/
       e[4].y), c(S, "height", D = /*geom*/
-      e[4].h), c(S, "width", 1), c(y, "class", "a9s-edge-handle a9s-edge-handle-bottom"), c(y, "x", _ = /*geom*/
-      e[4].x), c(y, "y", A = /*geom*/
+      e[4].h), c(S, "width", 1), c(_, "class", "a9s-edge-handle a9s-edge-handle-bottom"), c(_, "x", w = /*geom*/
+      e[4].x), c(_, "y", E = /*geom*/
       e[4].y + /*geom*/
-      e[4].h), c(y, "height", 1), c(y, "width", L = /*geom*/
+      e[4].h), c(_, "height", 1), c(_, "width", L = /*geom*/
       e[4].w), c(Y, "class", "a9s-edge-handle a9s-edge-handle-left"), c(Y, "x", R = /*geom*/
       e[4].x), c(Y, "y", X = /*geom*/
       e[4].y), c(Y, "height", se = /*geom*/
@@ -1676,7 +1676,7 @@ function Fo(e) {
       );
     },
     m(G, B) {
-      I(G, t, B), I(G, l, B), I(G, a, B), I(G, d, B), I(G, g, B), I(G, p, B), I(G, S, B), I(G, U, B), I(G, y, B), I(G, P, B), I(G, Y, B), I(G, H, B), I(G, O, B), I(G, le, B), I(G, K, B), I(G, Oe, B), I(G, $, B), I(G, Ie, B), I(G, J, B), ot || (Et = [
+      I(G, t, B), I(G, l, B), I(G, a, B), I(G, d, B), I(G, g, B), I(G, y, B), I(G, S, B), I(G, U, B), I(G, _, B), I(G, P, B), I(G, Y, B), I(G, H, B), I(G, O, B), I(G, le, B), I(G, K, B), I(G, Oe, B), I(G, $, B), I(G, Ie, B), I(G, J, B), ot || (Et = [
         Z(t, "pointerdown", function() {
           W(
             /*grab*/
@@ -1701,7 +1701,7 @@ function Fo(e) {
             e[10](v.RIGHT)
           ) && e[10](v.RIGHT).apply(this, arguments);
         }),
-        Z(y, "pointerdown", function() {
+        Z(_, "pointerdown", function() {
           W(
             /*grab*/
             e[10](v.BOTTOM)
@@ -1765,12 +1765,12 @@ function Fo(e) {
       e[4].w) && c(a, "width", f), B & /*geom*/
       16 && m !== (m = /*geom*/
       e[4].h) && c(a, "height", m), B & /*geom*/
+      16 && p !== (p = /*geom*/
+      e[4].x) && c(g, "x", p), B & /*geom*/
+      16 && A !== (A = /*geom*/
+      e[4].y) && c(g, "y", A), B & /*geom*/
       16 && b !== (b = /*geom*/
-      e[4].x) && c(g, "x", b), B & /*geom*/
-      16 && E !== (E = /*geom*/
-      e[4].y) && c(g, "y", E), B & /*geom*/
-      16 && w !== (w = /*geom*/
-      e[4].w) && c(g, "width", w), B & /*geom*/
+      e[4].w) && c(g, "width", b), B & /*geom*/
       16 && T !== (T = /*geom*/
       e[4].x + /*geom*/
       e[4].w) && c(S, "x", T), B & /*geom*/
@@ -1778,13 +1778,13 @@ function Fo(e) {
       e[4].y) && c(S, "y", M), B & /*geom*/
       16 && D !== (D = /*geom*/
       e[4].h) && c(S, "height", D), B & /*geom*/
-      16 && _ !== (_ = /*geom*/
-      e[4].x) && c(y, "x", _), B & /*geom*/
-      16 && A !== (A = /*geom*/
+      16 && w !== (w = /*geom*/
+      e[4].x) && c(_, "x", w), B & /*geom*/
+      16 && E !== (E = /*geom*/
       e[4].y + /*geom*/
-      e[4].h) && c(y, "y", A), B & /*geom*/
+      e[4].h) && c(_, "y", E), B & /*geom*/
       16 && L !== (L = /*geom*/
-      e[4].w) && c(y, "width", L), B & /*geom*/
+      e[4].w) && c(_, "width", L), B & /*geom*/
       16 && R !== (R = /*geom*/
       e[4].x) && c(Y, "x", R), B & /*geom*/
       16 && X !== (X = /*geom*/
@@ -1869,7 +1869,7 @@ function Fo(e) {
       );
     },
     d(G) {
-      G && k(t), G && k(l), G && k(a), G && k(d), G && k(g), G && k(p), G && k(S), G && k(U), G && k(y), G && k(P), G && k(Y), G && k(H), G && k(O), G && k(le), G && k(K), G && k(Oe), G && k($), G && k(Ie), G && k(J), ot = !1, de(Et);
+      G && k(t), G && k(l), G && k(a), G && k(d), G && k(g), G && k(y), G && k(S), G && k(U), G && k(_), G && k(P), G && k(Y), G && k(H), G && k(O), G && k(le), G && k(K), G && k(Oe), G && k($), G && k(Ie), G && k(J), ot = !1, de(Et);
     }
   };
 }
@@ -1939,18 +1939,18 @@ function zo(e) {
 }
 function jo(e, t, n) {
   let o, i, { shape: r } = t, { computedStyle: s = void 0 } = t, { transform: l } = t, { viewportScale: a = 1 } = t;
-  const u = (d, g, b) => {
-    const E = d.geometry.bounds;
-    let [w, p] = [E.minX, E.minY], [S, T] = [E.maxX, E.maxY];
-    const [M, D] = b;
+  const u = (d, g, p) => {
+    const A = d.geometry.bounds;
+    let [b, y] = [A.minX, A.minY], [S, T] = [A.maxX, A.maxY];
+    const [M, D] = p;
     if (g === v.SHAPE)
-      w += M, S += M, p += D, T += D;
+      b += M, S += M, y += D, T += D;
     else {
       switch (g) {
         case v.TOP:
         case v.TOP_LEFT:
         case v.TOP_RIGHT: {
-          p += D;
+          y += D;
           break;
         }
         case v.BOTTOM:
@@ -1964,7 +1964,7 @@ function jo(e, t, n) {
         case v.LEFT:
         case v.TOP_LEFT:
         case v.BOTTOM_LEFT: {
-          w += M;
+          b += M;
           break;
         }
         case v.RIGHT:
@@ -1975,19 +1975,19 @@ function jo(e, t, n) {
         }
       }
     }
-    const U = Math.min(w, S), y = Math.min(p, T), _ = Math.abs(S - w), A = Math.abs(T - p);
+    const U = Math.min(b, S), _ = Math.min(y, T), w = Math.abs(S - b), E = Math.abs(T - y);
     return {
       ...d,
       geometry: {
         x: U,
-        y,
-        w: _,
-        h: A,
+        y: _,
+        w,
+        h: E,
         bounds: {
           minX: U,
-          minY: y,
-          maxX: U + _,
-          maxY: y + A
+          minY: _,
+          maxX: U + w,
+          maxY: _ + E
         }
       }
     };
@@ -2031,10 +2031,10 @@ class qo extends oe {
   }
 }
 function Ko(e) {
-  let t, n, o, i, r, s, l, a, u, h, f, m, d, g, b, E, w, p, S, T, M, D, U, y, _, A, L, P, Y;
+  let t, n, o, i, r, s, l, a, u, h, f, m, d, g, p, A, b, y, S, T, M, D, U, _, w, E, L, P, Y;
   return {
     c() {
-      t = C("ellipse"), s = te(), l = C("ellipse"), m = te(), d = C("rect"), E = te(), w = C("rect"), T = te(), M = C("rect"), y = te(), _ = C("rect"), c(t, "class", "a9s-outer"), c(t, "cx", n = /*geom*/
+      t = C("ellipse"), s = te(), l = C("ellipse"), m = te(), d = C("rect"), A = te(), b = C("rect"), T = te(), M = C("rect"), _ = te(), w = C("rect"), c(t, "class", "a9s-outer"), c(t, "cx", n = /*geom*/
       e[3].cx), c(t, "cy", o = /*geom*/
       e[3].cy), c(t, "rx", i = /*geom*/
       e[3].rx), c(t, "ry", r = /*geom*/
@@ -2044,7 +2044,7 @@ function Ko(e) {
       e[3].rx), c(l, "ry", f = /*geom*/
       e[3].ry), c(d, "class", "a9s-corner-handle a9s-corner-top"), c(d, "x", g = /*geom*/
       e[3].cx - /*handleSize*/
-      e[2] / 2), c(d, "y", b = /*geom*/
+      e[2] / 2), c(d, "y", p = /*geom*/
       e[3].cy - /*handleSize*/
       e[2] / 2 - /*geom*/
       e[3].ry), c(
@@ -2057,18 +2057,18 @@ function Ko(e) {
         "width",
         /*handleSize*/
         e[2]
-      ), c(w, "class", "a9s-corner-handle a9s-corner-handle-right"), c(w, "x", p = /*geom*/
+      ), c(b, "class", "a9s-corner-handle a9s-corner-handle-right"), c(b, "x", y = /*geom*/
       e[3].cx + /*geom*/
       e[3].rx - /*handleSize*/
-      e[2] / 2), c(w, "y", S = /*geom*/
+      e[2] / 2), c(b, "y", S = /*geom*/
       e[3].cy - /*handleSize*/
       e[2] / 2), c(
-        w,
+        b,
         "height",
         /*handleSize*/
         e[2]
       ), c(
-        w,
+        b,
         "width",
         /*handleSize*/
         e[2]
@@ -2087,25 +2087,25 @@ function Ko(e) {
         "width",
         /*handleSize*/
         e[2]
-      ), c(_, "class", "a9s-corner-handle a9s-corner-handle-left"), c(_, "x", A = /*geom*/
+      ), c(w, "class", "a9s-corner-handle a9s-corner-handle-left"), c(w, "x", E = /*geom*/
       e[3].cx - /*geom*/
       e[3].rx - /*handleSize*/
-      e[2] / 2), c(_, "y", L = /*geom*/
+      e[2] / 2), c(w, "y", L = /*geom*/
       e[3].cy - /*handleSize*/
       e[2] / 2), c(
-        _,
+        w,
         "height",
         /*handleSize*/
         e[2]
       ), c(
-        _,
+        w,
         "width",
         /*handleSize*/
         e[2]
       );
     },
     m(R, X) {
-      I(R, t, X), I(R, s, X), I(R, l, X), I(R, m, X), I(R, d, X), I(R, E, X), I(R, w, X), I(R, T, X), I(R, M, X), I(R, y, X), I(R, _, X), P || (Y = [
+      I(R, t, X), I(R, s, X), I(R, l, X), I(R, m, X), I(R, d, X), I(R, A, X), I(R, b, X), I(R, T, X), I(R, M, X), I(R, _, X), I(R, w, X), P || (Y = [
         Z(t, "pointerdown", function() {
           W(
             /*grab*/
@@ -2124,7 +2124,7 @@ function Ko(e) {
             e[9](v.TOP)
           ) && e[9](v.TOP).apply(this, arguments);
         }),
-        Z(w, "pointerdown", function() {
+        Z(b, "pointerdown", function() {
           W(
             /*grab*/
             e[9](v.RIGHT)
@@ -2136,7 +2136,7 @@ function Ko(e) {
             e[9](v.BOTTOM)
           ) && e[9](v.BOTTOM).apply(this, arguments);
         }),
-        Z(_, "pointerdown", function() {
+        Z(w, "pointerdown", function() {
           W(
             /*grab*/
             e[9](v.LEFT)
@@ -2165,10 +2165,10 @@ function Ko(e) {
       12 && g !== (g = /*geom*/
       e[3].cx - /*handleSize*/
       e[2] / 2) && c(d, "x", g), X & /*geom, handleSize*/
-      12 && b !== (b = /*geom*/
+      12 && p !== (p = /*geom*/
       e[3].cy - /*handleSize*/
       e[2] / 2 - /*geom*/
-      e[3].ry) && c(d, "y", b), X & /*handleSize*/
+      e[3].ry) && c(d, "y", p), X & /*handleSize*/
       4 && c(
         d,
         "height",
@@ -2181,21 +2181,21 @@ function Ko(e) {
         /*handleSize*/
         e[2]
       ), X & /*geom, handleSize*/
-      12 && p !== (p = /*geom*/
+      12 && y !== (y = /*geom*/
       e[3].cx + /*geom*/
       e[3].rx - /*handleSize*/
-      e[2] / 2) && c(w, "x", p), X & /*geom, handleSize*/
+      e[2] / 2) && c(b, "x", y), X & /*geom, handleSize*/
       12 && S !== (S = /*geom*/
       e[3].cy - /*handleSize*/
-      e[2] / 2) && c(w, "y", S), X & /*handleSize*/
+      e[2] / 2) && c(b, "y", S), X & /*handleSize*/
       4 && c(
-        w,
+        b,
         "height",
         /*handleSize*/
         e[2]
       ), X & /*handleSize*/
       4 && c(
-        w,
+        b,
         "width",
         /*handleSize*/
         e[2]
@@ -2219,28 +2219,28 @@ function Ko(e) {
         /*handleSize*/
         e[2]
       ), X & /*geom, handleSize*/
-      12 && A !== (A = /*geom*/
+      12 && E !== (E = /*geom*/
       e[3].cx - /*geom*/
       e[3].rx - /*handleSize*/
-      e[2] / 2) && c(_, "x", A), X & /*geom, handleSize*/
+      e[2] / 2) && c(w, "x", E), X & /*geom, handleSize*/
       12 && L !== (L = /*geom*/
       e[3].cy - /*handleSize*/
-      e[2] / 2) && c(_, "y", L), X & /*handleSize*/
+      e[2] / 2) && c(w, "y", L), X & /*handleSize*/
       4 && c(
-        _,
+        w,
         "height",
         /*handleSize*/
         e[2]
       ), X & /*handleSize*/
       4 && c(
-        _,
+        w,
         "width",
         /*handleSize*/
         e[2]
       );
     },
     d(R) {
-      R && k(t), R && k(s), R && k(l), R && k(m), R && k(d), R && k(E), R && k(w), R && k(T), R && k(M), R && k(y), R && k(_), P = !1, de(Y);
+      R && k(t), R && k(s), R && k(l), R && k(m), R && k(d), R && k(A), R && k(b), R && k(T), R && k(M), R && k(_), R && k(w), P = !1, de(Y);
     }
   };
 }
@@ -2311,15 +2311,15 @@ function Wo(e) {
 function Zo(e, t, n) {
   let o, i, { shape: r } = t, { transform: s } = t, { viewportScale: l = 1 } = t;
   const a = (m, d, g) => {
-    const b = m.geometry.bounds;
-    let [E, w] = [b.minX, b.minY], [p, S] = [b.maxX, b.maxY];
+    const p = m.geometry.bounds;
+    let [A, b] = [p.minX, p.minY], [y, S] = [p.maxX, p.maxY];
     const [T, M] = g;
     if (d === v.SHAPE)
-      E += T, p += T, w += M, S += M;
+      A += T, y += T, b += M, S += M;
     else
       switch (d) {
         case v.TOP: {
-          w += M;
+          b += M;
           break;
         }
         case v.BOTTOM: {
@@ -2327,28 +2327,28 @@ function Zo(e, t, n) {
           break;
         }
         case v.LEFT: {
-          E += T;
+          A += T;
           break;
         }
         case v.RIGHT: {
-          p += T;
+          y += T;
           break;
         }
       }
-    const D = Math.min(E, p), U = Math.min(w, S), y = Math.abs(p - E), _ = Math.abs(S - w), A = (E + p) / 2, L = (w + S) / 2, P = y / 2, Y = _ / 2;
+    const D = Math.min(A, y), U = Math.min(b, S), _ = Math.abs(y - A), w = Math.abs(S - b), E = (A + y) / 2, L = (b + S) / 2, P = _ / 2, Y = w / 2;
     return {
       ...m,
       geometry: {
         ...m.geometry,
-        cx: A,
+        cx: E,
         cy: L,
         rx: P,
         ry: Y,
         bounds: {
           minX: D,
           minY: U,
-          maxX: D + y,
-          maxY: U + _
+          maxX: D + _,
+          maxY: U + w
         }
       }
     };
@@ -2487,11 +2487,11 @@ function xo(e) {
 }
 function $o(e, t, n) {
   let o, i, { shape: r } = t, { computedStyle: s = void 0 } = t, { transform: l } = t, { viewportScale: a = 1 } = t;
-  const u = (d, g, b) => {
-    let E;
-    g === v.SHAPE && (E = d.geometry.points.map(([p, S, T]) => [p + b[0], S + b[1], T]));
-    const w = Me(E.map((p) => [p[0], p[1]]));
-    return { ...d, geometry: { points: E, bounds: w } };
+  const u = (d, g, p) => {
+    let A;
+    g === v.SHAPE && (A = d.geometry.points.map(([y, S, T]) => [y + p[0], S + p[1], T]));
+    const b = Me(A.map((y) => [y[0], y[1]]));
+    return { ...d, geometry: { points: A, bounds: b } };
   };
   function h(d) {
     re.call(this, e, d);
@@ -2619,18 +2619,18 @@ function ii(e, t, n) {
   let { $$slots: o = {}, $$scope: i } = t;
   const r = Ee();
   let { shape: s } = t, { editor: l } = t, { transform: a } = t, u = null, h, f = null;
-  const m = (b) => (E) => {
-    u = b, h = a.elementToImage(E.offsetX, E.offsetY), f = s, E.target.setPointerCapture(E.pointerId), r("grab");
-  }, d = (b) => {
+  const m = (p) => (A) => {
+    u = p, h = a.elementToImage(A.offsetX, A.offsetY), f = s, A.target.setPointerCapture(A.pointerId), r("grab");
+  }, d = (p) => {
     if (u) {
-      const [E, w] = a.elementToImage(b.offsetX, b.offsetY), p = [E - h[0], w - h[1]];
-      n(3, s = l(f, u, p)), r("change", s);
+      const [A, b] = a.elementToImage(p.offsetX, p.offsetY), y = [A - h[0], b - h[1]];
+      n(3, s = l(f, u, y)), r("change", s);
     }
-  }, g = (b) => {
-    b.target.releasePointerCapture(b.pointerId), u = null, f = s, r("release");
+  }, g = (p) => {
+    p.target.releasePointerCapture(p.pointerId), u = null, f = s, r("release");
   };
-  return e.$$set = (b) => {
-    "shape" in b && n(3, s = b.shape), "editor" in b && n(4, l = b.editor), "transform" in b && n(5, a = b.transform), "$$scope" in b && n(6, i = b.$$scope);
+  return e.$$set = (p) => {
+    "shape" in p && n(3, s = p.shape), "editor" in p && n(4, l = p.editor), "transform" in p && n(5, a = p.transform), "$$scope" in p && n(6, i = p.$$scope);
   }, [m, d, g, s, l, a, i, o];
 }
 class nt extends oe {
@@ -2688,8 +2688,8 @@ function li(e, t, n) {
   const o = Ee();
   let { drawingMode: i } = t, { target: r } = t, { tool: s } = t, { transform: l } = t, { viewportScale: a } = t, u;
   return Le(() => {
-    const h = r.closest("svg"), f = [], m = (d, g, b) => {
-      h.addEventListener(d, g, b), f.push(() => h.removeEventListener(d, g, b));
+    const h = r.closest("svg"), f = [], m = (d, g, p) => {
+      h.addEventListener(d, g, p), f.push(() => h.removeEventListener(d, g, p));
     };
     return n(5, u = new s({
       target: r,
@@ -2852,21 +2852,21 @@ function ci(e) {
 function fi(e, t, n) {
   const o = Ee();
   let { addEventListener: i } = t, { drawingMode: r } = t, { transform: s } = t, l, a, u, h, f, m, d;
-  const g = (p) => {
-    l = performance.now(), r === "drag" && (n(0, a = s.elementToImage(p.offsetX, p.offsetY)), u = a, n(1, h = a[0]), n(2, f = a[1]), n(3, m = 1), n(4, d = 1));
-  }, b = (p) => {
-    a && (u = s.elementToImage(p.offsetX, p.offsetY), n(1, h = Math.min(u[0], a[0])), n(2, f = Math.min(u[1], a[1])), n(3, m = Math.abs(u[0] - a[0])), n(4, d = Math.abs(u[1] - a[1])));
-  }, E = (p) => {
+  const g = (y) => {
+    l = performance.now(), r === "drag" && (n(0, a = s.elementToImage(y.offsetX, y.offsetY)), u = a, n(1, h = a[0]), n(2, f = a[1]), n(3, m = 1), n(4, d = 1));
+  }, p = (y) => {
+    a && (u = s.elementToImage(y.offsetX, y.offsetY), n(1, h = Math.min(u[0], a[0])), n(2, f = Math.min(u[1], a[1])), n(3, m = Math.abs(u[0] - a[0])), n(4, d = Math.abs(u[1] - a[1])));
+  }, A = (y) => {
     const S = performance.now() - l;
     if (r === "click") {
       if (S > 300)
         return;
-      p.stopPropagation(), a ? w() : (n(0, a = s.elementToImage(p.offsetX, p.offsetY)), u = a, n(1, h = a[0]), n(2, f = a[1]), n(3, m = 1), n(4, d = 1));
+      y.stopPropagation(), a ? b() : (n(0, a = s.elementToImage(y.offsetX, y.offsetY)), u = a, n(1, h = a[0]), n(2, f = a[1]), n(3, m = 1), n(4, d = 1));
     } else
-      a && (S > 300 || m * d > 100 ? (p.stopPropagation(), w()) : (n(0, a = null), u = null));
-  }, w = () => {
+      a && (S > 300 || m * d > 100 ? (y.stopPropagation(), b()) : (n(0, a = null), u = null));
+  }, b = () => {
     if (m * d > 15) {
-      const p = {
+      const y = {
         type: j.RECTANGLE,
         geometry: {
           bounds: {
@@ -2881,14 +2881,14 @@ function fi(e, t, n) {
           h: d
         }
       };
-      o("create", p);
+      o("create", y);
     }
     n(0, a = null), u = null;
   };
   return Le(() => {
-    i("pointerdown", g), i("pointermove", b), i("pointerup", E, !0);
-  }), e.$$set = (p) => {
-    "addEventListener" in p && n(5, i = p.addEventListener), "drawingMode" in p && n(6, r = p.drawingMode), "transform" in p && n(7, s = p.transform);
+    i("pointerdown", g), i("pointermove", p), i("pointerup", A, !0);
+  }), e.$$set = (y) => {
+    "addEventListener" in y && n(5, i = y.addEventListener), "drawingMode" in y && n(6, r = y.drawingMode), "transform" in y && n(7, s = y.transform);
   }, [a, h, f, m, d, i, r, s];
 }
 class ui extends oe {
@@ -3073,26 +3073,26 @@ function yi(e, t, n) {
   let o;
   const i = Ee();
   let { addEventListener: r } = t, { drawingMode: s } = t, { transform: l } = t, { viewportScale: a = 1 } = t, u, h = [], f = null, m = !1;
-  const d = (p) => {
-    const { timeStamp: S, offsetX: T, offsetY: M } = p;
+  const d = (y) => {
+    const { timeStamp: S, offsetX: T, offsetY: M } = y;
     if (u = { timeStamp: S, offsetX: T, offsetY: M }, s === "drag" && h.length === 0) {
-      const D = l.elementToImage(p.offsetX, p.offsetY);
+      const D = l.elementToImage(y.offsetX, y.offsetY);
       h.push(D), n(1, f = D);
     }
-  }, g = (p) => {
-    if (h.length > 0 && (n(1, f = l.elementToImage(p.offsetX, p.offsetY)), h.length > 2)) {
+  }, g = (y) => {
+    if (h.length > 0 && (n(1, f = l.elementToImage(y.offsetX, y.offsetY)), h.length > 2)) {
       const S = lt(f, h[0]) * a;
       n(2, m = S < pi);
     }
-  }, b = (p) => {
+  }, p = (y) => {
     if (s === "click") {
-      const S = p.timeStamp - u.timeStamp, T = lt([u.offsetX, u.offsetY], [p.offsetX, p.offsetY]);
+      const S = y.timeStamp - u.timeStamp, T = lt([u.offsetX, u.offsetY], [y.offsetX, y.offsetY]);
       if (S > 300 || T > 15)
         return;
       if (m)
-        w();
+        b();
       else if (h.length === 0) {
-        const M = l.elementToImage(p.offsetX, p.offsetY);
+        const M = l.elementToImage(y.offsetX, y.offsetY);
         h.push(M), n(1, f = M);
       } else
         h.push(f);
@@ -3101,28 +3101,28 @@ function yi(e, t, n) {
         n(0, h = []), n(1, f = null);
         return;
       }
-      p.stopImmediatePropagation(), m ? w() : h.push(f);
+      y.stopImmediatePropagation(), m ? b() : h.push(f);
     }
-  }, E = () => {
-    const p = [...h, f], S = {
+  }, A = () => {
+    const y = [...h, f], S = {
       type: j.POLYGON,
-      geometry: { bounds: Me(p), points: p }
+      geometry: { bounds: Me(y), points: y }
     };
     mt(S) > 4 && (n(0, h = []), n(1, f = null), i("create", S));
-  }, w = () => {
-    const p = {
+  }, b = () => {
+    const y = {
       type: j.POLYGON,
       geometry: {
         bounds: Me(h),
         points: [...h]
       }
     };
-    n(0, h = []), n(1, f = null), i("create", p);
+    n(0, h = []), n(1, f = null), i("create", y);
   };
   return Le(() => {
-    r("pointerdown", d, !0), r("pointermove", g), r("pointerup", b, !0), r("dblclick", E, !0);
-  }), e.$$set = (p) => {
-    "addEventListener" in p && n(4, r = p.addEventListener), "drawingMode" in p && n(5, s = p.drawingMode), "transform" in p && n(6, l = p.transform), "viewportScale" in p && n(7, a = p.viewportScale);
+    r("pointerdown", d, !0), r("pointermove", g), r("pointerup", p, !0), r("dblclick", A, !0);
+  }), e.$$set = (y) => {
+    "addEventListener" in y && n(4, r = y.addEventListener), "drawingMode" in y && n(5, s = y.drawingMode), "transform" in y && n(6, l = y.transform), "viewportScale" in y && n(7, a = y.viewportScale);
   }, e.$$.update = () => {
     e.$$.dirty & /*viewportScale*/
     128 && n(3, o = 10 / a);
@@ -3221,32 +3221,32 @@ function wi(e) {
 }
 function bi(e, t, n) {
   const o = Ee();
-  let { addEventListener: i } = t, { drawingMode: r } = t, { transform: s } = t, l, a, u, h, f, m, d, g = !1, b = !1, E, w;
-  const p = (_) => {
-    E = performance.now(), r === "drag" && (n(1, a = s.elementToImage(_.offsetX, _.offsetY)), u = a, n(2, h = a[0]), n(3, f = a[1]), n(4, m = 1), n(5, d = 1));
-  }, S = (_) => {
-    const A = _ || w;
+  let { addEventListener: i } = t, { drawingMode: r } = t, { transform: s } = t, l, a, u, h, f, m, d, g = !1, p = !1, A, b;
+  const y = (w) => {
+    A = performance.now(), r === "drag" && (n(1, a = s.elementToImage(w.offsetX, w.offsetY)), u = a, n(2, h = a[0]), n(3, f = a[1]), n(4, m = 1), n(5, d = 1));
+  }, S = (w) => {
+    const E = w || b;
     if (a)
-      if (u = s.elementToImage(A.offsetX, A.offsetY), b) {
+      if (u = s.elementToImage(E.offsetX, E.offsetY), p) {
         const L = 2 * Math.abs(u[0] - a[0]), P = 2 * Math.abs(u[1] - a[1]);
         n(4, m = g ? Math.max(L, P) : L), n(5, d = g ? m : P), n(2, h = Math.min(u[0], a[0] - m / 2)), n(3, f = Math.min(u[1], a[1] - d / 2));
       } else {
         const L = Math.abs(u[0] - a[0]), P = Math.abs(u[1] - a[1]);
         n(4, m = g ? Math.max(L, P) : L), n(5, d = g ? m : P), n(2, h = Math.min(u[0], a[0])), n(3, f = Math.min(u[1], a[1]));
       }
-    _ && (w = _);
-  }, T = (_) => {
-    r === "click" && _.stopImmediatePropagation();
-    const A = performance.now() - E;
+    w && (b = w);
+  }, T = (w) => {
+    r === "click" && w.stopImmediatePropagation();
+    const E = performance.now() - A;
     if (r === "click") {
-      if (A > 300)
+      if (E > 300)
         return;
-      _.stopPropagation(), a ? M() : (n(1, a = s.elementToImage(_.offsetX, _.offsetY)), u = a, n(2, h = a[0]), n(3, f = a[1]), n(4, m = 1), n(5, d = 1));
+      w.stopPropagation(), a ? M() : (n(1, a = s.elementToImage(w.offsetX, w.offsetY)), u = a, n(2, h = a[0]), n(3, f = a[1]), n(4, m = 1), n(5, d = 1));
     } else
-      a && (A > 300 || m * d > 100 ? (_.stopPropagation(), M()) : (n(1, a = null), u = null, w = void 0));
+      a && (E > 300 || m * d > 100 ? (w.stopPropagation(), M()) : (n(1, a = null), u = null, b = void 0));
   }, M = () => {
     if (m * d > 15) {
-      const _ = {
+      const w = {
         type: j.ELLIPSE,
         geometry: {
           bounds: {
@@ -3261,24 +3261,24 @@ function bi(e, t, n) {
           ry: d / 2
         }
       };
-      o("create", _);
+      o("create", w);
     }
-    n(1, a = null), u = null, w = void 0;
-  }, D = (_) => {
-    _.key === "Shift" && (g = !0, S()), _.key === "Control" && (b = !0, S());
-  }, U = (_) => {
-    _.key === "Shift" && (g = !1, S()), _.key === "Control" && (b = !1, S());
+    n(1, a = null), u = null, b = void 0;
+  }, D = (w) => {
+    w.key === "Shift" && (g = !0, S()), w.key === "Control" && (p = !0, S());
+  }, U = (w) => {
+    w.key === "Shift" && (g = !1, S()), w.key === "Control" && (p = !1, S());
   };
-  Le(() => (document.addEventListener("keyup", U), document.addEventListener("keydown", D), i("pointerdown", p), i("pointermove", S), i("pointerup", T), () => {
+  Le(() => (document.addEventListener("keyup", U), document.addEventListener("keydown", D), i("pointerdown", y), i("pointermove", S), i("pointerup", T), () => {
     document.removeEventListener("keyup", U), document.removeEventListener("keydown", D);
   }));
-  function y(_) {
-    Ke[_ ? "unshift" : "push"](() => {
-      l = _, n(0, l);
+  function _(w) {
+    Ke[w ? "unshift" : "push"](() => {
+      l = w, n(0, l);
     });
   }
-  return e.$$set = (_) => {
-    "addEventListener" in _ && n(6, i = _.addEventListener), "drawingMode" in _ && n(7, r = _.drawingMode), "transform" in _ && n(8, s = _.transform);
+  return e.$$set = (w) => {
+    "addEventListener" in w && n(6, i = w.addEventListener), "drawingMode" in w && n(7, r = w.drawingMode), "transform" in w && n(8, s = w.transform);
   }, [
     l,
     a,
@@ -3289,7 +3289,7 @@ function bi(e, t, n) {
     i,
     r,
     s,
-    y
+    _
   ];
 }
 class Ei extends oe {
@@ -3355,33 +3355,31 @@ function Ai(e) {
 function Si(e, t, n) {
   let o, i;
   const r = Ee();
-  let { addEventListener: s } = t, { drawingMode: l } = t, { transform: a } = t, { viewportScale: u = 1 } = t, h = null, f = !1;
-  const m = (E) => {
-    if (l === "drag" && (f = !0, o.length === 0)) {
-      const w = a.elementToImage(E.offsetX, E.offsetY);
-      o = [...w, E.pressure], n(0, h = w);
+  let { addEventListener: s } = t, { drawingMode: l } = t, { transform: a } = t, { viewportScale: u = 1 } = t, h = null;
+  const f = (p) => {
+    if (l === "drag" && o.length === 0) {
+      const A = a.elementToImage(p.offsetX, p.offsetY);
+      o = [...A, p.pressure], n(0, h = A);
     }
-  }, d = (E) => {
-    if (f) {
-      const w = a.elementToImage(E.offsetX, E.offsetY);
-      o = [...o, [...w, E.pressure]];
-    }
-  }, g = (E) => {
-    f = !1, b();
-  }, b = () => {
-    const E = {
+  }, m = (p) => {
+    const A = a.elementToImage(p.offsetX, p.offsetY);
+    o = [...o, [...A, p.pressure]];
+  }, d = (p) => {
+    g();
+  }, g = () => {
+    const p = {
       type: j.FREEHAND,
       geometry: {
-        bounds: Me(o.map((w) => [w[0], w[1]])),
+        bounds: Me(o.map((A) => [A[0], A[1]])),
         points: o
       }
     };
-    o = [], n(0, h = null), r("create", E);
+    o = [], n(0, h = null), r("create", p);
   };
   return i = tt(o, et), Le(() => {
-    s("pointerdown", m, !0), s("pointermove", d), s("pointerup", g, !0);
-  }), e.$$set = (E) => {
-    "addEventListener" in E && n(2, s = E.addEventListener), "drawingMode" in E && n(3, l = E.drawingMode), "transform" in E && n(4, a = E.transform), "viewportScale" in E && n(5, u = E.viewportScale);
+    s("pointerdown", f, !0), s("pointermove", m), s("pointerup", d, !0);
+  }), e.$$set = (p) => {
+    "addEventListener" in p && n(2, s = p.addEventListener), "drawingMode" in p && n(3, l = p.drawingMode), "transform" in p && n(4, a = p.transform), "viewportScale" in p && n(5, u = p.viewportScale);
   }, e.$$.update = () => {
     e.$$.dirty & /*viewportScale*/
     32;
@@ -4451,20 +4449,20 @@ function Ji(e) {
   };
 }
 function Qi(e, t, n) {
-  let o, i, r, s, l, a, u, h, f, m, d = q, g = () => (d(), d = rn(y, (O) => n(14, m = O)), y);
+  let o, i, r, s, l, a, u, h, f, m, d = q, g = () => (d(), d = rn(_, (O) => n(14, m = O)), _);
   e.$$.on_destroy.push(() => d());
-  let { drawingEnabled: b } = t, { image: E } = t, { preferredDrawingMode: w } = t, { state: p } = t, { style: S = void 0 } = t, { toolName: T = pt().length > 0 ? pt()[0] : void 0 } = t, { user: M } = t, D, U, y;
-  Le(() => g(n(5, y = mi(E, U))));
-  const { selection: _, store: A } = p;
-  St(e, _, (O) => n(24, h = O)), St(e, A, (O) => n(13, f = O));
+  let { drawingEnabled: p } = t, { image: A } = t, { preferredDrawingMode: b } = t, { state: y } = t, { style: S = void 0 } = t, { toolName: T = pt().length > 0 ? pt()[0] : void 0 } = t, { user: M } = t, D, U, _;
+  Le(() => g(n(5, _ = mi(A, U))));
+  const { selection: w, store: E } = y;
+  St(e, w, (O) => n(24, h = O)), St(e, E, (O) => n(13, f = O));
   let L = null, P = null;
   const Y = (O) => {
-    A.unobserve(L);
+    E.unobserve(L);
     const V = O.filter(({ editable: N }) => N).map(({ id: N }) => N);
-    V.length > 0 ? (n(6, P = V.map((N) => A.getAnnotation(N))), L = (N) => {
+    V.length > 0 ? (n(6, P = V.map((N) => E.getAnnotation(N))), L = (N) => {
       const { updated: le } = N.changes;
       n(6, P = le.map((K) => K.newValue));
-    }, A.observe(L, { annotations: V })) : n(6, P = null);
+    }, E.observe(L, { annotations: V })) : n(6, P = null);
   }, R = (O) => {
     const V = dn(), N = {
       id: V,
@@ -4476,11 +4474,11 @@ function Qi(e, t, n) {
         created: /* @__PURE__ */ new Date()
       }
     };
-    A.addAnnotation(N), _.setSelected(N.id);
+    E.addAnnotation(N), w.setSelected(N.id);
   }, X = (O) => (V) => {
     var me;
     const { target: N } = O, le = 10 * 60 * 1e3, K = ((me = N.creator) == null ? void 0 : me.id) !== M.id || !N.created || (/* @__PURE__ */ new Date()).getTime() - N.created.getTime() > le;
-    A.updateTarget({
+    E.updateTarget({
       ...N,
       selector: V.detail,
       created: K ? N.created : /* @__PURE__ */ new Date(),
@@ -4499,22 +4497,22 @@ function Qi(e, t, n) {
     });
   }
   return e.$$set = (O) => {
-    "drawingEnabled" in O && n(0, b = O.drawingEnabled), "image" in O && n(19, E = O.image), "preferredDrawingMode" in O && n(20, w = O.preferredDrawingMode), "state" in O && n(21, p = O.state), "style" in O && n(1, S = O.style), "toolName" in O && n(2, T = O.toolName), "user" in O && n(22, M = O.user);
+    "drawingEnabled" in O && n(0, p = O.drawingEnabled), "image" in O && n(19, A = O.image), "preferredDrawingMode" in O && n(20, b = O.preferredDrawingMode), "state" in O && n(21, y = O.state), "style" in O && n(1, S = O.style), "toolName" in O && n(2, T = O.toolName), "user" in O && n(22, M = O.user);
   }, e.$$.update = () => {
     e.$$.dirty[0] & /*toolName*/
     4 && n(12, { tool: o, opts: i } = yn(T), o, (n(23, i), n(2, T))), e.$$.dirty[0] & /*opts, preferredDrawingMode*/
-    9437184 && n(11, r = (i == null ? void 0 : i.drawingMode) || w), e.$$.dirty[0] & /*svgEl*/
+    9437184 && n(11, r = (i == null ? void 0 : i.drawingMode) || b), e.$$.dirty[0] & /*svgEl*/
     8 && n(10, s = Vi(U)), e.$$.dirty[0] & /*svgEl*/
-    8 && n(9, { onPointerDown: l, onPointerUp: a } = Hi(U, A), l, (n(8, a), n(3, U))), e.$$.dirty[0] & /*$selection*/
+    8 && n(9, { onPointerDown: l, onPointerUp: a } = Hi(U, E), l, (n(8, a), n(3, U))), e.$$.dirty[0] & /*$selection*/
     16777216 && n(7, u = (O) => h.selected.find((V) => V.id === O.id && V.editable)), e.$$.dirty[0] & /*$selection*/
     16777216 && Y(h.selected);
   }, [
-    b,
+    p,
     S,
     T,
     U,
     D,
-    y,
+    _,
     P,
     u,
     a,
@@ -4524,13 +4522,13 @@ function Qi(e, t, n) {
     o,
     f,
     m,
-    _,
-    A,
+    w,
+    E,
     R,
     X,
-    E,
-    w,
-    p,
+    A,
+    b,
+    y,
     M,
     i,
     h,
@@ -4844,8 +4842,8 @@ const lr = () => {
   const e = new tr(), t = /* @__PURE__ */ new Map(), n = () => [...t.values()], o = () => {
     e.clear(), t.clear();
   }, i = (f) => {
-    const { minX: m, minY: d, maxX: g, maxY: b } = f.selector.geometry.bounds, E = { minX: m, minY: d, maxX: g, maxY: b, target: f };
-    e.insert(E), t.set(f.annotation, E);
+    const { minX: m, minY: d, maxX: g, maxY: p } = f.selector.geometry.bounds, A = { minX: m, minY: d, maxX: g, maxY: p, target: f };
+    e.insert(A), t.set(f.annotation, A);
   }, r = (f) => {
     const m = t.get(f.annotation);
     e.remove(m), t.delete(f.annotation);
@@ -4859,23 +4857,23 @@ const lr = () => {
         minY: m,
         maxX: f,
         maxY: m
-      }).map((b) => b.target).filter((b) => b.selector.type === j.RECTANGLE || Bn(b.selector, f, m));
+      }).map((p) => p.target).filter((p) => p.selector.type === j.RECTANGLE || Bn(p.selector, f, m));
       if (g.length > 0)
-        return g.sort((b, E) => mt(b.selector) - mt(E.selector)), g[0];
+        return g.sort((p, A) => mt(p.selector) - mt(A.selector)), g[0];
     },
     getIntersecting: (f, m, d, g) => e.search({
       minX: f,
       minY: m,
       maxX: f + d,
       maxY: m + g
-    }).map((b) => b.target),
+    }).map((p) => p.target),
     insert: i,
     remove: r,
     set: (f, m = !0) => {
       m && o();
       const d = f.map((g) => {
-        const { minX: b, minY: E, maxX: w, maxY: p } = g.selector.geometry.bounds;
-        return { minX: b, minY: E, maxX: w, maxY: p, target: g };
+        const { minX: p, minY: A, maxX: b, maxY: y } = g.selector.geometry.bounds;
+        return { minX: p, minY: A, maxX: b, maxY: y, target: g };
       });
       d.forEach((g) => t.set(g.target.annotation, g)), e.load(d);
     },
@@ -4972,32 +4970,32 @@ const yr = (e, t = {}) => {
       user: f
     }
   });
-  m.$on("click", (y) => {
-    const { originalEvent: _, annotation: A } = y.detail;
-    A ? r.clickSelect(A.id, _) : r.isEmpty() || r.clear();
+  m.$on("click", (_) => {
+    const { originalEvent: w, annotation: E } = _.detail;
+    E ? r.clickSelect(E.id, w) : r.isEmpty() || r.clear();
   });
   const d = Oo(i, l, o.adapter), g = () => {
     m.$destroy(), u.parentNode.insertBefore(n, u), u.parentNode.removeChild(u), h.destroy(), l.destroy();
-  }, b = () => f, E = (y, _, A) => Mi(y, _, A), w = (y, _) => ti(y, _), p = (y) => {
-    if (!yn(y))
-      throw `No drawing tool named ${y}`;
-    m.$set({ toolName: y });
-  }, S = (y) => m.$set({ drawingEnabled: y }), T = (y) => {
+  }, p = () => f, A = (_, w, E) => Mi(_, w, E), b = (_, w) => ti(_, w), y = (_) => {
+    if (!yn(_))
+      throw `No drawing tool named ${_}`;
+    m.$set({ toolName: _ });
+  }, S = (_) => m.$set({ drawingEnabled: _ }), T = (_) => {
     console.warn("Filter not implemented yet");
-  }, M = (y) => m.$set({ style: y }), D = (y) => tn(n, u, y), U = (y) => {
-    f = y, m.$set({ user: y });
+  }, M = (_) => m.$set({ style: _ }), D = (_) => tn(n, u, _), U = (_) => {
+    f = _, m.$set({ user: _ });
   };
   return {
     ...d,
     destroy: g,
-    getUser: b,
+    getUser: p,
     listDrawingTools: pt,
     on: a.on,
     off: a.off,
-    registerDrawingTool: E,
-    registerShapeEditor: w,
+    registerDrawingTool: A,
+    registerShapeEditor: b,
     setDrawingEnabled: S,
-    setDrawingTool: p,
+    setDrawingTool: y,
     setFilter: T,
     setStyle: M,
     setTheme: D,
