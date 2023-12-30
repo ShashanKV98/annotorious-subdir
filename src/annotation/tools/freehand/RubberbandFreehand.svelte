@@ -65,6 +65,8 @@
     dispatch('create', shape);
   }
 
+  $: pathData = getSmoothPathData(points,options)
+
   onMount(() => {
     addEventListener('pointerdown', onPointerDown, true);
     addEventListener('pointermove', onPointerMove);
@@ -75,7 +77,6 @@
 <g class="a9s-annotation a9s-rubberband">
   {#if cursor}
     {#if points.length > 0}
-      {@const pathData = getSmoothPathData(points,options)}
         <path 
           class="a9s-inner"
           d={pathData} />

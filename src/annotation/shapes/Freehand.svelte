@@ -9,9 +9,13 @@
   export let geom: Geometry;
   export let style: DrawingStyle | ((annotation: ImageAnnotation) => DrawingStyle) = undefined;
 
-  $: computedStyle = computeStyle(annotation, style);
+  let staticProps = {
+    fillOpacity: 1
+  }
+  $: computedStyle = computeStyle(annotation, style,staticProps);
 
   const { points } = geom as FreehandGeometry;
+  $: pathData = getSmoothPathData(points,options)
   
 </script>
 
@@ -19,5 +23,5 @@
   <path 
     class="a9s-inner"
     style={computedStyle}
-    d={getSmoothPathData(points,options)} />
+    d={pathData} />
 </g>

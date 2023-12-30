@@ -29,6 +29,8 @@
       geometry: { points, bounds }
     }
   }
+
+  $: pathData = getSmoothPathData(geom.points,options)
 </script>
 
 <Editor
@@ -42,7 +44,7 @@
 
   <path
     class="a9s-inner a9s-shape-handle"
-    style={computedStyle}
+    style={!computedStyle ? 'fill: black': null  }
     on:pointerdown={grab(Handle.SHAPE)}
-    d={getSmoothPathData(geom.points,options)} />
+    d={pathData} />
 </Editor>
