@@ -3353,18 +3353,18 @@ function Ai(e) {
   };
 }
 function Si(e, t, n) {
-  let o;
-  const i = Ee();
-  let { addEventListener: r } = t, { drawingMode: s } = t, { transform: l } = t, { viewportScale: a = 1 } = t, u = null, h = "", f = !1;
+  let o, i;
+  const r = Ee();
+  let { addEventListener: s } = t, { drawingMode: l } = t, { transform: a } = t, { viewportScale: u = 1 } = t, h = null, f = !1;
   const m = (E) => {
-    if (s === "drag" && (f = !0, o.length === 0)) {
-      const w = l.elementToImage(E.offsetX, E.offsetY);
-      o = [...w, E.pressure], n(1, h = Ve(o, Ue)), n(0, u = w);
+    if (l === "drag" && (f = !0, o.length === 0)) {
+      const w = a.elementToImage(E.offsetX, E.offsetY);
+      o = [...w, E.pressure], n(0, h = w), n(1, i = Ve(o, Ue));
     }
   }, d = (E) => {
     if (f) {
-      const w = l.elementToImage(E.offsetX, E.offsetY);
-      o = [...o, [...w, E.pressure]], n(1, h = Ve(o, Ue));
+      const w = a.elementToImage(E.offsetX, E.offsetY);
+      o = [...o, [...w, E.pressure]], n(1, i = Ve(o, Ue));
     }
   }, g = (E) => {
     f = !1, b();
@@ -3376,16 +3376,16 @@ function Si(e, t, n) {
         points: o
       }
     };
-    o = [], n(0, u = null), i("create", E);
+    o = [], n(0, h = null), r("create", E);
   };
-  return h = Ve(o, Ue), Le(() => {
-    r("pointerdown", m, !0), r("pointermove", d), r("pointerup", g, !0);
+  return i = Ve(o, Ue), Le(() => {
+    s("pointerdown", m, !0), s("pointermove", d), s("pointerup", g, !0);
   }), e.$$set = (E) => {
-    "addEventListener" in E && n(2, r = E.addEventListener), "drawingMode" in E && n(3, s = E.drawingMode), "transform" in E && n(4, l = E.transform), "viewportScale" in E && n(5, a = E.viewportScale);
+    "addEventListener" in E && n(2, s = E.addEventListener), "drawingMode" in E && n(3, l = E.drawingMode), "transform" in E && n(4, a = E.transform), "viewportScale" in E && n(5, u = E.viewportScale);
   }, e.$$.update = () => {
     e.$$.dirty & /*viewportScale*/
     32;
-  }, o = [], [u, h, r, s, l, a];
+  }, o = [], n(1, i = ""), [h, i, s, l, a, u];
 }
 class Ti extends oe {
   constructor(t) {

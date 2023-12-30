@@ -20,7 +20,7 @@
   
   let cursor: [number, number] = null;
 
-  let pathData : string = ''
+  $: pathData = ''
 
   let isDrawing: Boolean = false;
 
@@ -36,8 +36,9 @@
       if (points.length === 0) {
         const point = transform.elementToImage(evt.offsetX, evt.offsetY);
         points = [...point,evt.pressure];
-        pathData = getSmoothPathData(points,options)
+        
         cursor = point;
+        pathData = getSmoothPathData(points,options)
       }
     }
   }
