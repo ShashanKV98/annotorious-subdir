@@ -34,7 +34,7 @@
     if (drawingMode === 'drag') {
       
       if (points.length === 0) {
-        isDrawing = true
+        // isDrawing = true
         const point = transform.elementToImage(evt.offsetX, evt.offsetY);
         points = [...point,evt.pressure];
         
@@ -45,12 +45,12 @@
   }
 
   const onPointerMove = (evt: PointerEvent) => {
-    if (isDrawing){
+    // if (isDrawing){
       const point = transform.elementToImage(evt.offsetX, evt.offsetY);
       points = [...points, [...point,evt.pressure]];
       pathData = getSmoothPathData(points,options)
       // pathData = getSmoothPathData(points,options)
-    }
+    // }
   }
 
   const onPointerUp = (evt: PointerEvent) => {
@@ -58,7 +58,7 @@
       // evt.stopImmediatePropagation();
       
       pathData = getSmoothPathData(points,options)
-      isDrawing = false
+      // isDrawing = false
       stopDrawing();
   }
 
