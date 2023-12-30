@@ -38,7 +38,7 @@
         points = [...point,evt.pressure];
         
         cursor = point;
-        pathData = getSmoothPathData(points,options)
+        // pathData = getSmoothPathData(points,options)
       }
     }
   }
@@ -47,7 +47,7 @@
     if (isDrawing){
       const point = transform.elementToImage(evt.offsetX, evt.offsetY);
       points = [...points, [...point,evt.pressure]];
-      pathData = getSmoothPathData(points,options)
+      // pathData = getSmoothPathData(points,options)
     }
   }
 

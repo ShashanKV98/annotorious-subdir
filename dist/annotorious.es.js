@@ -112,14 +112,14 @@ function Ln(e, t, { bubbles: n = !1, cancelable: o = !1 } = {}) {
   const i = document.createEvent("CustomEvent");
   return i.initCustomEvent(e, n, o, t), i;
 }
-let We;
-function Ke(e) {
-  We = e;
+let qe;
+function je(e) {
+  qe = e;
 }
 function an() {
-  if (!We)
+  if (!qe)
     throw new Error("Function called outside component initialization");
-  return We;
+  return qe;
 }
 function Le(e) {
   an().$$.on_mount.push(e);
@@ -141,7 +141,7 @@ function re(e, t) {
   const n = e.$$.callbacks[t.type];
   n && n.slice().forEach((o) => o.call(this, t));
 }
-const Xe = [], Ze = [];
+const Xe = [], Ke = [];
 let Ne = [];
 const Mt = [], vn = /* @__PURE__ */ Promise.resolve();
 let dt = !1;
@@ -156,18 +156,18 @@ let Pe = 0;
 function cn() {
   if (Pe !== 0)
     return;
-  const e = We;
+  const e = qe;
   do {
     try {
       for (; Pe < Xe.length; ) {
         const t = Xe[Pe];
-        Pe++, Ke(t), kn(t.$$);
+        Pe++, je(t), kn(t.$$);
       }
     } catch (t) {
       throw Xe.length = 0, Pe = 0, t;
     }
-    for (Ke(null), Xe.length = 0, Pe = 0; Ze.length; )
-      Ze.pop()();
+    for (je(null), Xe.length = 0, Pe = 0; Ke.length; )
+      Ke.pop()();
     for (let t = 0; t < Ne.length; t += 1) {
       const n = Ne[t];
       it.has(n) || (it.add(n), n());
@@ -176,7 +176,7 @@ function cn() {
   } while (Xe.length);
   for (; Mt.length; )
     Mt.pop()();
-  dt = !1, it.clear(), Ke(e);
+  dt = !1, it.clear(), je(e);
 }
 function kn(e) {
   if (e.fragment !== null) {
@@ -189,7 +189,7 @@ function In(e) {
   const t = [], n = [];
   Ne.forEach((o) => e.indexOf(o) === -1 ? t.push(o) : n.push(o)), n.forEach((o) => o()), Ne = t;
 }
-const et = /* @__PURE__ */ new Set();
+const xe = /* @__PURE__ */ new Set();
 let Se;
 function ye() {
   Se = {
@@ -203,14 +203,14 @@ function _e() {
   Se.r || de(Se.c), Se = Se.p;
 }
 function F(e, t) {
-  e && e.i && (et.delete(e), e.i(t));
+  e && e.i && (xe.delete(e), e.i(t));
 }
 function z(e, t, n, o) {
   if (e && e.o) {
-    if (et.has(e))
+    if (xe.has(e))
       return;
-    et.add(e), Se.c.push(() => {
-      et.delete(e), o && (n && e.d(1), o());
+    xe.add(e), Se.c.push(() => {
+      xe.delete(e), o && (n && e.d(1), o());
     }), e.o(t);
   } else
     o && o();
@@ -233,8 +233,8 @@ function Pn(e, t) {
   e.$$.dirty[0] === -1 && (Xe.push(e), On(), e.$$.dirty.fill(0)), e.$$.dirty[t / 31 | 0] |= 1 << t % 31;
 }
 function ne(e, t, n, o, i, r, s, l = [-1]) {
-  const a = We;
-  Ke(e);
+  const a = qe;
+  je(e);
   const u = e.$$ = {
     fragment: null,
     ctx: [],
@@ -269,7 +269,7 @@ function ne(e, t, n, o, i, r, s, l = [-1]) {
       u.fragment && u.fragment.c();
     t.intro && F(e.$$.fragment), fe(e, t.target, t.anchor, t.customElement), cn();
   }
-  Ke(a);
+  je(a);
 }
 class oe {
   $destroy() {
@@ -289,7 +289,7 @@ class oe {
   }
 }
 var j = /* @__PURE__ */ ((e) => (e.ELLIPSE = "ELLIPSE", e.POLYGON = "POLYGON", e.RECTANGLE = "RECTANGLE", e.FREEHAND = "FREEHAND", e))(j || {});
-const _t = {}, tt = (e, t) => _t[e] = t, mt = (e) => _t[e.type].area(e), Bn = (e, t, n) => _t[e.type].intersects(e, t, n), Me = (e) => {
+const _t = {}, $e = (e, t) => _t[e] = t, mt = (e) => _t[e.type].area(e), Bn = (e, t, n) => _t[e.type].intersects(e, t, n), Me = (e) => {
   let t = 1 / 0, n = 1 / 0, o = -1 / 0, i = -1 / 0;
   return e.forEach(([r, s]) => {
     t = Math.min(t, r), n = Math.min(n, s), o = Math.max(o, r), i = Math.max(i, s);
@@ -301,7 +301,7 @@ const _t = {}, tt = (e, t) => _t[e] = t, mt = (e) => _t[e.type].area(e), Bn = (e
     return m * m / (r * r) + d * d / (s * s) <= 1;
   }
 };
-tt(j.ELLIPSE, Dn);
+$e(j.ELLIPSE, Dn);
 const Yn = {
   area: (e) => {
     const { points: t } = e.geometry;
@@ -320,12 +320,12 @@ const Yn = {
     return i;
   }
 };
-tt(j.POLYGON, Yn);
+$e(j.POLYGON, Yn);
 const Rn = {
   area: (e) => e.geometry.w * e.geometry.h,
   intersects: (e, t, n) => t >= e.geometry.x && t <= e.geometry.x + e.geometry.w && n >= e.geometry.y && n <= e.geometry.y + e.geometry.h
 };
-tt(j.RECTANGLE, Rn);
+$e(j.RECTANGLE, Rn);
 const Xn = {
   area: (e) => {
     const { points: t } = e.geometry;
@@ -344,7 +344,7 @@ const Xn = {
     return i;
   }
 };
-tt(j.FREEHAND, Xn);
+$e(j.FREEHAND, Xn);
 const Cn = (e, t = !1) => {
   const n = typeof e == "string" ? e : e.value, o = /^(xywh)=(pixel|percent)?:?(.+?),(.+?),(.+?),(.+)*/g, i = [...n.matchAll(o)][0], [r, s, l, a, u, h, f] = i;
   if (s !== "xywh")
@@ -403,7 +403,7 @@ function ae(e, t) {
 function Gn(e, t) {
   return [e[0] / t, e[1] / t];
 }
-function Ge(e) {
+function Ue(e) {
   return [e[1], -e[0]];
 }
 function Ot(e, t) {
@@ -427,7 +427,7 @@ function un(e) {
 function jn(e, t) {
   return Math.hypot(e[1] - t[1], e[0] - t[0]);
 }
-function He(e, t, n) {
+function Ve(e, t, n) {
   let o = Math.sin(n), i = Math.cos(n), r = e[0] - t[0], s = e[1] - t[1], l = r * i - s * o, a = r * o + s * i;
   return [l + t[0], a + t[1]];
 }
@@ -437,7 +437,7 @@ function gt(e, t, n) {
 function It(e, t, n) {
   return ce(e, ae(t, n));
 }
-var { min: Be, PI: qn } = Math, Pt = 0.275, Fe = qn + 1e-4;
+var { min: Be, PI: qn } = Math, Pt = 0.275, Ge = qn + 1e-4;
 function Kn(e, t = {}) {
   let { size: n = 16, smoothing: o = 0.5, thinning: i = 0.5, simulatePressure: r = !0, easing: s = (H) => H, start: l = {}, end: a = {}, last: u = !1 } = t, { cap: h = !0, easing: f = (H) => H * (2 - H) } = l, { cap: m = !0, easing: d = (H) => --H * H * H + 1 } = a;
   if (e.length === 0 || n <= 0)
@@ -467,46 +467,46 @@ function Kn(e, t = {}) {
     M = Math.max(0.01, M * Math.min(me, ve));
     let Oe = (H < e.length - 1 ? e[H + 1] : e[H]).vector, $ = H < e.length - 1 ? Ot(N, Oe) : 1, ke = Ot(N, U) < 0 && !P, Ae = $ !== null && $ < 0;
     if (ke || Ae) {
-      let J = ae(Ge(U), M);
+      let J = ae(Ue(U), M);
       for (let be = 1 / 13, ge = 0; ge <= 1; ge += be)
-        A = He(ie(V, J), V, Fe * ge), p.push(A), L = He(ce(V, J), V, Fe * -ge), S.push(L);
+        A = Ve(ie(V, J), V, Ge * ge), p.push(A), L = Ve(ce(V, J), V, Ge * -ge), S.push(L);
       y = A, _ = L, Ae && (P = !0);
       continue;
     }
     if (P = !1, H === e.length - 1) {
-      let J = ae(Ge(N), M);
+      let J = ae(Ue(N), M);
       p.push(ie(V, J)), S.push(ce(V, J));
       continue;
     }
-    let Ie = ae(Ge(gt(Oe, N, $)), M);
+    let Ie = ae(Ue(gt(Oe, N, $)), M);
     A = ie(V, Ie), (H <= 1 || kt(y, A) > w) && (p.push(A), y = A), L = ce(V, Ie), (H <= 1 || kt(_, L) > w) && (S.push(L), _ = L), T = O, U = N;
   }
   let Y = e[0].point.slice(0, 2), R = e.length > 1 ? e[e.length - 1].point.slice(0, 2) : ce(e[0].point, [1, 1]), X = [], se = [];
   if (e.length === 1) {
     if (!(b || E) || u) {
-      let H = It(Y, un(Ge(ie(Y, R))), -(D || M)), O = [];
+      let H = It(Y, un(Ue(ie(Y, R))), -(D || M)), O = [];
       for (let V = 1 / 13, N = V; N <= 1; N += V)
-        O.push(He(H, Y, Fe * 2 * N));
+        O.push(Ve(H, Y, Ge * 2 * N));
       return O;
     }
   } else {
     if (!(b || E && e.length === 1))
       if (h)
         for (let O = 1 / 13, V = O; V <= 1; V += O) {
-          let N = He(S[0], Y, Fe * V);
+          let N = Ve(S[0], Y, Ge * V);
           X.push(N);
         }
       else {
         let O = ie(p[0], S[0]), V = ae(O, 0.5), N = ae(O, 0.51);
         X.push(ie(Y, V), ie(Y, N), ce(Y, N), ce(Y, V));
       }
-    let H = Ge(Vn(e[e.length - 1].vector));
+    let H = Ue(Vn(e[e.length - 1].vector));
     if (E || b && e.length === 1)
       se.push(R);
     else if (m) {
       let O = It(R, H, M);
       for (let V = 1 / 29, N = V; N < 1; N += V)
-        se.push(He(O, R, Fe * 3 * N));
+        se.push(Ve(O, R, Ge * 3 * N));
     } else
       se.push(ce(R, ae(H, M)), ce(R, ae(H, M * 0.99)), ie(R, ae(H, M * 0.99)), ie(R, ae(H, M)));
   }
@@ -543,7 +543,7 @@ function Wn(e, t = {}) {
 function Zn(e, t = {}) {
   return Kn(Wn(e, t), t);
 }
-const Ue = {
+const et = {
   size: 6,
   thinning: 0.5,
   smoothing: 0.5,
@@ -572,7 +572,7 @@ function Jn(e) {
   );
   return t.push("Z"), t.join(" ");
 }
-function Ve(e, t) {
+function tt(e, t) {
   const n = Zn(e, t);
   return Jn(n);
 }
@@ -635,7 +635,7 @@ const Qn = (e) => {
     t = `<svg><polygon points="${o.map((i) => i.join(",")).join(" ")}" /></svg>`;
   } else if (e.type === j.FREEHAND) {
     const n = e.geometry;
-    t = `<svg><path d="${Ve(n.points, Ue)}"/></svg>`;
+    t = `<svg><path d="${tt(n.points, et)}"/></svg>`;
   } else if (e.type === j.ELLIPSE) {
     const n = e.geometry;
     t = `<svg><ellipse cx="${n.cx}" cy="${n.cy}" rx="${n.rx}" ry="${n.ry}" /></svg>`;
@@ -644,12 +644,12 @@ const Qn = (e) => {
     return { type: "SvgSelector", value: t };
   throw `Unsupported shape type: ${e.type}`;
 };
-let Qe;
+let Ze;
 const oo = new Uint8Array(16);
 function io() {
-  if (!Qe && (Qe = typeof crypto < "u" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto), !Qe))
+  if (!Ze && (Ze = typeof crypto < "u" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto), !Ze))
     throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
-  return Qe(oo);
+  return Ze(oo);
 }
 const ee = [];
 for (let e = 0; e < 256; ++e)
@@ -2508,7 +2508,7 @@ function $o(e, t, n) {
     e.$$.dirty & /*shape*/
     1 && n(6, o = r.geometry), e.$$.dirty & /*viewportScale*/
     32, e.$$.dirty & /*geom*/
-    64 && n(3, i = Ve(o.points, Ue));
+    64 && n(3, i = tt(o.points, et));
   }, [
     r,
     s,
@@ -2638,7 +2638,7 @@ class nt extends oe {
     super(), ne(this, t, ii, oi, x, { shape: 3, editor: 4, transform: 5 });
   }
 }
-const Je = (e, t, n) => {
+const We = (e, t, n) => {
   const o = typeof t == "function" ? t(e) : t;
   if (o) {
     const { fill: i, fillOpacity: r } = o;
@@ -2666,7 +2666,7 @@ function ri(e, t, n) {
     "annotation" in m && n(0, r = m.annotation), "editor" in m && n(1, s = m.editor), "style" in m && n(2, l = m.style), "target" in m && n(3, a = m.target), "transform" in m && n(4, u = m.transform), "viewportScale" in m && n(5, h = m.viewportScale);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
-    5 && (o = Je(r, l)), e.$$.dirty & /*annotation, editorComponent*/
+    5 && (o = We(r, l)), e.$$.dirty & /*annotation, editorComponent*/
     65 && r && (f == null || f.$set({ shape: r.target.selector })), e.$$.dirty & /*editorComponent, transform*/
     80 && f && f.$set({ transform: u }), e.$$.dirty & /*editorComponent, viewportScale*/
     96 && f && f.$set({ viewportScale: h });
@@ -3273,7 +3273,7 @@ function bi(e, t, n) {
     document.removeEventListener("keyup", U), document.removeEventListener("keydown", D);
   }));
   function y(_) {
-    Ze[_ ? "unshift" : "push"](() => {
+    Ke[_ ? "unshift" : "push"](() => {
       l = _, n(0, l);
     });
   }
@@ -3359,12 +3359,12 @@ function Si(e, t, n) {
   const m = (E) => {
     if (l === "drag" && (f = !0, o.length === 0)) {
       const w = a.elementToImage(E.offsetX, E.offsetY);
-      o = [...w, E.pressure], n(0, h = w), n(1, i = Ve(o, Ue));
+      o = [...w, E.pressure], n(0, h = w);
     }
   }, d = (E) => {
     if (f) {
       const w = a.elementToImage(E.offsetX, E.offsetY);
-      o = [...o, [...w, E.pressure]], n(1, i = Ve(o, Ue));
+      o = [...o, [...w, E.pressure]];
     }
   }, g = (E) => {
     f = !1, b();
@@ -3378,7 +3378,7 @@ function Si(e, t, n) {
     };
     o = [], n(0, h = null), r("create", E);
   };
-  return i = Ve(o, Ue), Le(() => {
+  return i = tt(o, et), Le(() => {
     s("pointerdown", m, !0), s("pointermove", d), s("pointerup", g, !0);
   }), e.$$set = (E) => {
     "addEventListener" in E && n(2, s = E.addEventListener), "drawingMode" in E && n(3, l = E.drawingMode), "transform" in E && n(4, a = E.transform), "viewportScale" in E && n(5, u = E.viewportScale);
@@ -3486,7 +3486,7 @@ function vi(e, t, n) {
     "annotation" in f && n(0, i = f.annotation), "geom" in f && n(6, r = f.geom), "style" in f && n(7, s = f.style);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
-    129 && n(1, o = Je(i, s));
+    129 && n(1, o = We(i, s));
   }, [i, o, l, a, u, h, r, s];
 }
 class Oi extends oe {
@@ -3548,7 +3548,7 @@ function Bi(e, t, n) {
     "annotation" in a && n(0, i = a.annotation), "geom" in a && n(3, r = a.geom), "style" in a && n(4, s = a.style);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
-    17 && n(1, o = Je(i, s));
+    17 && n(1, o = We(i, s));
   }, [i, o, l, r, s];
 }
 class Di extends oe {
@@ -3686,7 +3686,7 @@ function Ri(e, t, n) {
     "annotation" in f && n(0, a = f.annotation), "geom" in f && n(6, u = f.geom), "style" in f && n(7, h = f.style);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
-    129 && n(5, o = Je(a, h)), e.$$.dirty & /*geom*/
+    129 && n(5, o = We(a, h)), e.$$.dirty & /*geom*/
     64 && n(4, { x: i, y: r, w: s, h: l } = u, i, (n(3, r), n(6, u)), (n(2, s), n(6, u)), (n(1, l), n(6, u)));
   }, [a, l, s, r, i, o, u, h];
 }
@@ -3746,8 +3746,8 @@ function Ni(e, t, n) {
     "annotation" in h && n(0, r = h.annotation), "geom" in h && n(3, s = h.geom), "style" in h && n(4, l = h.style);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
-    17 && n(2, o = Je(r, l, a));
-  }, n(1, i = Ve(u, Ue)), [r, i, o, s, l];
+    17 && n(2, o = We(r, l, a));
+  }, n(1, i = tt(u, et)), [r, i, o, s, l];
 }
 class Ui extends oe {
   constructor(t) {
@@ -4489,12 +4489,12 @@ function Qi(e, t, n) {
     });
   };
   function se(O) {
-    Ze[O ? "unshift" : "push"](() => {
+    Ke[O ? "unshift" : "push"](() => {
       D = O, n(4, D);
     });
   }
   function H(O) {
-    Ze[O ? "unshift" : "push"](() => {
+    Ke[O ? "unshift" : "push"](() => {
       U = O, n(3, U);
     });
   }
@@ -4570,16 +4570,16 @@ function _n(e, t, n, o, i) {
       _n(e, t, h, f, i);
     }
     var m = e[t], d = n, g = o;
-    for (ze(e, n, t), i(e[o], m) > 0 && ze(e, n, o); d < g; ) {
-      for (ze(e, d, g), d++, g--; i(e[d], m) < 0; )
+    for (He(e, n, t), i(e[o], m) > 0 && He(e, n, o); d < g; ) {
+      for (He(e, d, g), d++, g--; i(e[d], m) < 0; )
         d++;
       for (; i(e[g], m) > 0; )
         g--;
     }
-    i(e[n], m) === 0 ? ze(e, n, g) : (g++, ze(e, g, o)), g <= t && (n = g + 1), t <= g && (o = g - 1);
+    i(e[n], m) === 0 ? He(e, n, g) : (g++, He(e, g, o)), g <= t && (n = g + 1), t <= g && (o = g - 1);
   }
 }
-function ze(e, t, n) {
+function He(e, t, n) {
   var o = e[t];
   e[t] = e[n], e[n] = o;
 }
@@ -4596,13 +4596,13 @@ class tr {
   search(t) {
     let n = this.data;
     const o = [];
-    if (!$e(t, n))
+    if (!Qe(t, n))
       return o;
     const i = this.toBBox, r = [];
     for (; n; ) {
       for (let s = 0; s < n.children.length; s++) {
         const l = n.children[s], a = n.leaf ? i(l) : l;
-        $e(t, a) && (n.leaf ? o.push(l) : ut(t, a) ? this._all(l, o) : r.push(l));
+        Qe(t, a) && (n.leaf ? o.push(l) : ut(t, a) ? this._all(l, o) : r.push(l));
       }
       n = r.pop();
     }
@@ -4610,13 +4610,13 @@ class tr {
   }
   collides(t) {
     let n = this.data;
-    if (!$e(t, n))
+    if (!Qe(t, n))
       return !1;
     const o = [];
     for (; n; ) {
       for (let i = 0; i < n.children.length; i++) {
         const r = n.children[i], s = n.leaf ? this.toBBox(r) : r;
-        if ($e(t, s)) {
+        if (Qe(t, s)) {
           if (n.leaf || ut(t, s))
             return !0;
           o.push(r);
@@ -4722,7 +4722,7 @@ class tr {
   }
   _insert(t, n, o) {
     const i = o ? t : this.toBBox(t), r = [], s = this._chooseSubtree(i, this.data, n, r);
-    for (s.children.push(t), qe(s, i); n >= 0 && r[n].children.length > this._maxEntries; )
+    for (s.children.push(t), ze(s, i); n >= 0 && r[n].children.length > this._maxEntries; )
       this._split(r, n), n--;
     this._adjustParentBBoxes(i, r, n);
   }
@@ -4739,7 +4739,7 @@ class tr {
   _chooseSplitIndex(t, n, o) {
     let i, r = 1 / 0, s = 1 / 0;
     for (let l = n; l <= o - n; l++) {
-      const a = je(t, 0, l, this.toBBox), u = je(t, l, o, this.toBBox), h = sr(a, u), f = ft(a) + ft(u);
+      const a = Fe(t, 0, l, this.toBBox), u = Fe(t, l, o, this.toBBox), h = sr(a, u), f = ft(a) + ft(u);
       h < r ? (r = h, i = l, s = f < s ? f : s) : h === r && f < s && (s = f, i = l);
     }
     return i || o - n;
@@ -4752,21 +4752,21 @@ class tr {
   // total margin of all possible split distributions where each node is at least m full
   _allDistMargin(t, n, o, i) {
     t.children.sort(i);
-    const r = this.toBBox, s = je(t, 0, n, r), l = je(t, o - n, o, r);
-    let a = xe(s) + xe(l);
+    const r = this.toBBox, s = Fe(t, 0, n, r), l = Fe(t, o - n, o, r);
+    let a = Je(s) + Je(l);
     for (let u = n; u < o - n; u++) {
       const h = t.children[u];
-      qe(s, t.leaf ? r(h) : h), a += xe(s);
+      ze(s, t.leaf ? r(h) : h), a += Je(s);
     }
     for (let u = o - n - 1; u >= n; u--) {
       const h = t.children[u];
-      qe(l, t.leaf ? r(h) : h), a += xe(l);
+      ze(l, t.leaf ? r(h) : h), a += Je(l);
     }
     return a;
   }
   _adjustParentBBoxes(t, n, o) {
     for (let i = o; i >= 0; i--)
-      qe(n[i], t);
+      ze(n[i], t);
   }
   _condense(t) {
     for (let n = t.length - 1, o; n >= 0; n--)
@@ -4782,17 +4782,17 @@ function nr(e, t, n) {
   return -1;
 }
 function Re(e, t) {
-  je(e, 0, e.children.length, t, e);
+  Fe(e, 0, e.children.length, t, e);
 }
-function je(e, t, n, o, i) {
+function Fe(e, t, n, o, i) {
   i || (i = Ce(null)), i.minX = 1 / 0, i.minY = 1 / 0, i.maxX = -1 / 0, i.maxY = -1 / 0;
   for (let r = t; r < n; r++) {
     const s = e.children[r];
-    qe(i, e.leaf ? o(s) : s);
+    ze(i, e.leaf ? o(s) : s);
   }
   return i;
 }
-function qe(e, t) {
+function ze(e, t) {
   return e.minX = Math.min(e.minX, t.minX), e.minY = Math.min(e.minY, t.minY), e.maxX = Math.max(e.maxX, t.maxX), e.maxY = Math.max(e.maxY, t.maxY), e;
 }
 function or(e, t) {
@@ -4804,7 +4804,7 @@ function ir(e, t) {
 function ft(e) {
   return (e.maxX - e.minX) * (e.maxY - e.minY);
 }
-function xe(e) {
+function Je(e) {
   return e.maxX - e.minX + (e.maxY - e.minY);
 }
 function rr(e, t) {
@@ -4817,7 +4817,7 @@ function sr(e, t) {
 function ut(e, t) {
   return e.minX <= t.minX && e.minY <= t.minY && t.maxX <= e.maxX && t.maxY <= e.maxY;
 }
-function $e(e, t) {
+function Qe(e, t) {
   return t.minX <= e.maxX && t.minY <= e.maxY && t.maxX >= e.minX && t.maxY >= e.minY;
 }
 function Ce(e) {
@@ -5041,7 +5041,7 @@ export {
   to as parseSVGSelector,
   Co as parseW3CImageAnnotation,
   ti as registerEditor,
-  tt as registerShapeUtil,
+  $e as registerShapeUtil,
   Mi as registerTool,
   fr as sampleBrightness,
   Nn as serializeFragmentSelector,
