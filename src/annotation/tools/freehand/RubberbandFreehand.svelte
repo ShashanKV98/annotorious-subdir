@@ -21,7 +21,8 @@
   let cursor: [number, number] = null;
 
   $: pathData = null
-  // let isDrawing: Boolean = false;
+
+  let isDrawing: Boolean = false;
 
   $: handleSize = 10 / viewportScale;
 
@@ -31,8 +32,9 @@
     lastPointerDown = { timeStamp, offsetX, offsetY };
 
     if (drawingMode === 'drag') {
-      // isDrawing = true
+      
       if (points.length === 0) {
+        isDrawing = true
         const point = transform.elementToImage(evt.offsetX, evt.offsetY);
         points = [...point,evt.pressure];
         
@@ -43,19 +45,20 @@
   }
 
   const onPointerMove = (evt: PointerEvent) => {
-    // if (isDrawing){
+    if (isDrawing){
       const point = transform.elementToImage(evt.offsetX, evt.offsetY);
       points = [...points, [...point,evt.pressure]];
       pathData = getSmoothPathData(points,options)
       // pathData = getSmoothPathData(points,options)
-    // }
+    }
   }
 
   const onPointerUp = (evt: PointerEvent) => {
       // Stop click event from propagating if we're drawing
       // evt.stopImmediatePropagation();
-      // isDrawing = false
+      
       pathData = getSmoothPathData(points,options)
+      isDrawing = false
       stopDrawing();
   }
 
