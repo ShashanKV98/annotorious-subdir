@@ -189,7 +189,7 @@ function In(e) {
   const t = [], n = [];
   Ne.forEach((o) => e.indexOf(o) === -1 ? t.push(o) : n.push(o)), n.forEach((o) => o()), Ne = t;
 }
-const xe = /* @__PURE__ */ new Set();
+const et = /* @__PURE__ */ new Set();
 let Se;
 function ye() {
   Se = {
@@ -203,14 +203,14 @@ function _e() {
   Se.r || de(Se.c), Se = Se.p;
 }
 function F(e, t) {
-  e && e.i && (xe.delete(e), e.i(t));
+  e && e.i && (et.delete(e), e.i(t));
 }
 function z(e, t, n, o) {
   if (e && e.o) {
-    if (xe.has(e))
+    if (et.has(e))
       return;
-    xe.add(e), Se.c.push(() => {
-      xe.delete(e), o && (n && e.d(1), o());
+    et.add(e), Se.c.push(() => {
+      et.delete(e), o && (n && e.d(1), o());
     }), e.o(t);
   } else
     o && o();
@@ -289,7 +289,7 @@ class oe {
   }
 }
 var j = /* @__PURE__ */ ((e) => (e.ELLIPSE = "ELLIPSE", e.POLYGON = "POLYGON", e.RECTANGLE = "RECTANGLE", e.FREEHAND = "FREEHAND", e))(j || {});
-const _t = {}, $e = (e, t) => _t[e] = t, mt = (e) => _t[e.type].area(e), Bn = (e, t, n) => _t[e.type].intersects(e, t, n), Me = (e) => {
+const _t = {}, tt = (e, t) => _t[e] = t, mt = (e) => _t[e.type].area(e), Bn = (e, t, n) => _t[e.type].intersects(e, t, n), Me = (e) => {
   let t = 1 / 0, n = 1 / 0, o = -1 / 0, i = -1 / 0;
   return e.forEach(([r, s]) => {
     t = Math.min(t, r), n = Math.min(n, s), o = Math.max(o, r), i = Math.max(i, s);
@@ -301,7 +301,7 @@ const _t = {}, $e = (e, t) => _t[e] = t, mt = (e) => _t[e.type].area(e), Bn = (e
     return m * m / (r * r) + d * d / (s * s) <= 1;
   }
 };
-$e(j.ELLIPSE, Dn);
+tt(j.ELLIPSE, Dn);
 const Yn = {
   area: (e) => {
     const { points: t } = e.geometry;
@@ -320,12 +320,12 @@ const Yn = {
     return i;
   }
 };
-$e(j.POLYGON, Yn);
+tt(j.POLYGON, Yn);
 const Rn = {
   area: (e) => e.geometry.w * e.geometry.h,
   intersects: (e, t, n) => t >= e.geometry.x && t <= e.geometry.x + e.geometry.w && n >= e.geometry.y && n <= e.geometry.y + e.geometry.h
 };
-$e(j.RECTANGLE, Rn);
+tt(j.RECTANGLE, Rn);
 const Xn = {
   area: (e) => {
     const { points: t } = e.geometry;
@@ -344,7 +344,7 @@ const Xn = {
     return i;
   }
 };
-$e(j.FREEHAND, Xn);
+tt(j.FREEHAND, Xn);
 const Cn = (e, t = !1) => {
   const n = typeof e == "string" ? e : e.value, o = /^(xywh)=(pixel|percent)?:?(.+?),(.+?),(.+?),(.+)*/g, i = [...n.matchAll(o)][0], [r, s, l, a, u, h, f] = i;
   if (s !== "xywh")
@@ -543,7 +543,7 @@ function Wn(e, t = {}) {
 function Zn(e, t = {}) {
   return Kn(Wn(e, t), t);
 }
-const et = {
+const We = {
   size: 6,
   thinning: 0.5,
   smoothing: 0.5,
@@ -572,7 +572,7 @@ function Jn(e) {
   );
   return t.push("Z"), t.join(" ");
 }
-function tt(e, t) {
+function Ze(e, t) {
   const n = Zn(e, t);
   return Jn(n);
 }
@@ -635,7 +635,7 @@ const Qn = (e) => {
     t = `<svg><polygon points="${o.map((i) => i.join(",")).join(" ")}" /></svg>`;
   } else if (e.type === j.FREEHAND) {
     const n = e.geometry;
-    t = `<svg><path d="${tt(n.points, et)}"/></svg>`;
+    t = `<svg><path d="${Ze(n.points, We)}"/></svg>`;
   } else if (e.type === j.ELLIPSE) {
     const n = e.geometry;
     t = `<svg><ellipse cx="${n.cx}" cy="${n.cy}" rx="${n.rx}" ry="${n.ry}" /></svg>`;
@@ -644,12 +644,12 @@ const Qn = (e) => {
     return { type: "SvgSelector", value: t };
   throw `Unsupported shape type: ${e.type}`;
 };
-let Ze;
+let Qe;
 const oo = new Uint8Array(16);
 function io() {
-  if (!Ze && (Ze = typeof crypto < "u" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto), !Ze))
+  if (!Qe && (Qe = typeof crypto < "u" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto), !Qe))
     throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
-  return Ze(oo);
+  return Qe(oo);
 }
 const ee = [];
 for (let e = 0; e < 256; ++e)
@@ -2508,7 +2508,7 @@ function $o(e, t, n) {
     e.$$.dirty & /*shape*/
     1 && n(6, o = r.geometry), e.$$.dirty & /*viewportScale*/
     32, e.$$.dirty & /*geom*/
-    64 && n(3, i = tt(o.points, et));
+    64 && n(3, i = Ze(o.points, We));
   }, [
     r,
     s,
@@ -2638,7 +2638,7 @@ class nt extends oe {
     super(), ne(this, t, ii, oi, x, { shape: 3, editor: 4, transform: 5 });
   }
 }
-const We = (e, t, n) => {
+const Je = (e, t, n) => {
   const o = typeof t == "function" ? t(e) : t;
   if (o) {
     const { fill: i, fillOpacity: r } = o;
@@ -2666,7 +2666,7 @@ function ri(e, t, n) {
     "annotation" in m && n(0, r = m.annotation), "editor" in m && n(1, s = m.editor), "style" in m && n(2, l = m.style), "target" in m && n(3, a = m.target), "transform" in m && n(4, u = m.transform), "viewportScale" in m && n(5, h = m.viewportScale);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
-    5 && (o = We(r, l)), e.$$.dirty & /*annotation, editorComponent*/
+    5 && (o = Je(r, l)), e.$$.dirty & /*annotation, editorComponent*/
     65 && r && (f == null || f.$set({ shape: r.target.selector })), e.$$.dirty & /*editorComponent, transform*/
     80 && f && f.$set({ transform: u }), e.$$.dirty & /*editorComponent, viewportScale*/
     96 && f && f.$set({ viewportScale: h });
@@ -3363,9 +3363,9 @@ function Si(e, t, n) {
     }
   }, m = (p) => {
     const A = a.elementToImage(p.offsetX, p.offsetY);
-    o = [...o, [...A, p.pressure]];
+    o = [...o, [...A, p.pressure]], n(1, i = Ze(o, We));
   }, d = (p) => {
-    n(1, i = tt(o, et)), g();
+    n(1, i = Ze(o, We)), g();
   }, g = () => {
     const p = {
       type: j.FREEHAND,
@@ -3484,7 +3484,7 @@ function vi(e, t, n) {
     "annotation" in f && n(0, i = f.annotation), "geom" in f && n(6, r = f.geom), "style" in f && n(7, s = f.style);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
-    129 && n(1, o = We(i, s));
+    129 && n(1, o = Je(i, s));
   }, [i, o, l, a, u, h, r, s];
 }
 class Oi extends oe {
@@ -3546,7 +3546,7 @@ function Bi(e, t, n) {
     "annotation" in a && n(0, i = a.annotation), "geom" in a && n(3, r = a.geom), "style" in a && n(4, s = a.style);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
-    17 && n(1, o = We(i, s));
+    17 && n(1, o = Je(i, s));
   }, [i, o, l, r, s];
 }
 class Di extends oe {
@@ -3684,7 +3684,7 @@ function Ri(e, t, n) {
     "annotation" in f && n(0, a = f.annotation), "geom" in f && n(6, u = f.geom), "style" in f && n(7, h = f.style);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
-    129 && n(5, o = We(a, h)), e.$$.dirty & /*geom*/
+    129 && n(5, o = Je(a, h)), e.$$.dirty & /*geom*/
     64 && n(4, { x: i, y: r, w: s, h: l } = u, i, (n(3, r), n(6, u)), (n(2, s), n(6, u)), (n(1, l), n(6, u)));
   }, [a, l, s, r, i, o, u, h];
 }
@@ -3744,8 +3744,8 @@ function Ni(e, t, n) {
     "annotation" in h && n(0, r = h.annotation), "geom" in h && n(3, s = h.geom), "style" in h && n(4, l = h.style);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
-    17 && n(2, o = We(r, l, a));
-  }, n(1, i = tt(u, et)), [r, i, o, s, l];
+    17 && n(2, o = Je(r, l, a));
+  }, n(1, i = Ze(u, We)), [r, i, o, s, l];
 }
 class Ui extends oe {
   constructor(t) {
@@ -4594,13 +4594,13 @@ class tr {
   search(t) {
     let n = this.data;
     const o = [];
-    if (!Qe(t, n))
+    if (!$e(t, n))
       return o;
     const i = this.toBBox, r = [];
     for (; n; ) {
       for (let s = 0; s < n.children.length; s++) {
         const l = n.children[s], a = n.leaf ? i(l) : l;
-        Qe(t, a) && (n.leaf ? o.push(l) : ut(t, a) ? this._all(l, o) : r.push(l));
+        $e(t, a) && (n.leaf ? o.push(l) : ut(t, a) ? this._all(l, o) : r.push(l));
       }
       n = r.pop();
     }
@@ -4608,13 +4608,13 @@ class tr {
   }
   collides(t) {
     let n = this.data;
-    if (!Qe(t, n))
+    if (!$e(t, n))
       return !1;
     const o = [];
     for (; n; ) {
       for (let i = 0; i < n.children.length; i++) {
         const r = n.children[i], s = n.leaf ? this.toBBox(r) : r;
-        if (Qe(t, s)) {
+        if ($e(t, s)) {
           if (n.leaf || ut(t, s))
             return !0;
           o.push(r);
@@ -4751,14 +4751,14 @@ class tr {
   _allDistMargin(t, n, o, i) {
     t.children.sort(i);
     const r = this.toBBox, s = Fe(t, 0, n, r), l = Fe(t, o - n, o, r);
-    let a = Je(s) + Je(l);
+    let a = xe(s) + xe(l);
     for (let u = n; u < o - n; u++) {
       const h = t.children[u];
-      ze(s, t.leaf ? r(h) : h), a += Je(s);
+      ze(s, t.leaf ? r(h) : h), a += xe(s);
     }
     for (let u = o - n - 1; u >= n; u--) {
       const h = t.children[u];
-      ze(l, t.leaf ? r(h) : h), a += Je(l);
+      ze(l, t.leaf ? r(h) : h), a += xe(l);
     }
     return a;
   }
@@ -4802,7 +4802,7 @@ function ir(e, t) {
 function ft(e) {
   return (e.maxX - e.minX) * (e.maxY - e.minY);
 }
-function Je(e) {
+function xe(e) {
   return e.maxX - e.minX + (e.maxY - e.minY);
 }
 function rr(e, t) {
@@ -4815,7 +4815,7 @@ function sr(e, t) {
 function ut(e, t) {
   return e.minX <= t.minX && e.minY <= t.minY && t.maxX <= e.maxX && t.maxY <= e.maxY;
 }
-function Qe(e, t) {
+function $e(e, t) {
   return t.minX <= e.maxX && t.minY <= e.maxY && t.maxX >= e.minX && t.maxY >= e.minY;
 }
 function Ce(e) {
@@ -5039,7 +5039,7 @@ export {
   to as parseSVGSelector,
   Co as parseW3CImageAnnotation,
   ti as registerEditor,
-  $e as registerShapeUtil,
+  tt as registerShapeUtil,
   Mi as registerTool,
   fr as sampleBrightness,
   Nn as serializeFragmentSelector,
