@@ -1,6 +1,7 @@
 export * from './polygon';
 export * from './rectangle';
 export * from './ellipse';
+export * from './freehand'
 export * from './editorsRegistry';
 export * from './Handle';
 

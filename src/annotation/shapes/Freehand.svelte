@@ -1,6 +1,6 @@
 <script type="ts" lang="ts">
   import type { DrawingStyle } from '@annotorious/core';
-  import type { Geometry, ImageAnnotation, PolygonGeometry } from '../../model';
+  import type { Geometry, ImageAnnotation, FreehandGeometry } from '../../model';
   import { computeStyle } from '../utils/styling';
   import { getSmoothPathData, options } from '../utils/path';
   
@@ -11,7 +11,7 @@
 
   $: computedStyle = computeStyle(annotation, style);
 
-  const { points } = geom as PolygonGeometry;
+  const { points } = geom as FreehandGeometry;
   
 </script>
 

@@ -1,7 +1,8 @@
 import type { W3CSelector } from '@annotorious/core';
 import { boundsFromPoints, ShapeType } from '../../core';
-import type { Ellipse, EllipseGeometry, Polygon, PolygonGeometry, Shape } from '../../core';
+import type { Ellipse, EllipseGeometry, Polygon, PolygonGeometry, Freehand, FreehandGeometry, Shape } from '../../core';
 import { SVG_NAMESPACE, insertSVGNamespace, sanitize } from './SVG';
+import { getSmoothPathData, options } from '../../../annotation/utils/path';
 
 export interface SVGSelector extends W3CSelector {
 
@@ -24,6 +25,27 @@ const parseSVGXML = (value: string): Element => {
     return sanitize(doc).firstChild as Element;
   } else {
     return sanitize(insertSVGNamespace(doc)).firstChild as Element;
+  }
+}
+
+const parseSVGFreehand = (value: string): Freehand => {
+  const [a, b, str] = value.match(/(<path d=["|'])([^("|')]*)/) || []
+
+  if (!str) return
+  const pathRegex = /([MQZT])([^MQZT]*)/g
+  const matches = Array.from(str.matchAll(pathRegex))
+  const points = matches.map((match) => {
+    const command = match[1]
+    const pointData = match[2].trim().split(/\s+/).map(parseFloat)
+    return pointData
+  })
+  
+  return {
+    type: ShapeType.FREEHAND,
+    geometry: {
+      points,
+      bounds: boundsFromPoints(points as [number, number][]),
+    },
   }
 }
 
@@ -74,20 +96,28 @@ export const parseSVGSelector = <T extends Shape>(valueOrSelector: SVGSelector |
   const value = typeof valueOrSelector === 'string' ? valueOrSelector : valueOrSelector.value;
 
   if (value.includes('<polygon points='))
-    return parseSVGPolygon(value) as unknown as T;
-  else if (value.includes('<ellipse ')) 
-    return parseSVGEllipse(value) as unknown as T;
+    return parseSVGPolygon(value) as unknown as T
+  else if (value.includes('<path d='))
+    return parseSVGFreehand(value) as unknown as T
+  else if (value.includes('<ellipse '))
+    return parseSVGEllipse(value) as unknown as T
 }
 
 export const serializeSVGSelector = (shape: Shape): SVGSelector => {
   let value: string;
 
   if (shape.type === ShapeType.POLYGON) {
-    const geom = shape.geometry as PolygonGeometry;
-    const { points } = geom;
-    value = `<svg><polygon points="${points.map((xy) => xy.join(',')).join(' ')}" /></svg>`;
+    const geom = shape.geometry as PolygonGeometry
+    const { points } = geom
+    value = `<svg><polygon points="${points
+      .map((xy) => xy.join(','))
+      .join(' ')}" /></svg>`
+  } else if (shape.type === ShapeType.FREEHAND) {
+    const geom = shape.geometry as FreehandGeometry
+    const pathData = getSmoothPathData(geom.points,options)
+    value = `<svg><path d="${pathData}"/></svg>`
   } else if (shape.type === ShapeType.ELLIPSE) {
-    const geom = shape.geometry as EllipseGeometry;
+    const geom = shape.geometry as EllipseGeometry
     value = `<svg><ellipse cx="${geom.cx}" cy="${geom.cy}" rx="${geom.rx}" ry="${geom.ry}" /></svg>`
   }
 

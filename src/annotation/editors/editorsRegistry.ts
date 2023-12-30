@@ -3,12 +3,14 @@ import type { SvelteComponent } from 'svelte';
 import { PolygonEditor } from './polygon';
 import { RectangleEditor } from './rectangle';
 import { EllipseEditor } from './ellipse';
+import { FreehandEditor } from './freehand'
 
 const REGISTERED = new Map<ShapeType, typeof SvelteComponent>([
   [ShapeType.RECTANGLE, RectangleEditor],
   [ShapeType.POLYGON, PolygonEditor],
   [ShapeType.ELLIPSE, EllipseEditor],
-]);
+  [ShapeType.FREEHAND, FreehandEditor],
+])
 
 export const getEditor = (shape: Shape) => REGISTERED.get(shape.type);
 
