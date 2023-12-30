@@ -20,6 +20,7 @@
   
   let cursor: [number, number] = null;
 
+  $: pathData = null
   // let isDrawing: Boolean = false;
 
   $: handleSize = 10 / viewportScale;
@@ -53,6 +54,7 @@
       // Stop click event from propagating if we're drawing
       // evt.stopImmediatePropagation();
       // isDrawing = false
+      pathData = getSmoothPathData(points,options)
       stopDrawing();
   }
 
@@ -66,12 +68,13 @@
     }
 
     points = [];
+    pathData = null
     cursor = null;
   
     dispatch('create', shape);
   }
 
-  $: pathData = getSmoothPathData(points,options)
+  
   
 
   onMount(() => {
