@@ -20,8 +20,6 @@
   
   let cursor: [number, number] = null;
 
-  $: pathData = ''
-
   // let isDrawing: Boolean = false;
 
   $: handleSize = 10 / viewportScale;
@@ -73,7 +71,7 @@
     dispatch('create', shape);
   }
 
-  pathData = getSmoothPathData(points,options)
+  $: pathData = getSmoothPathData(points,options)
   
 
   onMount(() => {
