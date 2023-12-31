@@ -578,7 +578,7 @@ function to(e, t, n) {
   return e = n ? e : $n(e, o), e = eo(e, o), e;
 }
 const Ze = {
-  size: 6,
+  size: 4,
   thinning: 0.5,
   smoothing: 0.5,
   streamline: 0.5,

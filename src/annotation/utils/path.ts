@@ -4,7 +4,7 @@ import simplify from './simplify'
 type GenericObject = Record<string,unknown>
 
 export const options = {
-  size: 6,
+  size: 4,
   thinning: 0.5,
   smoothing: 0.5,
   streamline: 0.5,
