@@ -1,3 +1,4 @@
+type GenericObject = Record<string, unknown>;
 export declare const options: {
     size: number;
     thinning: number;
@@ -16,5 +17,6 @@ export declare const options: {
     };
 };
 export declare function getSvgPathFromStroke(stroke: any): any;
-export declare function getSmoothPathData(points: any, options: any): any;
+export declare function getSmoothPathData(points: Array<Array<number>>, options: GenericObject, simplifyPath?: Boolean): any;
+export {};
 //# sourceMappingURL=path.d.ts.map

@@ -15,7 +15,7 @@
   $: computedStyle = computeStyle(annotation, style,staticProps);
 
   const { points } = geom as FreehandGeometry;
-  $: pathData = getSmoothPathData(points,options)
+  $: pathData = getSmoothPathData(points,options,true )
   
 </script>
 

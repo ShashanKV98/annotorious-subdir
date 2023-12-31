@@ -1,4 +1,7 @@
 import { getStroke } from "perfect-freehand";
+import simplify from './simplify'
+
+type GenericObject = Record<string,unknown>
 
 export const options = {
   size: 6,
@@ -34,8 +37,14 @@ export function getSvgPathFromStroke(stroke) {
   return d.join(" ")
 }
 
-export function getSmoothPathData(points,options) {
-  const stroke = getStroke(points, options);
-  const pathData = getSvgPathFromStroke(stroke);
+export function getSmoothPathData(
+  points: Array<Array<number>>,
+  options: GenericObject,
+  simplifyPath: Boolean = false
+) {
+  const stroke = getStroke(points, options)
+  const pathData = getSvgPathFromStroke(
+    simplifyPath ? simplify(stroke) : stroke
+  )
   return pathData
 }

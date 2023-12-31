@@ -6,7 +6,6 @@
   import { Editor, Handle } from '..';
   import { getSmoothPathData, options } from '../../utils/path';
   import { computeStyle } from '../../utils/styling';
-
   /** Props */
   export let shape: Freehand;
 //   export let computedStyle: string = undefined;
@@ -38,7 +37,7 @@
     }
   }
 
-  $: pathData = getSmoothPathData(geom.points,options)
+  $: pathData = getSmoothPathData(geom.points,options,true)
 </script>
 
 <Editor
