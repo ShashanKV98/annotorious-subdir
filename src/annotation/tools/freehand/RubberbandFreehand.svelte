@@ -45,9 +45,7 @@
   const onPointerMove = (evt: PointerEvent) => {
     if (isDrawing){
       const point = transform.elementToImage(evt.offsetX, evt.offsetY);
-      // points = [...points, [...point,evt.pressure]];
       points.push([...point,evt.pressure])
-      // pathData = getSmoothPathData(points,options)
     }
   }
 
@@ -90,7 +88,7 @@
   {#if isDrawing}
     <!-- {#if points.length > 0} -->
         <path 
-          class="a9s-inner"
+          class="a9s-outer"
           d={pathData} />
     <!-- {/if} -->
   {/if}
