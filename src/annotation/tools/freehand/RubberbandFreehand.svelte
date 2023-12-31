@@ -18,6 +18,8 @@
 
   let points : [number, number, number][] = [];
   
+  let pathData: string = ''
+
   let cursor: [number, number] = null;
 
   let isDrawing: Boolean = false;
@@ -37,7 +39,7 @@
         points.push([...point,evt.pressure]);
         
         cursor = point;
-        // pathData = getSmoothPathData(points,options)
+        pathData = getSmoothPathData(points,options)
       }
     }
   }
@@ -46,6 +48,7 @@
     if (isDrawing){
       const point = transform.elementToImage(evt.offsetX, evt.offsetY);
       points.push([...point,evt.pressure])
+      pathData = getSmoothPathData(points,options)
     }
   }
 
@@ -89,7 +92,7 @@
     <!-- {#if points.length > 0} -->
         <path 
           class="a9s-inner"
-          d={getSmoothPathData(points,options)} />
+          d={pathData} />
     <!-- {/if} -->
   {/if}
 </g>
