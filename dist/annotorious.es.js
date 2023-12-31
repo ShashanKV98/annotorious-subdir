@@ -3732,7 +3732,7 @@ function Ci(e) {
   let t, n, o;
   return {
     c() {
-      t = C("g"), n = C("path"), c(n, "class", "a9s-outer"), c(
+      t = C("g"), n = C("path"), c(
         n,
         "style",
         /*computedStyle*/

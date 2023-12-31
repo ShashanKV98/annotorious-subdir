@@ -21,7 +21,6 @@
 
 <g data-id={annotation.id}>
   <path 
-    class="a9s-outer"
     style={computedStyle}
     d={pathData} />
 </g>
