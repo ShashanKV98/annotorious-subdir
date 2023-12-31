@@ -100,7 +100,6 @@
   {#if isDrawing}
     <!-- {#if points.length > 0} -->
         <path 
-          class="a9s-inner"
           style={computedStyle}
           d={pathData} />
     <!-- {/if} -->

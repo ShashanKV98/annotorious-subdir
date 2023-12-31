@@ -3313,7 +3313,7 @@ function zt(e) {
   let t;
   return {
     c() {
-      t = C("path"), c(t, "class", "a9s-inner"), c(
+      t = C("path"), c(
         t,
         "style",
         /*computedStyle*/
