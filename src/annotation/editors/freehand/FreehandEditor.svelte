@@ -43,7 +43,7 @@
   let:grab={grab}>
 
   <path
-    class="a9s-inner a9s-shape-handle"
+    class="a9s-shape-handle"
     style={computedStyle}
     on:pointerdown={grab(Handle.SHAPE)}
     d={pathData} />

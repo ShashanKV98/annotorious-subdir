@@ -2389,7 +2389,7 @@ function Qo(e) {
   let t, n, o;
   return {
     c() {
-      t = C("path"), c(t, "class", "a9s-inner a9s-shape-handle"), c(
+      t = C("path"), c(t, "class", "a9s-shape-handle"), c(
         t,
         "style",
         /*computedStyle*/
