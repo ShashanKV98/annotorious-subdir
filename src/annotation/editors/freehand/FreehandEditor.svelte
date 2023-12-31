@@ -44,7 +44,7 @@
 
   <path
     class="a9s-inner a9s-shape-handle"
-    style={!computedStyle ? 'fill: black': null  }
+    style={computedStyle}
     on:pointerdown={grab(Handle.SHAPE)}
     d={pathData} />
 </Editor>

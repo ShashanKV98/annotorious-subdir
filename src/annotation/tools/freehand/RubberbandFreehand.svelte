@@ -1,9 +1,11 @@
 <script type="ts">
   import { onMount, createEventDispatcher } from 'svelte';
   import type { DrawingMode } from '../../../AnnotoriousOpts';
-  import { boundsFromPoints, computeArea, ShapeType, type Freehand } from '../../../model';
+  import type { DrawingStyle } from '@annotorious/core';
+  import { boundsFromPoints, computeArea, ShapeType, type Freehand, type ImageAnnotation } from '../../../model';
   import { distance } from '../../utils';
   import { getSmoothPathData, options } from '../../utils/path';
+  import { computeStyle } from '../../utils/styling'; 
   import type { Transform } from '../..';
 
   const dispatch = createEventDispatcher<{ create: Freehand }>();
@@ -11,8 +13,13 @@
   /** Props **/
   export let addEventListener: (type: string, fn: EventListener, capture?: boolean) => void;
   export let drawingMode: DrawingMode;
+  export let annotation: ImageAnnotation;
   export let transform: Transform;
   export let viewportScale = 1;
+  export let style: DrawingStyle | ((annotation: ImageAnnotation) => DrawingStyle) = undefined;
+  let staticProps = {
+    fillOpacity: 1
+  }
 
   let lastPointerDown: { timeStamp: number, offsetX: number, offsetY: number };
 
@@ -25,6 +32,8 @@
   let isDrawing: Boolean = false;
 
   $: handleSize = 10 / viewportScale;
+
+  $: computedStyle = computeStyle(annotation, style,staticProps);
 
   const onPointerDown = (evt: PointerEvent) => {
     // Note that the event itself is ephemeral!
@@ -92,6 +101,7 @@
     <!-- {#if points.length > 0} -->
         <path 
           class="a9s-inner"
+          style={computedStyle}
           d={pathData} />
     <!-- {/if} -->
   {/if}
