@@ -90,6 +90,9 @@
         <path 
           class="a9s-outer"
           d={pathData} />
+        <path 
+          class="a9s-inner"
+          d={pathData} />
     <!-- {/if} -->
   {/if}
 </g>

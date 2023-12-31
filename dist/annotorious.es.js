@@ -84,7 +84,7 @@ function yt(e, t) {
   for (let n = 0; n < e.length; n += 1)
     e[n] && e[n].d(t);
 }
-function C(e) {
+function X(e) {
   return document.createElementNS("http://www.w3.org/2000/svg", e);
 }
 function ln(e) {
@@ -481,7 +481,7 @@ function Kn(e, t = {}) {
     let Ie = ae(Ue(gt(Oe, N, $)), M);
     E = ie(V, Ie), (H <= 1 || kt(_, E) > b) && (y.push(E), _ = E), L = ce(V, Ie), (H <= 1 || kt(w, L) > b) && (S.push(L), w = L), T = O, U = N;
   }
-  let Y = e[0].point.slice(0, 2), R = e.length > 1 ? e[e.length - 1].point.slice(0, 2) : ce(e[0].point, [1, 1]), X = [], se = [];
+  let Y = e[0].point.slice(0, 2), R = e.length > 1 ? e[e.length - 1].point.slice(0, 2) : ce(e[0].point, [1, 1]), C = [], se = [];
   if (e.length === 1) {
     if (!(p || A) || u) {
       let H = It(Y, un(Ue(ie(Y, R))), -(D || M)), O = [];
@@ -494,11 +494,11 @@ function Kn(e, t = {}) {
       if (h)
         for (let O = 1 / 13, V = O; V <= 1; V += O) {
           let N = Ve(S[0], Y, Ge * V);
-          X.push(N);
+          C.push(N);
         }
       else {
         let O = ie(y[0], S[0]), V = ae(O, 0.5), N = ae(O, 0.51);
-        X.push(ie(Y, V), ie(Y, N), ce(Y, N), ce(Y, V));
+        C.push(ie(Y, V), ie(Y, N), ce(Y, N), ce(Y, V));
       }
     let H = Ue(Vn(e[e.length - 1].vector));
     if (A || p && e.length === 1)
@@ -510,7 +510,7 @@ function Kn(e, t = {}) {
     } else
       se.push(ce(R, ae(H, M)), ce(R, ae(H, M * 0.99)), ie(R, ae(H, M * 0.99)), ie(R, ae(H, M)));
   }
-  return y.concat(se, S.reverse(), X);
+  return y.concat(se, S.reverse(), C);
 }
 function Wn(e, t = {}) {
   var n;
@@ -1341,7 +1341,7 @@ function Rt(e) {
   let t, n, o, i, r;
   return {
     c() {
-      t = C("rect"), c(t, "class", "a9s-corner-handle"), c(t, "x", n = /*point*/
+      t = X("rect"), c(t, "class", "a9s-corner-handle"), c(t, "x", n = /*point*/
       e[11][0] - /*handleSize*/
       e[3] / 2), c(t, "y", o = /*point*/
       e[11][1] - /*handleSize*/
@@ -1406,7 +1406,7 @@ function Uo(e) {
     m[d] = Rt(Yt(e, f, d));
   return {
     c() {
-      t = C("polygon"), i = te(), r = C("polygon"), l = te();
+      t = X("polygon"), i = te(), r = X("polygon"), l = te();
       for (let d = 0; d < m.length; d += 1)
         m[d].c();
       a = we(), c(t, "class", "a9s-outer"), c(t, "style", n = /*computedStyle*/
@@ -1582,10 +1582,10 @@ class Ho extends oe {
   }
 }
 function Fo(e) {
-  let t, n, o, i, r, s, l, a, u, h, f, m, d, g, p, A, b, y, S, T, M, D, U, _, w, E, L, P, Y, R, X, se, H, O, V, N, le, K, me, ve, Oe, $, ke, Ae, Ie, J, be, ge, ot, Et;
+  let t, n, o, i, r, s, l, a, u, h, f, m, d, g, p, A, b, y, S, T, M, D, U, _, w, E, L, P, Y, R, C, se, H, O, V, N, le, K, me, ve, Oe, $, ke, Ae, Ie, J, be, ge, ot, Et;
   return {
     c() {
-      t = C("rect"), l = te(), a = C("rect"), d = te(), g = C("rect"), y = te(), S = C("rect"), U = te(), _ = C("rect"), P = te(), Y = C("rect"), H = te(), O = C("rect"), le = te(), K = C("rect"), Oe = te(), $ = C("rect"), Ie = te(), J = C("rect"), c(t, "class", "a9s-outer"), c(t, "style", n = /*computedStyle*/
+      t = X("rect"), l = te(), a = X("rect"), d = te(), g = X("rect"), y = te(), S = X("rect"), U = te(), _ = X("rect"), P = te(), Y = X("rect"), H = te(), O = X("rect"), le = te(), K = X("rect"), Oe = te(), $ = X("rect"), Ie = te(), J = X("rect"), c(t, "class", "a9s-outer"), c(t, "style", n = /*computedStyle*/
       e[1] ? "display:none;" : void 0), c(t, "x", o = /*geom*/
       e[4].x), c(t, "y", i = /*geom*/
       e[4].y), c(t, "width", r = /*geom*/
@@ -1611,7 +1611,7 @@ function Fo(e) {
       e[4].y + /*geom*/
       e[4].h), c(_, "height", 1), c(_, "width", L = /*geom*/
       e[4].w), c(Y, "class", "a9s-edge-handle a9s-edge-handle-left"), c(Y, "x", R = /*geom*/
-      e[4].x), c(Y, "y", X = /*geom*/
+      e[4].x), c(Y, "y", C = /*geom*/
       e[4].y), c(Y, "height", se = /*geom*/
       e[4].h), c(Y, "width", 1), c(O, "class", "a9s-corner-handle a9s-corner-handle-topleft"), c(O, "x", V = /*geom*/
       e[4].x - /*handleSize*/
@@ -1787,8 +1787,8 @@ function Fo(e) {
       e[4].w) && c(_, "width", L), B & /*geom*/
       16 && R !== (R = /*geom*/
       e[4].x) && c(Y, "x", R), B & /*geom*/
-      16 && X !== (X = /*geom*/
-      e[4].y) && c(Y, "y", X), B & /*geom*/
+      16 && C !== (C = /*geom*/
+      e[4].y) && c(Y, "y", C), B & /*geom*/
       16 && se !== (se = /*geom*/
       e[4].h) && c(Y, "height", se), B & /*geom, handleSize*/
       24 && V !== (V = /*geom*/
@@ -2034,7 +2034,7 @@ function Ko(e) {
   let t, n, o, i, r, s, l, a, u, h, f, m, d, g, p, A, b, y, S, T, M, D, U, _, w, E, L, P, Y;
   return {
     c() {
-      t = C("ellipse"), s = te(), l = C("ellipse"), m = te(), d = C("rect"), A = te(), b = C("rect"), T = te(), M = C("rect"), _ = te(), w = C("rect"), c(t, "class", "a9s-outer"), c(t, "cx", n = /*geom*/
+      t = X("ellipse"), s = te(), l = X("ellipse"), m = te(), d = X("rect"), A = te(), b = X("rect"), T = te(), M = X("rect"), _ = te(), w = X("rect"), c(t, "class", "a9s-outer"), c(t, "cx", n = /*geom*/
       e[3].cx), c(t, "cy", o = /*geom*/
       e[3].cy), c(t, "rx", i = /*geom*/
       e[3].rx), c(t, "ry", r = /*geom*/
@@ -2104,8 +2104,8 @@ function Ko(e) {
         e[2]
       );
     },
-    m(R, X) {
-      I(R, t, X), I(R, s, X), I(R, l, X), I(R, m, X), I(R, d, X), I(R, A, X), I(R, b, X), I(R, T, X), I(R, M, X), I(R, _, X), I(R, w, X), P || (Y = [
+    m(R, C) {
+      I(R, t, C), I(R, s, C), I(R, l, C), I(R, m, C), I(R, d, C), I(R, A, C), I(R, b, C), I(R, T, C), I(R, M, C), I(R, _, C), I(R, w, C), P || (Y = [
         Z(t, "pointerdown", function() {
           W(
             /*grab*/
@@ -2144,94 +2144,94 @@ function Ko(e) {
         })
       ], P = !0);
     },
-    p(R, X) {
-      e = R, X & /*geom*/
+    p(R, C) {
+      e = R, C & /*geom*/
       8 && n !== (n = /*geom*/
-      e[3].cx) && c(t, "cx", n), X & /*geom*/
+      e[3].cx) && c(t, "cx", n), C & /*geom*/
       8 && o !== (o = /*geom*/
-      e[3].cy) && c(t, "cy", o), X & /*geom*/
+      e[3].cy) && c(t, "cy", o), C & /*geom*/
       8 && i !== (i = /*geom*/
-      e[3].rx) && c(t, "rx", i), X & /*geom*/
+      e[3].rx) && c(t, "rx", i), C & /*geom*/
       8 && r !== (r = /*geom*/
-      e[3].ry) && c(t, "ry", r), X & /*geom*/
+      e[3].ry) && c(t, "ry", r), C & /*geom*/
       8 && a !== (a = /*geom*/
-      e[3].cx) && c(l, "cx", a), X & /*geom*/
+      e[3].cx) && c(l, "cx", a), C & /*geom*/
       8 && u !== (u = /*geom*/
-      e[3].cy) && c(l, "cy", u), X & /*geom*/
+      e[3].cy) && c(l, "cy", u), C & /*geom*/
       8 && h !== (h = /*geom*/
-      e[3].rx) && c(l, "rx", h), X & /*geom*/
+      e[3].rx) && c(l, "rx", h), C & /*geom*/
       8 && f !== (f = /*geom*/
-      e[3].ry) && c(l, "ry", f), X & /*geom, handleSize*/
+      e[3].ry) && c(l, "ry", f), C & /*geom, handleSize*/
       12 && g !== (g = /*geom*/
       e[3].cx - /*handleSize*/
-      e[2] / 2) && c(d, "x", g), X & /*geom, handleSize*/
+      e[2] / 2) && c(d, "x", g), C & /*geom, handleSize*/
       12 && p !== (p = /*geom*/
       e[3].cy - /*handleSize*/
       e[2] / 2 - /*geom*/
-      e[3].ry) && c(d, "y", p), X & /*handleSize*/
+      e[3].ry) && c(d, "y", p), C & /*handleSize*/
       4 && c(
         d,
         "height",
         /*handleSize*/
         e[2]
-      ), X & /*handleSize*/
+      ), C & /*handleSize*/
       4 && c(
         d,
         "width",
         /*handleSize*/
         e[2]
-      ), X & /*geom, handleSize*/
+      ), C & /*geom, handleSize*/
       12 && y !== (y = /*geom*/
       e[3].cx + /*geom*/
       e[3].rx - /*handleSize*/
-      e[2] / 2) && c(b, "x", y), X & /*geom, handleSize*/
+      e[2] / 2) && c(b, "x", y), C & /*geom, handleSize*/
       12 && S !== (S = /*geom*/
       e[3].cy - /*handleSize*/
-      e[2] / 2) && c(b, "y", S), X & /*handleSize*/
+      e[2] / 2) && c(b, "y", S), C & /*handleSize*/
       4 && c(
         b,
         "height",
         /*handleSize*/
         e[2]
-      ), X & /*handleSize*/
+      ), C & /*handleSize*/
       4 && c(
         b,
         "width",
         /*handleSize*/
         e[2]
-      ), X & /*geom, handleSize*/
+      ), C & /*geom, handleSize*/
       12 && D !== (D = /*geom*/
       e[3].cx - /*handleSize*/
-      e[2] / 2) && c(M, "x", D), X & /*geom, handleSize*/
+      e[2] / 2) && c(M, "x", D), C & /*geom, handleSize*/
       12 && U !== (U = /*geom*/
       e[3].cy + /*geom*/
       e[3].ry - /*handleSize*/
-      e[2] / 2) && c(M, "y", U), X & /*handleSize*/
+      e[2] / 2) && c(M, "y", U), C & /*handleSize*/
       4 && c(
         M,
         "height",
         /*handleSize*/
         e[2]
-      ), X & /*handleSize*/
+      ), C & /*handleSize*/
       4 && c(
         M,
         "width",
         /*handleSize*/
         e[2]
-      ), X & /*geom, handleSize*/
+      ), C & /*geom, handleSize*/
       12 && E !== (E = /*geom*/
       e[3].cx - /*geom*/
       e[3].rx - /*handleSize*/
-      e[2] / 2) && c(w, "x", E), X & /*geom, handleSize*/
+      e[2] / 2) && c(w, "x", E), C & /*geom, handleSize*/
       12 && L !== (L = /*geom*/
       e[3].cy - /*handleSize*/
-      e[2] / 2) && c(w, "y", L), X & /*handleSize*/
+      e[2] / 2) && c(w, "y", L), C & /*handleSize*/
       4 && c(
         w,
         "height",
         /*handleSize*/
         e[2]
-      ), X & /*handleSize*/
+      ), C & /*handleSize*/
       4 && c(
         w,
         "width",
@@ -2389,7 +2389,7 @@ function Qo(e) {
   let t, n, o, i;
   return {
     c() {
-      t = C("path"), c(t, "class", "a9s-inner a9s-shape-handle"), c(t, "style", n = /*computedStyle*/
+      t = X("path"), c(t, "class", "a9s-inner a9s-shape-handle"), c(t, "style", n = /*computedStyle*/
       e[1] ? null : "fill: black"), c(
         t,
         "d",
@@ -2565,7 +2565,7 @@ function oi(e) {
   );
   return {
     c() {
-      t = C("g"), s && s.c(), c(t, "class", "a9s-annotation selected");
+      t = X("g"), s && s.c(), c(t, "class", "a9s-annotation selected");
     },
     m(l, a) {
       I(l, t, a), s && s.m(t, null), n = !0, o || (i = [
@@ -2725,7 +2725,7 @@ function Vt(e) {
   let t, n;
   return {
     c() {
-      t = C("rect"), n = C("rect"), c(t, "class", "a9s-outer"), c(
+      t = X("rect"), n = X("rect"), c(t, "class", "a9s-outer"), c(
         t,
         "x",
         /*x*/
@@ -2833,7 +2833,7 @@ function ci(e) {
   );
   return {
     c() {
-      t = C("g"), n && n.c(), c(t, "class", "a9s-annotation a9s-rubberband");
+      t = X("g"), n && n.c(), c(t, "class", "a9s-annotation a9s-rubberband");
     },
     m(o, i) {
       I(o, t, i), n && n.m(t, null);
@@ -2976,7 +2976,7 @@ function Gt(e) {
   );
   return {
     c() {
-      t = C("polygon"), o = C("polygon"), s && s.c(), r = we(), c(t, "class", "a9s-outer"), c(t, "points", n = /*coords*/
+      t = X("polygon"), o = X("polygon"), s && s.c(), r = we(), c(t, "class", "a9s-outer"), c(t, "points", n = /*coords*/
       e[15]), c(o, "class", "a9s-inner"), c(o, "points", i = /*coords*/
       e[15]);
     },
@@ -3000,7 +3000,7 @@ function Ht(e) {
   let t, n, o;
   return {
     c() {
-      t = C("rect"), c(t, "class", "a9s-corner-handle"), c(t, "x", n = /*points*/
+      t = X("rect"), c(t, "class", "a9s-corner-handle"), c(t, "x", n = /*points*/
       e[0][0][0] - /*handleSize*/
       e[3] / 2), c(t, "y", o = /*points*/
       e[0][0][1] - /*handleSize*/
@@ -3052,7 +3052,7 @@ function gi(e) {
   );
   return {
     c() {
-      t = C("g"), n && n.c(), c(t, "class", "a9s-annotation a9s-rubberband");
+      t = X("g"), n && n.c(), c(t, "class", "a9s-annotation a9s-rubberband");
     },
     m(o, i) {
       I(o, t, i), n && n.m(t, null);
@@ -3151,7 +3151,7 @@ function Ft(e) {
   let t, n, o, i, r, s, l, a, u, h;
   return {
     c() {
-      t = C("ellipse"), s = C("ellipse"), c(t, "class", "a9s-outer"), c(t, "cx", n = /*x*/
+      t = X("ellipse"), s = X("ellipse"), c(t, "class", "a9s-outer"), c(t, "cx", n = /*x*/
       e[2] + /*w*/
       e[4] / 2), c(t, "cy", o = /*y*/
       e[3] + /*h*/
@@ -3203,7 +3203,7 @@ function wi(e) {
   );
   return {
     c() {
-      t = C("g"), n && n.c(), c(t, "class", "a9s-annotation a9s-rubberband");
+      t = X("g"), n && n.c(), c(t, "class", "a9s-annotation a9s-rubberband");
     },
     m(o, i) {
       I(o, t, i), n && n.m(t, null), e[9](t);
@@ -3302,30 +3302,41 @@ class Ei extends oe {
   }
 }
 function zt(e) {
-  let t;
+  let t, n;
   return {
     c() {
-      t = C("path"), c(t, "class", "a9s-outer"), c(
+      t = X("path"), n = X("path"), c(t, "class", "a9s-outer"), c(
         t,
+        "d",
+        /*pathData*/
+        e[1]
+      ), c(n, "class", "a9s-inner"), c(
+        n,
         "d",
         /*pathData*/
         e[1]
       );
     },
-    m(n, o) {
-      I(n, t, o);
+    m(o, i) {
+      I(o, t, i), I(o, n, i);
     },
-    p(n, o) {
-      o & /*pathData*/
+    p(o, i) {
+      i & /*pathData*/
       2 && c(
         t,
         "d",
         /*pathData*/
-        n[1]
+        o[1]
+      ), i & /*pathData*/
+      2 && c(
+        n,
+        "d",
+        /*pathData*/
+        o[1]
       );
     },
-    d(n) {
-      n && k(t);
+    d(o) {
+      o && k(t), o && k(n);
     }
   };
 }
@@ -3336,7 +3347,7 @@ function Ai(e) {
   );
   return {
     c() {
-      t = C("g"), n && n.c(), c(t, "class", "a9s-annotation a9s-rubberband");
+      t = X("g"), n && n.c(), c(t, "class", "a9s-annotation a9s-rubberband");
     },
     m(o, i) {
       I(o, t, i), n && n.m(t, null);
@@ -3417,7 +3428,7 @@ function Li(e) {
   let t, n, o, i, r;
   return {
     c() {
-      t = C("g"), n = C("ellipse"), i = C("ellipse"), c(n, "class", "a9s-outer"), c(n, "style", o = /*computedStyle*/
+      t = X("g"), n = X("ellipse"), i = X("ellipse"), c(n, "class", "a9s-outer"), c(n, "style", o = /*computedStyle*/
       e[1] ? "display:none;" : void 0), c(
         n,
         "cx",
@@ -3508,7 +3519,7 @@ function ki(e) {
   let t, n, o, i, r;
   return {
     c() {
-      t = C("g"), n = C("polygon"), i = C("polygon"), c(n, "class", "a9s-outer"), c(n, "style", o = /*computedStyle*/
+      t = X("g"), n = X("polygon"), i = X("polygon"), c(n, "class", "a9s-outer"), c(n, "style", o = /*computedStyle*/
       e[1] ? "display:none;" : void 0), c(
         n,
         "points",
@@ -3570,7 +3581,7 @@ function Yi(e) {
   let t, n, o, i, r;
   return {
     c() {
-      t = C("g"), n = C("rect"), i = C("rect"), c(n, "class", "a9s-outer"), c(n, "style", o = /*computedStyle*/
+      t = X("g"), n = X("rect"), i = X("rect"), c(n, "class", "a9s-outer"), c(n, "style", o = /*computedStyle*/
       e[5] ? "display:none;" : void 0), c(
         n,
         "x",
@@ -3709,7 +3720,7 @@ function Ci(e) {
   let t, n, o;
   return {
     c() {
-      t = C("g"), n = C("path"), c(n, "class", "a9s-inner"), c(
+      t = X("g"), n = X("path"), c(n, "class", "a9s-outer"), c(
         n,
         "style",
         /*computedStyle*/
@@ -4387,10 +4398,10 @@ function Ji(e) {
   );
   return {
     c() {
-      t = C("svg"), n = C("g");
+      t = X("svg"), n = X("g");
       for (let f = 0; f < a.length; f += 1)
         a[f].c();
-      o = C("g"), h && h.c(), c(o, "class", "drawing"), c(t, "class", "a9s-annotationlayer"), Tt(
+      o = X("g"), h && h.c(), c(o, "class", "drawing"), c(t, "class", "a9s-annotationlayer"), Tt(
         t,
         "drawing",
         /*tool*/
@@ -4487,7 +4498,7 @@ function Qi(e, t, n) {
       }
     };
     E.addAnnotation(N), w.setSelected(N.id);
-  }, X = (O) => (V) => {
+  }, C = (O) => (V) => {
     var me;
     const { target: N } = O, le = 10 * 60 * 1e3, K = ((me = N.creator) == null ? void 0 : me.id) !== M.id || !N.created || (/* @__PURE__ */ new Date()).getTime() - N.created.getTime() > le;
     E.updateTarget({
@@ -4537,7 +4548,7 @@ function Qi(e, t, n) {
     w,
     E,
     R,
-    X,
+    C,
     A,
     b,
     y,
