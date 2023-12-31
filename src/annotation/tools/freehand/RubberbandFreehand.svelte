@@ -68,13 +68,13 @@
     }
     isDrawing = false
     points = [];
-    pathData = null
+    // pathData = null
     cursor = null;
   
     dispatch('create', shape);
   }
 
-   $: pathData = getSmoothPathData(points,options)
+  //  $: pathData = getSmoothPathData(points,options)
   
 
   onMount(() => {
@@ -88,11 +88,8 @@
   {#if isDrawing}
     <!-- {#if points.length > 0} -->
         <path 
-          class="a9s-outer"
-          d={pathData} />
-        <path 
           class="a9s-inner"
-          d={pathData} />
+          d={getSmoothPathData(points,options)} />
     <!-- {/if} -->
   {/if}
 </g>
