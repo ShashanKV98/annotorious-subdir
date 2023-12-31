@@ -1,19 +1,27 @@
 <script type="ts" lang="ts">
-  import { boundsFromPoints } from '../../../model';
+  import { boundsFromPoints, type ImageAnnotation } from '../../../model';
   import type { Freehand } from '../../../model';
   import type { Transform } from '../../Transform';
+  import type { DrawingStyle } from '@annotorious/core';
   import { Editor, Handle } from '..';
   import { getSmoothPathData, options } from '../../utils/path';
+  import { computeStyle } from '../../utils/styling';
 
   /** Props */
   export let shape: Freehand;
-  export let computedStyle: string = undefined;
+//   export let computedStyle: string = undefined;
+  export let annotation: ImageAnnotation;
   export let transform: Transform;
   export let viewportScale: number = 1;
-
+  export let style: DrawingStyle | ((annotation: ImageAnnotation) => DrawingStyle) = undefined;
+  let staticProps = {
+    fillOpacity: 1
+  }
   $: geom = shape.geometry;
 
   $: handleSize = 10 / viewportScale;
+
+  $: computedStyle = computeStyle(annotation, style,staticProps);
 
   const editor = (path: Freehand, handle: Handle, delta: [number, number]) => {
     let points: [number, number, number][];
