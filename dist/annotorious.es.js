@@ -579,8 +579,8 @@ function to(e, t, n) {
 }
 const Ze = {
   size: 4,
-  thinning: 0.5,
-  smoothing: 0.5,
+  thinning: 0.3,
+  smoothing: 1.5,
   streamline: 0.5,
   easing: (e) => e,
   start: {
