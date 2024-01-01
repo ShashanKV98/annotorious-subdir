@@ -16,7 +16,7 @@ export declare const options: {
         cap: boolean;
     };
 };
-export declare function getSvgPathFromStroke(points: any, closed?: boolean): string;
-export declare function getSmoothPathData(points: Array<Array<number>>, options: GenericObject, simplifyPath?: Boolean): string;
+export declare function getSvgPathFromStroke(stroke: any): any;
+export declare function getSmoothPathData(points: Array<Array<number>>, options: GenericObject, simplifyPath?: Boolean): any;
 export {};
 //# sourceMappingURL=path.d.ts.map
