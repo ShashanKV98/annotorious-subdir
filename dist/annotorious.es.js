@@ -581,7 +581,7 @@ const Ze = {
   size: 4,
   thinning: 0.3,
   smoothing: 1.5,
-  streamline: 0.5,
+  streamline: 0,
   easing: (e) => e,
   start: {
     taper: 0,
