@@ -1,4 +1,4 @@
-<script type="ts">
+<script type="ts" lang="ts">
   import { onMount, createEventDispatcher } from 'svelte';
   import type { DrawingMode } from '../../../AnnotoriousOpts';
   import type { DrawingStyle } from '@annotorious/core';
