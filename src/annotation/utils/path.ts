@@ -6,8 +6,8 @@ type GenericObject = Record<string,unknown>
 export const options = {
   size: 4,
   thinning: 0.3,
-  smoothing: 1.5,
-  streamline: 0,
+  smoothing: 0.5,
+  streamline: 0.5,
   easing: (t) => t,
   start: {
     taper: 0,
