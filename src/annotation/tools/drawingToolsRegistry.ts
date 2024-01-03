@@ -3,6 +3,7 @@ import { RubberbandRectangle } from './rectangle';
 import { RubberbandPolygon } from './polygon';
 import { RubberbandEllipse } from './ellipse';
 import { RubberbandFreehand } from './freehand'
+import { RubberbandLine } from './line'
 import type { DrawingMode } from '../../AnnotoriousOpts';
 
 export type DrawingTool = 'rectangle' | 'polygon' | string;
@@ -23,6 +24,7 @@ const REGISTERED = new Map<
   ['polygon', { tool: RubberbandPolygon }],
   ['ellipse', { tool: RubberbandEllipse }],
   ['freehand', { tool: RubberbandFreehand }],
+  ['line', { tool: RubberbandLine }],
 ])
 
 export const listDrawingTools = () => [...REGISTERED.keys()];

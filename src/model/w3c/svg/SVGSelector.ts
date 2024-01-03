@@ -1,6 +1,6 @@
 import type { W3CSelector } from '@annotorious/core';
 import { boundsFromPoints, ShapeType } from '../../core';
-import type { Ellipse, EllipseGeometry, Polygon, PolygonGeometry, Freehand, FreehandGeometry, Shape } from '../../core';
+import type { Ellipse, EllipseGeometry, Polygon, PolygonGeometry, Freehand, FreehandGeometry,Line, LineGeometry, Shape } from '../../core';
 import { SVG_NAMESPACE, insertSVGNamespace, sanitize } from './SVG';
 import { getSmoothPathData, options } from '../../../annotation/utils/path';
 
@@ -92,6 +92,34 @@ const parseSVGEllipse = (value: string): Ellipse => {
   };
 }
 
+const parseSVGLine = (value: string): Line => {
+  const doc = parseSVGXML(value)
+
+  const x1 = parseFloat(doc.getAttribute('x1'))
+  const x2 = parseFloat(doc.getAttribute('x2'))
+  const y1 = parseFloat(doc.getAttribute('y1'))
+  const y2 = parseFloat(doc.getAttribute('y2'))
+
+  const bounds = {
+    minX: Math.min(x1, x2),
+    minY: Math.min(y1, y2),
+    maxX: Math.max(x1, x2),
+    maxY: Math.max(y1, y2),
+  }
+
+  return {
+    type: ShapeType.LINE,
+    geometry: {
+      x1,
+      x2,
+      y1,
+      y2,
+      bounds,
+    },
+  }
+}
+
+
 export const parseSVGSelector = <T extends Shape>(valueOrSelector: SVGSelector | string): T => {
   const value = typeof valueOrSelector === 'string' ? valueOrSelector : valueOrSelector.value;
 
@@ -101,6 +129,8 @@ export const parseSVGSelector = <T extends Shape>(valueOrSelector: SVGSelector |
     return parseSVGFreehand(value) as unknown as T
   else if (value.includes('<ellipse '))
     return parseSVGEllipse(value) as unknown as T
+  else if (value.includes('<line '))
+    return parseSVGLine(value) as unknown as T
 }
 
 export const serializeSVGSelector = (shape: Shape): SVGSelector => {
@@ -114,11 +144,14 @@ export const serializeSVGSelector = (shape: Shape): SVGSelector => {
       .join(' ')}" /></svg>`
   } else if (shape.type === ShapeType.FREEHAND) {
     const geom = shape.geometry as FreehandGeometry
-    const pathData = getSmoothPathData(geom.points,options)
+    const pathData = getSmoothPathData(geom.points, options)
     value = `<svg><path d="${pathData}"/></svg>`
   } else if (shape.type === ShapeType.ELLIPSE) {
     const geom = shape.geometry as EllipseGeometry
     value = `<svg><ellipse cx="${geom.cx}" cy="${geom.cy}" rx="${geom.rx}" ry="${geom.ry}" /></svg>`
+  } else if (shape.type === ShapeType.LINE) {
+    const geom = shape.geometry as LineGeometry
+    value = `<svg><line x1="${geom.x1}" x2="${geom.x2}" y1="${geom.y1}" y2="${geom.y2}" /></svg>`
   }
 
   if (value) {

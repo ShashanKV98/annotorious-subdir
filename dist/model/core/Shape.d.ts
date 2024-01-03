@@ -7,7 +7,8 @@ export declare enum ShapeType {
     ELLIPSE = "ELLIPSE",
     POLYGON = "POLYGON",
     RECTANGLE = "RECTANGLE",
-    FREEHAND = "FREEHAND"
+    FREEHAND = "FREEHAND",
+    LINE = "LINE"
 }
 export interface Geometry {
     bounds: Bounds;

@@ -16,7 +16,9 @@ export enum ShapeType {
 
   RECTANGLE = 'RECTANGLE',
 
-  FREEHAND = 'FREEHAND'
+  FREEHAND = 'FREEHAND',
+
+  LINE = 'LINE'
 
 }
 
