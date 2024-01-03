@@ -74,11 +74,11 @@
     <!-- A marker to be used as an arrowhead -->
     <marker
       id="arrow"
-      viewBox={`0 0 ${handleSize/2} ${handleSize/2}`}
-      refX = {`${handleSize/2}`}
-      refY = {`${handleSize/2}`}
-      markerWidth={`${handleSize/2}`}
-      markerHeight={`${handleSize/2}`}
+      viewBox={`0 0 ${handleSize/4} ${handleSize/4}`}
+      refX = "0"
+      refY = "0"
+      markerWidth={`${handleSize/6}`}
+      markerHeight={`${handleSize/6}`}
       orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" />
     </marker>
