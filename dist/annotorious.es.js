@@ -3503,7 +3503,7 @@ function Nt(e) {
   let t, n;
   return {
     c() {
-      t = I("line"), n = I("line"), a(t, "class", "a9s-outer"), a(t, "stroke", "blue"), a(t, "stroke-width", "3"), a(
+      t = I("line"), n = I("line"), a(t, "class", "a9s-outer"), a(
         t,
         "x1",
         /*x1*/
@@ -3523,7 +3523,7 @@ function Nt(e) {
         "y2",
         /*y2*/
         e[4]
-      ), a(n, "class", "a9s-inner"), a(n, "stroke", "blue"), a(n, "stroke-width", "3"), a(
+      ), a(n, "class", "a9s-inner"), a(
         n,
         "x1",
         /*x1*/
