@@ -235,7 +235,7 @@ function Mn(e, t) {
 function J(e, t, n, o, i, r, s, f = [-1]) {
   const a = Be;
   De(e);
-  const u = e.$$ = {
+  const c = e.$$ = {
     fragment: null,
     ctx: [],
     // state
@@ -256,17 +256,17 @@ function J(e, t, n, o, i, r, s, f = [-1]) {
     skip_bound: !1,
     root: t.target || a.$$.root
   };
-  s && s(u.root);
-  let h = !1;
-  if (u.ctx = n ? n(e, t.props || {}, (c, m, ...d) => {
-    const p = d.length ? d[0] : m;
-    return u.ctx && i(u.ctx[c], u.ctx[c] = p) && (!u.skip_bound && u.bound[c] && u.bound[c](p), h && Mn(e, c)), m;
-  }) : [], u.update(), h = !0, ae(u.before_update), u.fragment = o ? o(u.ctx) : !1, t.target) {
+  s && s(c.root);
+  let m = !1;
+  if (c.ctx = n ? n(e, t.props || {}, (u, h, ...d) => {
+    const p = d.length ? d[0] : h;
+    return c.ctx && i(c.ctx[u], c.ctx[u] = p) && (!c.skip_bound && c.bound[u] && c.bound[u](p), m && Mn(e, u)), h;
+  }) : [], c.update(), m = !0, ae(c.before_update), c.fragment = o ? o(c.ctx) : !1, t.target) {
     if (t.hydrate) {
-      const c = _n(t.target);
-      u.fragment && u.fragment.l(c), c.forEach(k);
+      const u = _n(t.target);
+      c.fragment && c.fragment.l(u), u.forEach(k);
     } else
-      u.fragment && u.fragment.c();
+      c.fragment && c.fragment.c();
     t.intro && H(e.$$.fragment), oe(e, t.target, t.anchor, t.customElement), tn();
   }
   De(a);
@@ -297,8 +297,8 @@ const ht = {}, Re = (e, t) => ht[e] = t, ct = (e) => ht[e.type].area(e), Tn = (e
 }, Ln = {
   area: (e) => Math.PI * e.geometry.rx * e.geometry.ry,
   intersects: (e, t, n) => {
-    const { cx: o, cy: i, rx: r, ry: s } = e.geometry, f = 0, a = Math.cos(f), u = Math.sin(f), h = t - o, c = n - i, m = a * h + u * c, d = u * h - a * c;
-    return m * m / (r * r) + d * d / (s * s) <= 1;
+    const { cx: o, cy: i, rx: r, ry: s } = e.geometry, f = 0, a = Math.cos(f), c = Math.sin(f), m = t - o, u = n - i, h = a * m + c * u, d = c * m - a * u;
+    return h * h / (r * r) + d * d / (s * s) <= 1;
   }
 };
 Re(F.ELLIPSE, Ln);
@@ -314,8 +314,8 @@ const kn = {
     const { points: o } = e.geometry;
     let i = !1;
     for (let r = 0, s = o.length - 1; r < o.length; s = r++) {
-      const f = o[r][0], a = o[r][1], u = o[s][0], h = o[s][1];
-      a > n != h > n && t < (u - f) * (n - a) / (h - a) + f && (i = !i);
+      const f = o[r][0], a = o[r][1], c = o[s][0], m = o[s][1];
+      a > n != m > n && t < (c - f) * (n - a) / (m - a) + f && (i = !i);
     }
     return i;
   }
@@ -338,8 +338,8 @@ const vn = {
     const { points: o } = e.geometry;
     let i = !1;
     for (let r = 0, s = o.length - 1; r < o.length; s = r++) {
-      const f = o[r][0], a = o[r][1], u = o[s][0], h = o[s][1];
-      a > n != h > n && t < (u - f) * (n - a) / (h - a) + f && (i = !i);
+      const f = o[r][0], a = o[r][1], c = o[s][0], m = o[s][1];
+      a > n != m > n && t < (c - f) * (n - a) / (m - a) + f && (i = !i);
     }
     return i;
   }
@@ -349,29 +349,29 @@ const Pn = {
   area: (e) => 0,
   intersects: (e, t, n) => {
     const o = e.geometry.x1, i = e.geometry.x2, r = e.geometry.y1, s = e.geometry.y2;
-    var f = Math.sqrt(Math.pow(t - o, 2) + Math.pow(n - r, 2)), a = Math.sqrt(Math.pow(t - i, 2) + Math.pow(n - s, 2)), u = Math.sqrt(Math.pow(i - o, 2) + Math.pow(s - r, 2)), h = f + a;
-    return Math.abs(h - u) <= 0.1;
+    var f = Math.sqrt(Math.pow(t - o, 2) + Math.pow(n - r, 2)), a = Math.sqrt(Math.pow(t - i, 2) + Math.pow(n - s, 2)), c = Math.sqrt(Math.pow(i - o, 2) + Math.pow(s - r, 2)), m = f + a;
+    return Math.abs(m - c) <= 0.1;
   }
 };
 Re(F.LINE, Pn);
 const In = (e, t = !1) => {
-  const n = typeof e == "string" ? e : e.value, o = /^(xywh)=(pixel|percent)?:?(.+?),(.+?),(.+?),(.+)*/g, i = [...n.matchAll(o)][0], [r, s, f, a, u, h, c] = i;
+  const n = typeof e == "string" ? e : e.value, o = /^(xywh)=(pixel|percent)?:?(.+?),(.+?),(.+?),(.+)*/g, i = [...n.matchAll(o)][0], [r, s, f, a, c, m, u] = i;
   if (s !== "xywh")
     throw new Error("Unsupported MediaFragment: " + n);
   if (f && f !== "pixel")
     throw new Error(`Unsupported MediaFragment unit: ${f}`);
-  const [m, d, p, A] = [a, u, h, c].map(parseFloat);
+  const [h, d, p, A] = [a, c, m, u].map(parseFloat);
   return {
     type: F.RECTANGLE,
     geometry: {
-      x: m,
+      x: h,
       y: d,
       w: p,
       h: A,
       bounds: {
-        minX: m,
+        minX: h,
         minY: t ? d - A : d,
-        maxX: m + p,
+        maxX: h + p,
         maxY: t ? d : d + A
       }
     }
@@ -619,11 +619,11 @@ function pt(e, t = tt) {
   function i(f) {
     if (Jn(e, f) && (e = f, n)) {
       const a = !Ae.length;
-      for (const u of o)
-        u[1](), Ae.push(u, e);
+      for (const c of o)
+        c[1](), Ae.push(c, e);
       if (a) {
-        for (let u = 0; u < Ae.length; u += 2)
-          Ae[u][0](Ae[u + 1]);
+        for (let c = 0; c < Ae.length; c += 2)
+          Ae[c][0](Ae[c + 1]);
         Ae.length = 0;
       }
     }
@@ -632,9 +632,9 @@ function pt(e, t = tt) {
     i(f(e));
   }
   function s(f, a = tt) {
-    const u = [f, a];
-    return o.add(u), o.size === 1 && (n = t(i) || tt), f(e), () => {
-      o.delete(u), o.size === 0 && n && (n(), n = null);
+    const c = [f, a];
+    return o.add(c), o.size === 1 && (n = t(i) || tt), f(e), () => {
+      o.delete(c), o.size === 0 && n && (n(), n = null);
     };
   }
   return { set: i, update: r, subscribe: s };
@@ -660,32 +660,32 @@ var sn = /* @__PURE__ */ ((e) => (e.EDIT = "EDIT", e.SELECT = "SELECT", e.NONE =
 const nt = { selected: [] }, xn = (e, t = "EDIT") => {
   const { subscribe: n, set: o } = pt(nt);
   let i = nt;
-  n((c) => i = c);
+  n((u) => i = u);
   const r = () => o(nt), s = () => {
-    var c;
-    return ((c = i.selected) == null ? void 0 : c.length) === 0;
-  }, f = (c) => {
+    var u;
+    return ((u = i.selected) == null ? void 0 : u.length) === 0;
+  }, f = (u) => {
     if (i.selected.length === 0)
       return !1;
-    const m = typeof c == "string" ? c : c.id;
-    return i.selected.some((d) => d.id === m);
-  }, a = (c, m) => {
-    const d = e.getAnnotation(c);
+    const h = typeof u == "string" ? u : u.id;
+    return i.selected.some((d) => d.id === h);
+  }, a = (u, h) => {
+    const d = e.getAnnotation(u);
     if (d) {
       const p = $n(d, t);
-      o(p === "EDIT" ? { selected: [{ id: c, editable: !0 }], pointerEvent: m } : p === "SELECT" ? { selected: [{ id: c }], pointerEvent: m } : { selected: [], pointerEvent: m });
+      o(p === "EDIT" ? { selected: [{ id: u, editable: !0 }], pointerEvent: h } : p === "SELECT" ? { selected: [{ id: u }], pointerEvent: h } : { selected: [], pointerEvent: h });
     } else
-      console.warn("Invalid selection: " + c);
-  }, u = (c, m = !0) => {
-    const d = Array.isArray(c) ? c : [c], p = d.map((A) => e.getAnnotation(A)).filter((A) => A);
-    o({ selected: p.map(({ id: A }) => ({ id: A, editable: m })) }), p.length !== d.length && console.warn("Invalid selection", c);
-  }, h = (c) => {
+      console.warn("Invalid selection: " + u);
+  }, c = (u, h = !0) => {
+    const d = Array.isArray(u) ? u : [u], p = d.map((A) => e.getAnnotation(A)).filter((A) => A);
+    o({ selected: p.map(({ id: A }) => ({ id: A, editable: h })) }), p.length !== d.length && console.warn("Invalid selection", u);
+  }, m = (u) => {
     if (i.selected.length === 0)
       return !1;
-    const { selected: m } = i;
-    m.filter(({ id: d }) => c.includes(d)).length > 0 && o({ selected: m.filter(({ id: d }) => !c.includes(d)) });
+    const { selected: h } = i;
+    h.filter(({ id: d }) => u.includes(d)).length > 0 && o({ selected: h.filter(({ id: d }) => !u.includes(d)) });
   };
-  return e.observe(({ changes: c }) => h(c.deleted.map((m) => m.id))), {
+  return e.observe(({ changes: u }) => m(u.deleted.map((h) => h.id))), {
     clear: r,
     clickSelect: a,
     get selected() {
@@ -696,7 +696,7 @@ const nt = { selected: [] }, xn = (e, t = "EDIT") => {
     },
     isEmpty: s,
     isSelected: f,
-    setSelected: u,
+    setSelected: c,
     subscribe: n
   };
 }, $n = (e, t) => typeof t == "function" ? t(e) || "EDIT" : t || "EDIT", eo = [];
@@ -732,8 +732,8 @@ const ro = (e, t) => {
   if (e.options.ignore) {
     const { ignore: s } = e.options, f = (a) => (a == null ? void 0 : a.length) > 0;
     if (!(f(i.created) || f(i.deleted))) {
-      const a = (n = i.updated) == null ? void 0 : n.some((h) => f(h.bodiesCreated) || f(h.bodiesDeleted) || f(h.bodiesUpdated)), u = (o = i.updated) == null ? void 0 : o.some((h) => h.targetUpdated);
-      if (s === "BODY_ONLY" && a && !u || s === "TARGET_ONLY" && u && !a)
+      const a = (n = i.updated) == null ? void 0 : n.some((m) => f(m.bodiesCreated) || f(m.bodiesDeleted) || f(m.bodiesUpdated)), c = (o = i.updated) == null ? void 0 : o.some((m) => m.targetUpdated);
+      if (s === "BODY_ONLY" && a && !c || s === "TARGET_ONLY" && c && !a)
         return !1;
     }
   }
@@ -747,24 +747,24 @@ const ro = (e, t) => {
   } else
     return !0;
 }, so = (e, t) => {
-  const n = new Set((e.created || []).map((c) => c.id)), o = new Set((e.updated || []).map(({ newValue: c }) => c.id)), i = new Set((t.created || []).map((c) => c.id)), r = new Set((t.deleted || []).map((c) => c.id)), s = new Set((t.updated || []).map(({ oldValue: c }) => c.id)), f = new Set((t.updated || []).filter(({ oldValue: c }) => n.has(c.id) || o.has(c.id)).map(({ oldValue: c }) => c.id)), a = [
-    ...(e.created || []).filter((c) => !r.has(c.id)).map((c) => s.has(c.id) ? t.updated.find(({ oldValue: m }) => m.id === c.id).newValue : c),
+  const n = new Set((e.created || []).map((u) => u.id)), o = new Set((e.updated || []).map(({ newValue: u }) => u.id)), i = new Set((t.created || []).map((u) => u.id)), r = new Set((t.deleted || []).map((u) => u.id)), s = new Set((t.updated || []).map(({ oldValue: u }) => u.id)), f = new Set((t.updated || []).filter(({ oldValue: u }) => n.has(u.id) || o.has(u.id)).map(({ oldValue: u }) => u.id)), a = [
+    ...(e.created || []).filter((u) => !r.has(u.id)).map((u) => s.has(u.id) ? t.updated.find(({ oldValue: h }) => h.id === u.id).newValue : u),
     ...t.created || []
-  ], u = [
-    ...(e.deleted || []).filter((c) => !i.has(c.id)),
-    ...(t.deleted || []).filter((c) => !n.has(c.id))
-  ], h = [
-    ...(e.updated || []).filter(({ newValue: c }) => !r.has(c.id)).map((c) => {
-      const { oldValue: m, newValue: d } = c;
+  ], c = [
+    ...(e.deleted || []).filter((u) => !i.has(u.id)),
+    ...(t.deleted || []).filter((u) => !n.has(u.id))
+  ], m = [
+    ...(e.updated || []).filter(({ newValue: u }) => !r.has(u.id)).map((u) => {
+      const { oldValue: h, newValue: d } = u;
       if (s.has(d.id)) {
         const p = t.updated.find((A) => A.oldValue.id === d.id).newValue;
-        return ln(m, p);
+        return ln(h, p);
       } else
-        return c;
+        return u;
     }),
-    ...(t.updated || []).filter(({ oldValue: c }) => !f.has(c.id))
+    ...(t.updated || []).filter(({ oldValue: u }) => !f.has(u.id))
   ];
-  return { created: a, deleted: u, updated: h };
+  return { created: a, deleted: c, updated: m };
 }, lo = (e) => e.id !== void 0, ao = () => {
   const e = /* @__PURE__ */ new Map(), t = /* @__PURE__ */ new Map(), n = [], o = (w, b = {}) => n.push({ onChange: w, options: b }), i = (w) => {
     const b = n.findIndex((S) => S.onChange == w);
@@ -796,13 +796,13 @@ const ro = (e, t) => {
   }, a = (w, b = K.LOCAL, S = K.LOCAL) => {
     const v = lo(b) ? S : b, B = f(w, b);
     B && r(v, { updated: [B] });
-  }, u = (w, b = K.LOCAL) => {
+  }, c = (w, b = K.LOCAL) => {
     const S = w.reduce((v, B) => {
       const D = f(B);
       return D ? [...v, D] : v;
     }, []);
     S.length > 0 && r(b, { updated: S });
-  }, h = (w, b = K.LOCAL) => {
+  }, m = (w, b = K.LOCAL) => {
     const S = e.get(w.annotation);
     if (S) {
       const v = {
@@ -816,7 +816,7 @@ const ro = (e, t) => {
       }] });
     } else
       console.warn(`Attempt to add body to missing annotation: ${w.annotation}`);
-  }, c = () => [...e.values()], m = (w = K.LOCAL) => {
+  }, u = () => [...e.values()], h = (w = K.LOCAL) => {
     const b = [...e.values()];
     e.clear(), t.clear(), r(w, { deleted: b });
   }, d = (w, b = !0, S = K.LOCAL) => {
@@ -926,17 +926,17 @@ const ro = (e, t) => {
   };
   return {
     addAnnotation: s,
-    addBody: h,
-    all: c,
+    addBody: m,
+    all: u,
     bulkAddAnnotation: d,
     bulkDeleteAnnotation: E,
-    bulkUpdateAnnotation: u,
+    bulkUpdateAnnotation: c,
     bulkUpdateBodies: X,
     bulkUpdateTargets: (w, b = K.LOCAL) => {
       const S = w.map(R).filter((v) => v);
       S.length > 0 && r(b, { updated: S });
     },
-    clear: m,
+    clear: h,
     deleteAnnotation: A,
     deleteBody: _,
     getAnnotation: g,
@@ -989,7 +989,7 @@ const uo = 250, mo = (e) => {
     i = !1;
   };
   e.observe(s, { origin: K.LOCAL });
-  const f = (d) => (d == null ? void 0 : d.length) > 0 && e.bulkDeleteAnnotation(d), a = (d) => (d == null ? void 0 : d.length) > 0 && e.bulkAddAnnotation(d, !1), u = (d) => (d == null ? void 0 : d.length) > 0 && e.bulkUpdateAnnotation(d.map(({ oldValue: p }) => p)), h = (d) => (d == null ? void 0 : d.length) > 0 && e.bulkUpdateAnnotation(d.map(({ newValue: p }) => p)), c = (d) => (d == null ? void 0 : d.length) > 0 && e.bulkAddAnnotation(d, !1), m = (d) => (d == null ? void 0 : d.length) > 0 && e.bulkDeleteAnnotation(d);
+  const f = (d) => (d == null ? void 0 : d.length) > 0 && e.bulkDeleteAnnotation(d), a = (d) => (d == null ? void 0 : d.length) > 0 && e.bulkAddAnnotation(d, !1), c = (d) => (d == null ? void 0 : d.length) > 0 && e.bulkUpdateAnnotation(d.map(({ oldValue: p }) => p)), m = (d) => (d == null ? void 0 : d.length) > 0 && e.bulkUpdateAnnotation(d.map(({ newValue: p }) => p)), u = (d) => (d == null ? void 0 : d.length) > 0 && e.bulkAddAnnotation(d, !1), h = (d) => (d == null ? void 0 : d.length) > 0 && e.bulkDeleteAnnotation(d);
   return {
     canRedo: () => n.length - 1 > o,
     canUndo: () => o > -1,
@@ -999,14 +999,14 @@ const uo = 250, mo = (e) => {
       if (n.length - 1 > o) {
         i = !0;
         const { created: d, updated: p, deleted: A } = n[o + 1];
-        a(d), h(p), m(A), t.emit("redo", n[o + 1]), o += 1;
+        a(d), m(p), h(A), t.emit("redo", n[o + 1]), o += 1;
       }
     },
     undo: () => {
       if (o > -1) {
         i = !0;
         const { created: d, updated: p, deleted: A } = n[o];
-        f(d), u(p), c(A), t.emit("undo", n[o]), o -= 1;
+        f(d), c(p), u(A), t.emit("undo", n[o]), o -= 1;
       }
     }
   };
@@ -1018,8 +1018,8 @@ const uo = 250, mo = (e) => {
   };
 }, go = (e, t, n, o) => {
   const { store: i, selection: r, hover: s, viewport: f } = e, a = /* @__PURE__ */ new Map();
-  let u = [], h, c;
-  const m = (_, g) => {
+  let c = [], m, u;
+  const h = (_, g) => {
     a.has(_) ? a.get(_).push(g) : a.set(_, [g]);
   }, d = (_, g) => {
     const y = a.get(_);
@@ -1037,57 +1037,57 @@ const uo = 250, mo = (e) => {
   }, A = () => {
     const { selected: _ } = r, g = _.map(({ id: y }) => i.getAnnotation(y));
     g.forEach((y) => {
-      const M = u.find((L) => L.id === y.id);
+      const M = c.find((L) => L.id === y.id);
       (!M || !_e(M, y)) && p("updateAnnotation", y, M);
-    }), u = u.map((y) => g.find(({ id: L }) => L === y.id) || y);
+    }), c = c.map((y) => g.find(({ id: L }) => L === y.id) || y);
   };
   r.subscribe(({ selected: _ }) => {
-    if (!(u.length === 0 && _.length === 0)) {
-      if (u.length === 0 && _.length > 0)
-        u = _.map(({ id: g }) => i.getAnnotation(g));
-      else if (u.length > 0 && _.length === 0)
-        u.forEach((g) => {
+    if (!(c.length === 0 && _.length === 0)) {
+      if (c.length === 0 && _.length > 0)
+        c = _.map(({ id: g }) => i.getAnnotation(g));
+      else if (c.length > 0 && _.length === 0)
+        c.forEach((g) => {
           const y = i.getAnnotation(g.id);
           y && !_e(y, g) && p("updateAnnotation", y, g);
-        }), u = [];
+        }), c = [];
       else {
-        const g = new Set(u.map((M) => M.id)), y = new Set(_.map(({ id: M }) => M));
-        u.filter((M) => !y.has(M.id)).forEach((M) => {
+        const g = new Set(c.map((M) => M.id)), y = new Set(_.map(({ id: M }) => M));
+        c.filter((M) => !y.has(M.id)).forEach((M) => {
           const L = i.getAnnotation(M.id);
           L && !_e(L, M) && p("updateAnnotation", L, M);
-        }), u = [
+        }), c = [
           // Remove annotations that were deselected
-          ...u.filter((M) => y.has(M.id)),
+          ...c.filter((M) => y.has(M.id)),
           // Add editable annotations that were selected
           ..._.filter(({ id: M }) => !g.has(M)).map(({ id: M }) => i.getAnnotation(M))
         ];
       }
-      p("selectionChanged", u);
+      p("selectionChanged", c);
     }
   }), s.subscribe((_) => {
-    !h && _ ? p("mouseEnterAnnotation", i.getAnnotation(_)) : h && !_ ? p("mouseLeaveAnnotation", i.getAnnotation(h)) : h && _ && (p("mouseLeaveAnnotation", i.getAnnotation(h)), p("mouseEnterAnnotation", i.getAnnotation(_))), h = _;
+    !m && _ ? p("mouseEnterAnnotation", i.getAnnotation(_)) : m && !_ ? p("mouseLeaveAnnotation", i.getAnnotation(m)) : m && _ && (p("mouseLeaveAnnotation", i.getAnnotation(m)), p("mouseEnterAnnotation", i.getAnnotation(_))), m = _;
   }), f == null || f.subscribe((_) => p("viewportIntersect", _.map(i.getAnnotation))), i.observe((_) => {
-    o && (c && clearTimeout(c), c = setTimeout(A, 1e3));
+    o && (u && clearTimeout(u), u = setTimeout(A, 1e3));
     const { created: g, deleted: y } = _.changes;
     g.forEach((M) => p("createAnnotation", M)), y.forEach((M) => p("deleteAnnotation", M)), _.changes.updated.filter((M) => [
       ...M.bodiesCreated || [],
       ...M.bodiesDeleted || [],
       ...M.bodiesUpdated || []
     ].length > 0).forEach(({ oldValue: M, newValue: L }) => {
-      const X = u.find((R) => R.id === M.id) || M;
-      u = u.map((R) => R.id === M.id ? L : R), p("updateAnnotation", L, X);
+      const X = c.find((R) => R.id === M.id) || M;
+      c = c.map((R) => R.id === M.id ? L : R), p("updateAnnotation", L, X);
     });
   }, { origin: K.LOCAL }), i.observe((_) => {
-    if (u) {
-      const g = new Set(u.map((M) => M.id)), y = _.changes.updated.filter(({ newValue: M }) => g.has(M.id)).map(({ newValue: M }) => M);
-      y.length > 0 && (u = u.map((M) => y.find((X) => X.id === M.id) || M));
+    if (c) {
+      const g = new Set(c.map((M) => M.id)), y = _.changes.updated.filter(({ newValue: M }) => g.has(M.id)).map(({ newValue: M }) => M);
+      y.length > 0 && (c = c.map((M) => y.find((X) => X.id === M.id) || M));
     }
   }, { origin: K.REMOTE });
   const E = (_) => (g) => {
     const { created: y, deleted: M, updated: L } = g;
     y.forEach((X) => p("createAnnotation", X)), M.forEach((X) => p("deleteAnnotation", X)), _ ? L.forEach((X) => p("updateAnnotation", X.oldValue, X.newValue)) : L.forEach((X) => p("updateAnnotation", X.newValue, X.oldValue));
   };
-  return t.on("undo", E(!0)), t.on("redo", E(!1)), { on: m, off: d, emit: p };
+  return t.on("undo", E(!0)), t.on("redo", E(!1)), { on: h, off: d, emit: p };
 }, po = (e) => (t) => t.reduce((n, o) => {
   const { parsed: i, error: r } = e.parse(o);
   return r ? {
@@ -1107,11 +1107,11 @@ const uo = 250, mo = (e) => {
   }, s = () => i.clear(), f = () => o.clear(), a = (E) => {
     const _ = o.getAnnotation(E);
     return n && _ ? n.serialize(_) : _;
-  }, u = () => n ? o.all().map(n.serialize) : o.all(), h = () => {
+  }, c = () => n ? o.all().map(n.serialize) : o.all(), m = () => {
     var E;
     const _ = (((E = i.selected) == null ? void 0 : E.map((g) => g.id)) || []).map((g) => o.getAnnotation(g));
     return n ? _.map(n.serialize) : _;
-  }, c = (E) => fetch(E).then((_) => _.json()).then((_) => (d(_), _)), m = (E) => {
+  }, u = (E) => fetch(E).then((_) => _.json()).then((_) => (d(_), _)), h = (E) => {
     if (typeof E == "string") {
       const _ = o.getAnnotation(E);
       return o.deleteAnnotation(E), n ? n.serialize(_) : _;
@@ -1143,11 +1143,11 @@ const uo = 250, mo = (e) => {
     canUndo: t.canUndo,
     clearAnnotations: f,
     getAnnotationById: a,
-    getAnnotations: u,
-    getSelected: h,
-    loadAnnotations: c,
+    getAnnotations: c,
+    getSelected: m,
+    loadAnnotations: u,
     redo: t.redo,
-    removeAnnotation: m,
+    removeAnnotation: h,
     setAnnotations: d,
     setSelected: p,
     undo: t.undo,
@@ -1175,7 +1175,7 @@ const Ao = () => ({ isGuest: !0, id: bo("1234567890abcdefghijklmnopqrstuvwxyzABC
   }
   return `${n}`;
 }, an = (e) => e ? typeof e == "object" ? { ...e } : e : void 0, Mo = (e, t) => (Array.isArray(e) ? e : [e]).map((n) => {
-  const { id: o, type: i, purpose: r, value: s, created: f, creator: a, ...u } = n;
+  const { id: o, type: i, purpose: r, value: s, created: f, creator: a, ...c } = n;
   return {
     id: o || `temp-${So(n)}`,
     annotation: t,
@@ -1184,7 +1184,7 @@ const Ao = () => ({ isGuest: !0, id: bo("1234567890abcdefghijklmnopqrstuvwxyzABC
     value: s,
     created: f ? new Date(f) : void 0,
     creator: an(a),
-    ...u
+    ...c
   };
 }), To = (e) => e.map((t) => {
   var n;
@@ -1200,22 +1200,22 @@ const hr = (e, t = !1) => ({ parse: (i) => Lo(i, t), serialize: (i) => ko(i, e) 
     updated: s,
     body: f,
     ...a
-  } = e, u = Mo(f, n), h = Array.isArray(e.target) ? e.target[0] : e.target, c = Array.isArray(h.selector) ? h.selector[0] : h.selector, m = c.type === "FragmentSelector" ? In(c, t) : c.type === "SvgSelector" ? zn(c) : void 0;
-  return m ? {
+  } = e, c = Mo(f, n), m = Array.isArray(e.target) ? e.target[0] : e.target, u = Array.isArray(m.selector) ? m.selector[0] : m.selector, h = u.type === "FragmentSelector" ? In(u, t) : u.type === "SvgSelector" ? zn(u) : void 0;
+  return h ? {
     parsed: {
       ...a,
       id: n,
-      bodies: u,
+      bodies: c,
       target: {
         created: i ? new Date(i) : void 0,
         creator: an(o),
         ...a.target,
         annotation: n,
-        selector: m
+        selector: h
       }
     }
   } : {
-    error: Error(`Unknown selector type: ${c.type}`)
+    error: Error(`Unknown selector type: ${u.type}`)
   };
 }, ko = (e, t) => {
   const {
@@ -1306,17 +1306,17 @@ function kt(e) {
   };
 }
 function Oo(e) {
-  let t, n, o, i, r, s, f, a, u, h, c = (
+  let t, n, o, i, r, s, f, a, c, m, u = (
     /*geom*/
     e[4].points
-  ), m = [];
-  for (let d = 0; d < c.length; d += 1)
-    m[d] = kt(Lt(e, c, d));
+  ), h = [];
+  for (let d = 0; d < u.length; d += 1)
+    h[d] = kt(Lt(e, u, d));
   return {
     c() {
       t = I("polygon"), i = Z(), r = I("polygon"), f = Z();
-      for (let d = 0; d < m.length; d += 1)
-        m[d].c();
+      for (let d = 0; d < h.length; d += 1)
+        h[d].c();
       a = de(), l(t, "class", "a9s-outer"), l(t, "style", n = /*computedStyle*/
       e[1] ? "display:none;" : void 0), l(t, "points", o = /*geom*/
       e[4].points.map(Ot).join(" ")), l(r, "class", "a9s-inner a9s-shape-handle"), l(
@@ -1329,9 +1329,9 @@ function Oo(e) {
     },
     m(d, p) {
       O(d, t, p), O(d, i, p), O(d, r, p), O(d, f, p);
-      for (let A = 0; A < m.length; A += 1)
-        m[A] && m[A].m(d, p);
-      O(d, a, p), u || (h = [
+      for (let A = 0; A < h.length; A += 1)
+        h[A] && h[A].m(d, p);
+      O(d, a, p), c || (m = [
         j(t, "pointerdown", function() {
           z(
             /*grab*/
@@ -1344,7 +1344,7 @@ function Oo(e) {
             e[10](T.SHAPE)
           ) && e[10](T.SHAPE).apply(this, arguments);
         })
-      ], u = !0);
+      ], c = !0);
     },
     p(d, p) {
       if (e = d, p & /*computedStyle*/
@@ -1361,20 +1361,20 @@ function Oo(e) {
       16 && s !== (s = /*geom*/
       e[4].points.map(vt).join(" ")) && l(r, "points", s), p & /*geom, handleSize, grab, Handle*/
       1048) {
-        c = /*geom*/
+        u = /*geom*/
         e[4].points;
         let A;
-        for (A = 0; A < c.length; A += 1) {
-          const E = Lt(e, c, A);
-          m[A] ? m[A].p(E, p) : (m[A] = kt(E), m[A].c(), m[A].m(a.parentNode, a));
+        for (A = 0; A < u.length; A += 1) {
+          const E = Lt(e, u, A);
+          h[A] ? h[A].p(E, p) : (h[A] = kt(E), h[A].c(), h[A].m(a.parentNode, a));
         }
-        for (; A < m.length; A += 1)
-          m[A].d(1);
-        m.length = c.length;
+        for (; A < h.length; A += 1)
+          h[A].d(1);
+        h.length = u.length;
       }
     },
     d(d) {
-      d && k(t), d && k(i), d && k(r), d && k(f), mt(m, d), d && k(a), u = !1, ae(h);
+      d && k(t), d && k(i), d && k(r), d && k(f), mt(h, d), d && k(a), c = !1, ae(m);
     }
   };
 }
@@ -1445,19 +1445,19 @@ function vo(e) {
 const Ot = (e) => e.join(","), vt = (e) => e.join(",");
 function Po(e, t, n) {
   let o, i, { shape: r } = t, { computedStyle: s = void 0 } = t, { transform: f } = t, { viewportScale: a = 1 } = t;
-  const u = (d, p, A) => {
+  const c = (d, p, A) => {
     let E;
     p === T.SHAPE ? E = d.geometry.points.map(([g, y]) => [g + A[0], y + A[1]]) : E = d.geometry.points.map(([g, y], M) => p === T(M) ? [g + A[0], y + A[1]] : [g, y]);
     const _ = we(E);
     return { ...d, geometry: { points: E, bounds: _ } };
   };
-  function h(d) {
-    te.call(this, e, d);
-  }
-  function c(d) {
-    te.call(this, e, d);
-  }
   function m(d) {
+    te.call(this, e, d);
+  }
+  function u(d) {
+    te.call(this, e, d);
+  }
+  function h(d) {
     te.call(this, e, d);
   }
   return e.$$set = (d) => {
@@ -1472,11 +1472,11 @@ function Po(e, t, n) {
     f,
     i,
     o,
-    u,
-    a,
-    h,
     c,
-    m
+    a,
+    m,
+    u,
+    h
   ];
 }
 class Io extends Q {
@@ -1490,7 +1490,7 @@ class Io extends Q {
   }
 }
 function Do(e) {
-  let t, n, o, i, r, s, f, a, u, h, c, m, d, p, A, E, _, g, y, M, L, X, R, w, b, S, v, B, D, P, C, be, Oe, N, $, W, he, fe, ne, Ce, Ue, He, Qe, se, Fe, Ge, Ve, xe, le, ze, je, qe, $e, _t;
+  let t, n, o, i, r, s, f, a, c, m, u, h, d, p, A, E, _, g, y, M, L, X, R, w, b, S, v, B, D, P, C, be, Oe, N, $, W, he, fe, ne, Ce, Ue, He, Qe, se, Fe, Ge, Ve, xe, le, ze, je, qe, $e, _t;
   return {
     c() {
       t = I("rect"), f = Z(), a = I("rect"), d = Z(), p = I("rect"), g = Z(), y = I("rect"), R = Z(), w = I("rect"), B = Z(), D = I("rect"), Oe = Z(), N = I("circle"), fe = Z(), ne = I("circle"), Qe = Z(), se = I("circle"), xe = Z(), le = I("circle"), l(t, "class", "a9s-outer"), l(t, "style", n = /*computedStyle*/
@@ -1503,10 +1503,10 @@ function Do(e) {
         "style",
         /*computedStyle*/
         e[1]
-      ), l(a, "x", u = /*geom*/
-      e[4].x), l(a, "y", h = /*geom*/
-      e[4].y), l(a, "width", c = /*geom*/
-      e[4].w), l(a, "height", m = /*geom*/
+      ), l(a, "x", c = /*geom*/
+      e[4].x), l(a, "y", m = /*geom*/
+      e[4].y), l(a, "width", u = /*geom*/
+      e[4].w), l(a, "height", h = /*geom*/
       e[4].h), l(p, "class", "a9s-edge-handle a9s-edge-handle-top"), l(p, "x", A = /*geom*/
       e[4].x), l(p, "y", E = /*geom*/
       e[4].y), l(p, "height", 1), l(p, "width", _ = /*geom*/
@@ -1621,14 +1621,14 @@ function Do(e) {
         /*computedStyle*/
         e[1]
       ), Y & /*geom*/
-      16 && u !== (u = /*geom*/
-      e[4].x) && l(a, "x", u), Y & /*geom*/
-      16 && h !== (h = /*geom*/
-      e[4].y) && l(a, "y", h), Y & /*geom*/
       16 && c !== (c = /*geom*/
-      e[4].w) && l(a, "width", c), Y & /*geom*/
+      e[4].x) && l(a, "x", c), Y & /*geom*/
       16 && m !== (m = /*geom*/
-      e[4].h) && l(a, "height", m), Y & /*geom*/
+      e[4].y) && l(a, "y", m), Y & /*geom*/
+      16 && u !== (u = /*geom*/
+      e[4].w) && l(a, "width", u), Y & /*geom*/
+      16 && h !== (h = /*geom*/
+      e[4].h) && l(a, "height", h), Y & /*geom*/
       16 && A !== (A = /*geom*/
       e[4].x) && l(p, "x", A), Y & /*geom*/
       16 && E !== (E = /*geom*/
@@ -1755,7 +1755,7 @@ function Bo(e) {
 }
 function Yo(e, t, n) {
   let o, i, { shape: r } = t, { computedStyle: s = void 0 } = t, { transform: f } = t, { viewportScale: a = 1 } = t;
-  const u = (d, p, A) => {
+  const c = (d, p, A) => {
     const E = d.geometry.bounds;
     let [_, g] = [E.minX, E.minY], [y, M] = [E.maxX, E.maxY];
     const [L, X] = A;
@@ -1808,13 +1808,13 @@ function Yo(e, t, n) {
       }
     };
   };
-  function h(d) {
-    te.call(this, e, d);
-  }
-  function c(d) {
-    te.call(this, e, d);
-  }
   function m(d) {
+    te.call(this, e, d);
+  }
+  function u(d) {
+    te.call(this, e, d);
+  }
+  function h(d) {
     te.call(this, e, d);
   }
   return e.$$set = (d) => {
@@ -1829,11 +1829,11 @@ function Yo(e, t, n) {
     f,
     i,
     o,
-    u,
-    a,
-    h,
     c,
-    m
+    a,
+    m,
+    u,
+    h
   ];
 }
 class Xo extends Q {
@@ -1847,17 +1847,17 @@ class Xo extends Q {
   }
 }
 function Ro(e) {
-  let t, n, o, i, r, s, f, a, u, h, c, m, d, p, A, E, _, g, y, M, L, X, R, w, b, S, v, B, D;
+  let t, n, o, i, r, s, f, a, c, m, u, h, d, p, A, E, _, g, y, M, L, X, R, w, b, S, v, B, D;
   return {
     c() {
-      t = I("ellipse"), s = Z(), f = I("ellipse"), m = Z(), d = I("rect"), E = Z(), _ = I("rect"), M = Z(), L = I("rect"), w = Z(), b = I("rect"), l(t, "class", "a9s-outer"), l(t, "cx", n = /*geom*/
+      t = I("ellipse"), s = Z(), f = I("ellipse"), h = Z(), d = I("rect"), E = Z(), _ = I("rect"), M = Z(), L = I("rect"), w = Z(), b = I("rect"), l(t, "class", "a9s-outer"), l(t, "cx", n = /*geom*/
       e[3].cx), l(t, "cy", o = /*geom*/
       e[3].cy), l(t, "rx", i = /*geom*/
       e[3].rx), l(t, "ry", r = /*geom*/
       e[3].ry), l(f, "class", "a9s-inner a9s-shape-handle"), l(f, "cx", a = /*geom*/
-      e[3].cx), l(f, "cy", u = /*geom*/
-      e[3].cy), l(f, "rx", h = /*geom*/
-      e[3].rx), l(f, "ry", c = /*geom*/
+      e[3].cx), l(f, "cy", c = /*geom*/
+      e[3].cy), l(f, "rx", m = /*geom*/
+      e[3].rx), l(f, "ry", u = /*geom*/
       e[3].ry), l(d, "class", "a9s-corner-handle a9s-corner-top"), l(d, "x", p = /*geom*/
       e[3].cx - /*handleSize*/
       e[2] / 2), l(d, "y", A = /*geom*/
@@ -1921,7 +1921,7 @@ function Ro(e) {
       );
     },
     m(P, C) {
-      O(P, t, C), O(P, s, C), O(P, f, C), O(P, m, C), O(P, d, C), O(P, E, C), O(P, _, C), O(P, M, C), O(P, L, C), O(P, w, C), O(P, b, C), B || (D = [
+      O(P, t, C), O(P, s, C), O(P, f, C), O(P, h, C), O(P, d, C), O(P, E, C), O(P, _, C), O(P, M, C), O(P, L, C), O(P, w, C), O(P, b, C), B || (D = [
         j(t, "pointerdown", function() {
           z(
             /*grab*/
@@ -1972,12 +1972,12 @@ function Ro(e) {
       e[3].ry) && l(t, "ry", r), C & /*geom*/
       8 && a !== (a = /*geom*/
       e[3].cx) && l(f, "cx", a), C & /*geom*/
-      8 && u !== (u = /*geom*/
-      e[3].cy) && l(f, "cy", u), C & /*geom*/
-      8 && h !== (h = /*geom*/
-      e[3].rx) && l(f, "rx", h), C & /*geom*/
       8 && c !== (c = /*geom*/
-      e[3].ry) && l(f, "ry", c), C & /*geom, handleSize*/
+      e[3].cy) && l(f, "cy", c), C & /*geom*/
+      8 && m !== (m = /*geom*/
+      e[3].rx) && l(f, "rx", m), C & /*geom*/
+      8 && u !== (u = /*geom*/
+      e[3].ry) && l(f, "ry", u), C & /*geom, handleSize*/
       12 && p !== (p = /*geom*/
       e[3].cx - /*handleSize*/
       e[2] / 2) && l(d, "x", p), C & /*geom, handleSize*/
@@ -2056,7 +2056,7 @@ function Ro(e) {
       );
     },
     d(P) {
-      P && k(t), P && k(s), P && k(f), P && k(m), P && k(d), P && k(E), P && k(_), P && k(M), P && k(L), P && k(w), P && k(b), B = !1, ae(D);
+      P && k(t), P && k(s), P && k(f), P && k(h), P && k(d), P && k(E), P && k(_), P && k(M), P && k(L), P && k(w), P && k(b), B = !1, ae(D);
     }
   };
 }
@@ -2126,8 +2126,8 @@ function No(e) {
 }
 function Co(e, t, n) {
   let o, i, { shape: r } = t, { transform: s } = t, { viewportScale: f = 1 } = t;
-  const a = (m, d, p) => {
-    const A = m.geometry.bounds;
+  const a = (h, d, p) => {
+    const A = h.geometry.bounds;
     let [E, _] = [A.minX, A.minY], [g, y] = [A.maxX, A.maxY];
     const [M, L] = p;
     if (d === T.SHAPE)
@@ -2153,9 +2153,9 @@ function Co(e, t, n) {
       }
     const X = Math.min(E, g), R = Math.min(_, y), w = Math.abs(g - E), b = Math.abs(y - _), S = (E + g) / 2, v = (_ + y) / 2, B = w / 2, D = b / 2;
     return {
-      ...m,
+      ...h,
       geometry: {
-        ...m.geometry,
+        ...h.geometry,
         cx: S,
         cy: v,
         rx: B,
@@ -2169,17 +2169,17 @@ function Co(e, t, n) {
       }
     };
   };
-  function u(m) {
-    te.call(this, e, m);
+  function c(h) {
+    te.call(this, e, h);
   }
-  function h(m) {
-    te.call(this, e, m);
+  function m(h) {
+    te.call(this, e, h);
   }
-  function c(m) {
-    te.call(this, e, m);
+  function u(h) {
+    te.call(this, e, h);
   }
-  return e.$$set = (m) => {
-    "shape" in m && n(0, r = m.shape), "transform" in m && n(1, s = m.transform), "viewportScale" in m && n(5, f = m.viewportScale);
+  return e.$$set = (h) => {
+    "shape" in h && n(0, r = h.shape), "transform" in h && n(1, s = h.transform), "viewportScale" in h && n(5, f = h.viewportScale);
   }, e.$$.update = () => {
     e.$$.dirty & /*shape*/
     1 && n(3, o = r.geometry), e.$$.dirty & /*viewportScale*/
@@ -2191,9 +2191,9 @@ function Co(e, t, n) {
     o,
     a,
     f,
-    u,
-    h,
-    c
+    c,
+    m,
+    u
   ];
 }
 class Uo extends Q {
@@ -2318,8 +2318,8 @@ function Fo(e) {
   };
 }
 function Go(e, t, n) {
-  let o, i, r, { shape: s } = t, { annotation: f } = t, { transform: a } = t, { viewportScale: u = 1 } = t, { style: h = void 0 } = t, c = { fillOpacity: 1 };
-  const m = (E, _, g) => {
+  let o, i, r, { shape: s } = t, { annotation: f } = t, { transform: a } = t, { viewportScale: c = 1 } = t, { style: m = void 0 } = t, u = { fillOpacity: 1 };
+  const h = (E, _, g) => {
     let y;
     _ === T.SHAPE && (y = E.geometry.points.map(([L, X, R]) => [L + g[0], X + g[1], R]));
     const M = we(y.map((L) => [L[0], L[1]]));
@@ -2335,22 +2335,22 @@ function Go(e, t, n) {
     te.call(this, e, E);
   }
   return e.$$set = (E) => {
-    "shape" in E && n(0, s = E.shape), "annotation" in E && n(5, f = E.annotation), "transform" in E && n(1, a = E.transform), "viewportScale" in E && n(6, u = E.viewportScale), "style" in E && n(7, h = E.style);
+    "shape" in E && n(0, s = E.shape), "annotation" in E && n(5, f = E.annotation), "transform" in E && n(1, a = E.transform), "viewportScale" in E && n(6, c = E.viewportScale), "style" in E && n(7, m = E.style);
   }, e.$$.update = () => {
     e.$$.dirty & /*shape*/
     1 && n(8, o = s.geometry), e.$$.dirty & /*viewportScale*/
     64, e.$$.dirty & /*annotation, style*/
-    160 && n(3, i = pe(f, h, c)), e.$$.dirty & /*geom*/
+    160 && n(3, i = pe(f, m, u)), e.$$.dirty & /*geom*/
     256 && n(2, r = Xe(o.points, gt, !0));
   }, [
     s,
     a,
     r,
     i,
-    m,
-    f,
-    u,
     h,
+    f,
+    c,
+    m,
     o,
     d,
     p,
@@ -2369,23 +2369,23 @@ class Vo extends Q {
   }
 }
 function zo(e) {
-  let t, n, o, i, r, s, f, a, u, h, c, m, d, p, A, E, _, g, y, M, L, X, R, w, b, S, v, B;
+  let t, n, o, i, r, s, f, a, c, m, u, h, d, p, A, E, _, g, y, M, L, X, R, w, b, S, v, B;
   return {
     c() {
-      t = I("defs"), n = I("marker"), o = I("path"), i = Z(), r = I("line"), c = Z(), m = I("line"), _ = Z(), g = I("circle"), X = Z(), R = I("circle"), l(o, "d", "M 0 0 L 10 5 L 0 10 z"), l(n, "id", "arrow"), l(n, "viewBox", "0 0 10 10"), l(n, "refX", "0"), l(n, "refY", "0"), l(n, "markerWidth", "6"), l(n, "markerHeight", "6"), l(n, "orient", "auto-start-reverse"), l(r, "class", "a9s-outer"), l(r, "style", s = /*computedStyle*/
+      t = I("defs"), n = I("marker"), o = I("path"), i = Z(), r = I("line"), u = Z(), h = I("line"), _ = Z(), g = I("circle"), X = Z(), R = I("circle"), l(o, "d", "M 0 0 L 10 5 L 0 10 z"), l(n, "id", "arrow"), l(n, "viewBox", "0 0 10 10"), l(n, "refX", "0"), l(n, "refY", "0"), l(n, "markerWidth", "6"), l(n, "markerHeight", "6"), l(n, "orient", "auto-start-reverse"), l(r, "class", "a9s-outer"), l(r, "style", s = /*computedStyle*/
       e[1] ? "display:none;" : void 0), l(r, "x1", f = /*geom*/
       e[4].x1), l(r, "y1", a = /*geom*/
-      e[4].y1), l(r, "x2", u = /*geom*/
-      e[4].x2), l(r, "y2", h = /*geom*/
-      e[4].y2), l(r, "marker-end", "url(#arrow)"), l(m, "class", "a9s-inner a9s-shape-handle"), l(
-        m,
+      e[4].y1), l(r, "x2", c = /*geom*/
+      e[4].x2), l(r, "y2", m = /*geom*/
+      e[4].y2), l(r, "marker-end", "url(#arrow)"), l(h, "class", "a9s-inner a9s-shape-handle"), l(
+        h,
         "style",
         /*computedStyle*/
         e[1]
-      ), l(m, "marker-end", "url(#arrow)"), l(m, "x1", d = /*geom*/
-      e[4].x1), l(m, "y1", p = /*geom*/
-      e[4].y1), l(m, "x2", A = /*geom*/
-      e[4].x2), l(m, "y2", E = /*geom*/
+      ), l(h, "marker-end", "url(#arrow)"), l(h, "x1", d = /*geom*/
+      e[4].x1), l(h, "y1", p = /*geom*/
+      e[4].y1), l(h, "x2", A = /*geom*/
+      e[4].x2), l(h, "y2", E = /*geom*/
       e[4].y2), l(g, "class", "a9s-corner-handle"), l(g, "cx", y = /*geom*/
       e[4].x1), l(g, "cy", M = /*geom*/
       e[4].y1), l(g, "r", L = /*handleSize*/
@@ -2395,14 +2395,14 @@ function zo(e) {
       e[3] / 3);
     },
     m(D, P) {
-      O(D, t, P), ee(t, n), ee(n, o), O(D, i, P), O(D, r, P), O(D, c, P), O(D, m, P), O(D, _, P), O(D, g, P), O(D, X, P), O(D, R, P), v || (B = [
+      O(D, t, P), ee(t, n), ee(n, o), O(D, i, P), O(D, r, P), O(D, u, P), O(D, h, P), O(D, _, P), O(D, g, P), O(D, X, P), O(D, R, P), v || (B = [
         j(r, "pointerdown", function() {
           z(
             /*grab*/
             e[10](T.SHAPE)
           ) && e[10](T.SHAPE).apply(this, arguments);
         }),
-        j(m, "pointerdown", function() {
+        j(h, "pointerdown", function() {
           z(
             /*grab*/
             e[10](T.SHAPE)
@@ -2430,24 +2430,24 @@ function zo(e) {
       e[4].x1) && l(r, "x1", f), P & /*geom*/
       16 && a !== (a = /*geom*/
       e[4].y1) && l(r, "y1", a), P & /*geom*/
-      16 && u !== (u = /*geom*/
-      e[4].x2) && l(r, "x2", u), P & /*geom*/
-      16 && h !== (h = /*geom*/
-      e[4].y2) && l(r, "y2", h), P & /*computedStyle*/
+      16 && c !== (c = /*geom*/
+      e[4].x2) && l(r, "x2", c), P & /*geom*/
+      16 && m !== (m = /*geom*/
+      e[4].y2) && l(r, "y2", m), P & /*computedStyle*/
       2 && l(
-        m,
+        h,
         "style",
         /*computedStyle*/
         e[1]
       ), P & /*geom*/
       16 && d !== (d = /*geom*/
-      e[4].x1) && l(m, "x1", d), P & /*geom*/
+      e[4].x1) && l(h, "x1", d), P & /*geom*/
       16 && p !== (p = /*geom*/
-      e[4].y1) && l(m, "y1", p), P & /*geom*/
+      e[4].y1) && l(h, "y1", p), P & /*geom*/
       16 && A !== (A = /*geom*/
-      e[4].x2) && l(m, "x2", A), P & /*geom*/
+      e[4].x2) && l(h, "x2", A), P & /*geom*/
       16 && E !== (E = /*geom*/
-      e[4].y2) && l(m, "y2", E), P & /*geom*/
+      e[4].y2) && l(h, "y2", E), P & /*geom*/
       16 && y !== (y = /*geom*/
       e[4].x1) && l(g, "cx", y), P & /*geom*/
       16 && M !== (M = /*geom*/
@@ -2462,7 +2462,7 @@ function zo(e) {
       e[3] / 3) && l(R, "r", S);
     },
     d(D) {
-      D && k(t), D && k(i), D && k(r), D && k(c), D && k(m), D && k(_), D && k(g), D && k(X), D && k(R), v = !1, ae(B);
+      D && k(t), D && k(i), D && k(r), D && k(u), D && k(h), D && k(_), D && k(g), D && k(X), D && k(R), v = !1, ae(B);
     }
   };
 }
@@ -2532,7 +2532,7 @@ function jo(e) {
 }
 function qo(e, t, n) {
   let o, i, { shape: r } = t, { computedStyle: s = void 0 } = t, { transform: f } = t, { viewportScale: a = 1 } = t;
-  const u = (d, p, A) => {
+  const c = (d, p, A) => {
     d.geometry.bounds;
     let E = d.geometry.x1, _ = d.geometry.x2, g = d.geometry.y1, y = d.geometry.y2;
     const [M, L] = A;
@@ -2565,13 +2565,13 @@ function qo(e, t, n) {
       }
     };
   };
-  function h(d) {
-    te.call(this, e, d);
-  }
-  function c(d) {
-    te.call(this, e, d);
-  }
   function m(d) {
+    te.call(this, e, d);
+  }
+  function u(d) {
+    te.call(this, e, d);
+  }
+  function h(d) {
     te.call(this, e, d);
   }
   return e.$$set = (d) => {
@@ -2586,11 +2586,11 @@ function qo(e, t, n) {
     f,
     i,
     o,
-    u,
-    a,
-    h,
     c,
-    m
+    a,
+    m,
+    u,
+    h
   ];
 }
 class Ko extends Q {
@@ -2692,20 +2692,20 @@ function Jo(e) {
 function Qo(e, t, n) {
   let { $$slots: o = {}, $$scope: i } = t;
   const r = me();
-  let { shape: s } = t, { editor: f } = t, { transform: a } = t, u = null, h, c = null;
-  const m = (A) => (E) => {
-    u = A, h = a.elementToImage(E.offsetX, E.offsetY), c = s, E.target.setPointerCapture(E.pointerId), r("grab");
+  let { shape: s } = t, { editor: f } = t, { transform: a } = t, c = null, m, u = null;
+  const h = (A) => (E) => {
+    c = A, m = a.elementToImage(E.offsetX, E.offsetY), u = s, E.target.setPointerCapture(E.pointerId), r("grab");
   }, d = (A) => {
-    if (u) {
-      const [E, _] = a.elementToImage(A.offsetX, A.offsetY), g = [E - h[0], _ - h[1]];
-      n(3, s = f(c, u, g)), r("change", s);
+    if (c) {
+      const [E, _] = a.elementToImage(A.offsetX, A.offsetY), g = [E - m[0], _ - m[1]];
+      n(3, s = f(u, c, g)), r("change", s);
     }
   }, p = (A) => {
-    A.target.releasePointerCapture(A.pointerId), u = null, c = s, r("release");
+    A.target.releasePointerCapture(A.pointerId), c = null, u = s, r("release");
   };
   return e.$$set = (A) => {
     "shape" in A && n(3, s = A.shape), "editor" in A && n(4, f = A.editor), "transform" in A && n(5, a = A.transform), "$$scope" in A && n(6, i = A.$$scope);
-  }, [m, d, p, s, f, a, i, o];
+  }, [h, d, p, s, f, a, i, o];
 }
 class Ne extends Q {
   constructor(t) {
@@ -2715,28 +2715,28 @@ class Ne extends Q {
 function xo(e, t, n) {
   let o;
   const i = me();
-  let { annotation: r } = t, { editor: s } = t, { style: f = void 0 } = t, { target: a } = t, { transform: u } = t, { viewportScale: h } = t, c;
-  return ge(() => (n(6, c = new s({
+  let { annotation: r } = t, { editor: s } = t, { style: f = void 0 } = t, { target: a } = t, { transform: c } = t, { viewportScale: m } = t, u;
+  return ge(() => (n(6, u = new s({
     target: a,
     props: {
       shape: r.target.selector,
       computedStyle: o,
-      transform: u,
-      viewportScale: h
+      transform: c,
+      viewportScale: m
     }
-  })), c.$on("change", (m) => {
-    c.$$set({ shape: m.detail }), i("change", m.detail);
-  }), c.$on("grab", (m) => i("grab", m.detail)), c.$on("release", (m) => i("release", m.detail)), () => {
-    c.$destroy();
-  })), e.$$set = (m) => {
-    "annotation" in m && n(0, r = m.annotation), "editor" in m && n(1, s = m.editor), "style" in m && n(2, f = m.style), "target" in m && n(3, a = m.target), "transform" in m && n(4, u = m.transform), "viewportScale" in m && n(5, h = m.viewportScale);
+  })), u.$on("change", (h) => {
+    u.$$set({ shape: h.detail }), i("change", h.detail);
+  }), u.$on("grab", (h) => i("grab", h.detail)), u.$on("release", (h) => i("release", h.detail)), () => {
+    u.$destroy();
+  })), e.$$set = (h) => {
+    "annotation" in h && n(0, r = h.annotation), "editor" in h && n(1, s = h.editor), "style" in h && n(2, f = h.style), "target" in h && n(3, a = h.target), "transform" in h && n(4, c = h.transform), "viewportScale" in h && n(5, m = h.viewportScale);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
     5 && (o = pe(r, f)), e.$$.dirty & /*annotation, editorComponent*/
-    65 && r && (c == null || c.$set({ shape: r.target.selector })), e.$$.dirty & /*editorComponent, transform*/
-    80 && c && c.$set({ transform: u }), e.$$.dirty & /*editorComponent, viewportScale*/
-    96 && c && c.$set({ viewportScale: h });
-  }, [r, s, f, a, u, h, c];
+    65 && r && (u == null || u.$set({ shape: r.target.selector })), e.$$.dirty & /*editorComponent, transform*/
+    80 && u && u.$set({ transform: c }), e.$$.dirty & /*editorComponent, viewportScale*/
+    96 && u && u.$set({ viewportScale: m });
+  }, [r, s, f, a, c, m, u];
 }
 class $o extends Q {
   constructor(t) {
@@ -2752,29 +2752,29 @@ class $o extends Q {
 }
 function ei(e, t, n) {
   const o = me();
-  let { drawingMode: i } = t, { target: r } = t, { tool: s } = t, { transform: f } = t, { viewportScale: a } = t, u;
+  let { drawingMode: i } = t, { target: r } = t, { tool: s } = t, { transform: f } = t, { viewportScale: a } = t, c;
   return ge(() => {
-    const h = r.closest("svg"), c = [], m = (d, p, A) => {
-      h.addEventListener(d, p, A), c.push(() => h.removeEventListener(d, p, A));
+    const m = r.closest("svg"), u = [], h = (d, p, A) => {
+      m.addEventListener(d, p, A), u.push(() => m.removeEventListener(d, p, A));
     };
-    return n(5, u = new s({
+    return n(5, c = new s({
       target: r,
       props: {
-        addEventListener: m,
+        addEventListener: h,
         drawingMode: i,
         transform: f,
         viewportScale: a
       }
-    })), u.$on("create", (d) => o("create", d.detail)), () => {
-      c.forEach((d) => d()), u.$destroy();
+    })), c.$on("create", (d) => o("create", d.detail)), () => {
+      u.forEach((d) => d()), c.$destroy();
     };
-  }), e.$$set = (h) => {
-    "drawingMode" in h && n(0, i = h.drawingMode), "target" in h && n(1, r = h.target), "tool" in h && n(2, s = h.tool), "transform" in h && n(3, f = h.transform), "viewportScale" in h && n(4, a = h.viewportScale);
+  }), e.$$set = (m) => {
+    "drawingMode" in m && n(0, i = m.drawingMode), "target" in m && n(1, r = m.target), "tool" in m && n(2, s = m.tool), "transform" in m && n(3, f = m.transform), "viewportScale" in m && n(4, a = m.viewportScale);
   }, e.$$.update = () => {
     e.$$.dirty & /*toolComponent, transform*/
-    40 && u && u.$set({ transform: f }), e.$$.dirty & /*toolComponent, viewportScale*/
-    48 && u && u.$set({ viewportScale: a });
-  }, [i, r, s, f, a, u];
+    40 && c && c.$set({ transform: f }), e.$$.dirty & /*toolComponent, viewportScale*/
+    48 && c && c.$set({ viewportScale: a });
+  }, [i, r, s, f, a, c];
 }
 class ti extends Q {
   constructor(t) {
@@ -2917,45 +2917,45 @@ function ni(e) {
 }
 function oi(e, t, n) {
   const o = me();
-  let { addEventListener: i } = t, { drawingMode: r } = t, { transform: s } = t, f, a, u, h, c, m, d;
+  let { addEventListener: i } = t, { drawingMode: r } = t, { transform: s } = t, f, a, c, m, u, h, d;
   const p = (g) => {
-    f = performance.now(), r === "drag" && (n(0, a = s.elementToImage(g.offsetX, g.offsetY)), u = a, n(1, h = a[0]), n(2, c = a[1]), n(3, m = 1), n(4, d = 1));
+    f = performance.now(), r === "drag" && (n(0, a = s.elementToImage(g.offsetX, g.offsetY)), c = a, n(1, m = a[0]), n(2, u = a[1]), n(3, h = 1), n(4, d = 1));
   }, A = (g) => {
-    a && (u = s.elementToImage(g.offsetX, g.offsetY), n(1, h = Math.min(u[0], a[0])), n(2, c = Math.min(u[1], a[1])), n(3, m = Math.abs(u[0] - a[0])), n(4, d = Math.abs(u[1] - a[1])));
+    a && (c = s.elementToImage(g.offsetX, g.offsetY), n(1, m = Math.min(c[0], a[0])), n(2, u = Math.min(c[1], a[1])), n(3, h = Math.abs(c[0] - a[0])), n(4, d = Math.abs(c[1] - a[1])));
   }, E = (g) => {
     const y = performance.now() - f;
     if (r === "click") {
       if (y > 300)
         return;
-      g.stopPropagation(), a ? _() : (n(0, a = s.elementToImage(g.offsetX, g.offsetY)), u = a, n(1, h = a[0]), n(2, c = a[1]), n(3, m = 1), n(4, d = 1));
+      g.stopPropagation(), a ? _() : (n(0, a = s.elementToImage(g.offsetX, g.offsetY)), c = a, n(1, m = a[0]), n(2, u = a[1]), n(3, h = 1), n(4, d = 1));
     } else
-      a && (y > 300 || m * d > 100 ? (g.stopPropagation(), _()) : (n(0, a = null), u = null));
+      a && (y > 300 || h * d > 100 ? (g.stopPropagation(), _()) : (n(0, a = null), c = null));
   }, _ = () => {
-    if (m * d > 15) {
+    if (h * d > 15) {
       const g = {
         type: F.RECTANGLE,
         geometry: {
           bounds: {
-            minX: h,
-            minY: c,
-            maxX: h + m,
-            maxY: c + d
+            minX: m,
+            minY: u,
+            maxX: m + h,
+            maxY: u + d
           },
-          x: h,
-          y: c,
-          w: m,
+          x: m,
+          y: u,
+          w: h,
           h: d
         }
       };
       o("create", g);
     }
-    n(0, a = null), u = null;
+    n(0, a = null), c = null;
   };
   return ge(() => {
     i("pointerdown", p), i("pointermove", A), i("pointerup", E, !0);
   }), e.$$set = (g) => {
     "addEventListener" in g && n(5, i = g.addEventListener), "drawingMode" in g && n(6, r = g.drawingMode), "transform" in g && n(7, s = g.transform);
-  }, [a, h, c, m, d, i, r, s];
+  }, [a, m, u, h, d, i, r, s];
 }
 class ii extends Q {
   constructor(t) {
@@ -2976,11 +2976,11 @@ function ri(e, t = V) {
   function i(f) {
     if (q(e, f) && (e = f, n)) {
       const a = !Se.length;
-      for (const u of o)
-        u[1](), Se.push(u, e);
+      for (const c of o)
+        c[1](), Se.push(c, e);
       if (a) {
-        for (let u = 0; u < Se.length; u += 2)
-          Se[u][0](Se[u + 1]);
+        for (let c = 0; c < Se.length; c += 2)
+          Se[c][0](Se[c + 1]);
         Se.length = 0;
       }
     }
@@ -2989,9 +2989,9 @@ function ri(e, t = V) {
     i(f(e));
   }
   function s(f, a = V) {
-    const u = [f, a];
-    return o.add(u), o.size === 1 && (n = t(i) || V), f(e), () => {
-      o.delete(u), o.size === 0 && n && (n(), n = null);
+    const c = [f, a];
+    return o.add(c), o.size === 1 && (n = t(i) || V), f(e), () => {
+      o.delete(c), o.size === 0 && n && (n(), n = null);
     };
   }
   return { set: i, update: r, subscribe: s };
@@ -3011,11 +3011,11 @@ const si = (e, t) => {
   const { subscribe: n, set: o } = ri(1);
   let i;
   return window.ResizeObserver && (i = new ResizeObserver(() => {
-    const s = t.getBoundingClientRect(), { width: f, height: a } = t.viewBox.baseVal, u = Math.max(
+    const s = t.getBoundingClientRect(), { width: f, height: a } = t.viewBox.baseVal, c = Math.max(
       s.width / f,
       s.height / a
     );
-    o(u);
+    o(c);
   }), i.observe(t.parentElement)), { destroy: () => {
     i && i.disconnect();
   }, subscribe: n };
@@ -3138,52 +3138,52 @@ const fi = 20;
 function ci(e, t, n) {
   let o;
   const i = me();
-  let { addEventListener: r } = t, { drawingMode: s } = t, { transform: f } = t, { viewportScale: a = 1 } = t, u, h = [], c = null, m = !1;
+  let { addEventListener: r } = t, { drawingMode: s } = t, { transform: f } = t, { viewportScale: a = 1 } = t, c, m = [], u = null, h = !1;
   const d = (g) => {
     const { timeStamp: y, offsetX: M, offsetY: L } = g;
-    if (u = { timeStamp: y, offsetX: M, offsetY: L }, s === "drag" && h.length === 0) {
+    if (c = { timeStamp: y, offsetX: M, offsetY: L }, s === "drag" && m.length === 0) {
       const X = f.elementToImage(g.offsetX, g.offsetY);
-      h.push(X), n(1, c = X);
+      m.push(X), n(1, u = X);
     }
   }, p = (g) => {
-    if (h.length > 0 && (n(1, c = f.elementToImage(g.offsetX, g.offsetY)), h.length > 2)) {
-      const y = ot(c, h[0]) * a;
-      n(2, m = y < fi);
+    if (m.length > 0 && (n(1, u = f.elementToImage(g.offsetX, g.offsetY)), m.length > 2)) {
+      const y = ot(u, m[0]) * a;
+      n(2, h = y < fi);
     }
   }, A = (g) => {
     if (s === "click") {
-      const y = g.timeStamp - u.timeStamp, M = ot([u.offsetX, u.offsetY], [g.offsetX, g.offsetY]);
+      const y = g.timeStamp - c.timeStamp, M = ot([c.offsetX, c.offsetY], [g.offsetX, g.offsetY]);
       if (y > 300 || M > 15)
         return;
-      if (m)
+      if (h)
         _();
-      else if (h.length === 0) {
+      else if (m.length === 0) {
         const L = f.elementToImage(g.offsetX, g.offsetY);
-        h.push(L), n(1, c = L);
+        m.push(L), n(1, u = L);
       } else
-        h.push(c);
+        m.push(u);
     } else {
-      if (h.length === 1 && ot(h[0], c) <= 4) {
-        n(0, h = []), n(1, c = null);
+      if (m.length === 1 && ot(m[0], u) <= 4) {
+        n(0, m = []), n(1, u = null);
         return;
       }
-      g.stopImmediatePropagation(), m ? _() : h.push(c);
+      g.stopImmediatePropagation(), h ? _() : m.push(u);
     }
   }, E = () => {
-    const g = [...h, c], y = {
+    const g = [...m, u], y = {
       type: F.POLYGON,
       geometry: { bounds: we(g), points: g }
     };
-    ct(y) > 4 && (n(0, h = []), n(1, c = null), i("create", y));
+    ct(y) > 4 && (n(0, m = []), n(1, u = null), i("create", y));
   }, _ = () => {
     const g = {
       type: F.POLYGON,
       geometry: {
-        bounds: we(h),
-        points: [...h]
+        bounds: we(m),
+        points: [...m]
       }
     };
-    n(0, h = []), n(1, c = null), i("create", g);
+    n(0, m = []), n(1, u = null), i("create", g);
   };
   return ge(() => {
     r("pointerdown", d, !0), r("pointermove", p), r("pointerup", A, !0), r("dblclick", E, !0);
@@ -3193,9 +3193,9 @@ function ci(e, t, n) {
     e.$$.dirty & /*viewportScale*/
     128 && n(3, o = 10 / a);
   }, [
-    h,
-    c,
     m,
+    u,
+    h,
     o,
     r,
     s,
@@ -3214,7 +3214,7 @@ class ui extends Q {
   }
 }
 function Xt(e) {
-  let t, n, o, i, r, s, f, a, u, h;
+  let t, n, o, i, r, s, f, a, c, m;
   return {
     c() {
       t = I("ellipse"), s = I("ellipse"), l(t, "class", "a9s-outer"), l(t, "cx", n = /*x*/
@@ -3227,38 +3227,38 @@ function Xt(e) {
       e[2] + /*w*/
       e[4] / 2), l(s, "cy", a = /*y*/
       e[3] + /*h*/
-      e[5] / 2), l(s, "rx", u = /*w*/
-      e[4] / 2), l(s, "ry", h = /*h*/
+      e[5] / 2), l(s, "rx", c = /*w*/
+      e[4] / 2), l(s, "ry", m = /*h*/
       e[5] / 2);
     },
-    m(c, m) {
-      O(c, t, m), O(c, s, m);
+    m(u, h) {
+      O(u, t, h), O(u, s, h);
     },
-    p(c, m) {
-      m & /*x, w*/
+    p(u, h) {
+      h & /*x, w*/
       20 && n !== (n = /*x*/
-      c[2] + /*w*/
-      c[4] / 2) && l(t, "cx", n), m & /*y, h*/
+      u[2] + /*w*/
+      u[4] / 2) && l(t, "cx", n), h & /*y, h*/
       40 && o !== (o = /*y*/
-      c[3] + /*h*/
-      c[5] / 2) && l(t, "cy", o), m & /*w*/
+      u[3] + /*h*/
+      u[5] / 2) && l(t, "cy", o), h & /*w*/
       16 && i !== (i = /*w*/
-      c[4] / 2) && l(t, "rx", i), m & /*h*/
+      u[4] / 2) && l(t, "rx", i), h & /*h*/
       32 && r !== (r = /*h*/
-      c[5] / 2) && l(t, "ry", r), m & /*x, w*/
+      u[5] / 2) && l(t, "ry", r), h & /*x, w*/
       20 && f !== (f = /*x*/
-      c[2] + /*w*/
-      c[4] / 2) && l(s, "cx", f), m & /*y, h*/
+      u[2] + /*w*/
+      u[4] / 2) && l(s, "cx", f), h & /*y, h*/
       40 && a !== (a = /*y*/
-      c[3] + /*h*/
-      c[5] / 2) && l(s, "cy", a), m & /*w*/
-      16 && u !== (u = /*w*/
-      c[4] / 2) && l(s, "rx", u), m & /*h*/
-      32 && h !== (h = /*h*/
-      c[5] / 2) && l(s, "ry", h);
+      u[3] + /*h*/
+      u[5] / 2) && l(s, "cy", a), h & /*w*/
+      16 && c !== (c = /*w*/
+      u[4] / 2) && l(s, "rx", c), h & /*h*/
+      32 && m !== (m = /*h*/
+      u[5] / 2) && l(s, "ry", m);
     },
-    d(c) {
-      c && k(t), c && k(s);
+    d(u) {
+      u && k(t), u && k(s);
     }
   };
 }
@@ -3287,18 +3287,18 @@ function di(e) {
 }
 function mi(e, t, n) {
   const o = me();
-  let { addEventListener: i } = t, { drawingMode: r } = t, { transform: s } = t, f, a, u, h, c, m, d, p = !1, A = !1, E, _;
+  let { addEventListener: i } = t, { drawingMode: r } = t, { transform: s } = t, f, a, c, m, u, h, d, p = !1, A = !1, E, _;
   const g = (b) => {
-    E = performance.now(), r === "drag" && (n(1, a = s.elementToImage(b.offsetX, b.offsetY)), u = a, n(2, h = a[0]), n(3, c = a[1]), n(4, m = 1), n(5, d = 1));
+    E = performance.now(), r === "drag" && (n(1, a = s.elementToImage(b.offsetX, b.offsetY)), c = a, n(2, m = a[0]), n(3, u = a[1]), n(4, h = 1), n(5, d = 1));
   }, y = (b) => {
     const S = b || _;
     if (a)
-      if (u = s.elementToImage(S.offsetX, S.offsetY), A) {
-        const v = 2 * Math.abs(u[0] - a[0]), B = 2 * Math.abs(u[1] - a[1]);
-        n(4, m = p ? Math.max(v, B) : v), n(5, d = p ? m : B), n(2, h = Math.min(u[0], a[0] - m / 2)), n(3, c = Math.min(u[1], a[1] - d / 2));
+      if (c = s.elementToImage(S.offsetX, S.offsetY), A) {
+        const v = 2 * Math.abs(c[0] - a[0]), B = 2 * Math.abs(c[1] - a[1]);
+        n(4, h = p ? Math.max(v, B) : v), n(5, d = p ? h : B), n(2, m = Math.min(c[0], a[0] - h / 2)), n(3, u = Math.min(c[1], a[1] - d / 2));
       } else {
-        const v = Math.abs(u[0] - a[0]), B = Math.abs(u[1] - a[1]);
-        n(4, m = p ? Math.max(v, B) : v), n(5, d = p ? m : B), n(2, h = Math.min(u[0], a[0])), n(3, c = Math.min(u[1], a[1]));
+        const v = Math.abs(c[0] - a[0]), B = Math.abs(c[1] - a[1]);
+        n(4, h = p ? Math.max(v, B) : v), n(5, d = p ? h : B), n(2, m = Math.min(c[0], a[0])), n(3, u = Math.min(c[1], a[1]));
       }
     b && (_ = b);
   }, M = (b) => {
@@ -3307,29 +3307,29 @@ function mi(e, t, n) {
     if (r === "click") {
       if (S > 300)
         return;
-      b.stopPropagation(), a ? L() : (n(1, a = s.elementToImage(b.offsetX, b.offsetY)), u = a, n(2, h = a[0]), n(3, c = a[1]), n(4, m = 1), n(5, d = 1));
+      b.stopPropagation(), a ? L() : (n(1, a = s.elementToImage(b.offsetX, b.offsetY)), c = a, n(2, m = a[0]), n(3, u = a[1]), n(4, h = 1), n(5, d = 1));
     } else
-      a && (S > 300 || m * d > 100 ? (b.stopPropagation(), L()) : (n(1, a = null), u = null, _ = void 0));
+      a && (S > 300 || h * d > 100 ? (b.stopPropagation(), L()) : (n(1, a = null), c = null, _ = void 0));
   }, L = () => {
-    if (m * d > 15) {
+    if (h * d > 15) {
       const b = {
         type: F.ELLIPSE,
         geometry: {
           bounds: {
-            minX: h,
-            minY: c,
-            maxX: h + m,
-            maxY: c + d
+            minX: m,
+            minY: u,
+            maxX: m + h,
+            maxY: u + d
           },
-          cx: h + m / 2,
-          cy: c + d / 2,
-          rx: m / 2,
+          cx: m + h / 2,
+          cy: u + d / 2,
+          rx: h / 2,
           ry: d / 2
         }
       };
       o("create", b);
     }
-    n(1, a = null), u = null, _ = void 0;
+    n(1, a = null), c = null, _ = void 0;
   }, X = (b) => {
     b.key === "Shift" && (p = !0, y()), b.key === "Control" && (A = !0, y());
   }, R = (b) => {
@@ -3348,9 +3348,9 @@ function mi(e, t, n) {
   }, [
     f,
     a,
-    h,
-    c,
     m,
+    u,
+    h,
     d,
     i,
     r,
@@ -3432,17 +3432,17 @@ function gi(e) {
 function pi(e, t, n) {
   let o;
   const i = me();
-  let { addEventListener: r } = t, { drawingMode: s } = t, { annotation: f } = t, { transform: a } = t, { viewportScale: u = 1 } = t, { style: h = void 0 } = t, c = { fillOpacity: 1 }, m = [], d = "", p = !1;
+  let { addEventListener: r } = t, { drawingMode: s } = t, { annotation: f } = t, { transform: a } = t, { viewportScale: c = 1 } = t, { style: m = void 0 } = t, u = { fillOpacity: 1 }, h = [], d = "", p = !1;
   const A = (y) => {
-    if (s === "drag" && m.length === 0) {
+    if (s === "drag" && h.length === 0) {
       n(1, p = !0);
       const M = a.elementToImage(y.offsetX, y.offsetY);
-      m.push([...M, y.pressure]), n(0, d = Xe(m));
+      h.push([...M, y.pressure]), n(0, d = Xe(h));
     }
   }, E = (y) => {
     if (p) {
       const M = a.elementToImage(y.offsetX, y.offsetY);
-      m.push([...M, y.pressure]), n(0, d = Xe(m, gt, !0));
+      h.push([...M, y.pressure]), n(0, d = Xe(h, gt, !0));
     }
   }, _ = (y) => {
     p && g();
@@ -3450,20 +3450,20 @@ function pi(e, t, n) {
     const y = {
       type: F.FREEHAND,
       geometry: {
-        bounds: we(m.map((M) => [M[0], M[1]])),
-        points: m
+        bounds: we(h.map((M) => [M[0], M[1]])),
+        points: h
       }
     };
-    n(1, p = !1), m = [], i("create", y);
+    n(1, p = !1), h = [], i("create", y);
   };
   return ge(() => {
     r("pointerdown", A, !0), r("pointermove", E), r("pointerup", _, !0);
   }), e.$$set = (y) => {
-    "addEventListener" in y && n(3, r = y.addEventListener), "drawingMode" in y && n(4, s = y.drawingMode), "annotation" in y && n(5, f = y.annotation), "transform" in y && n(6, a = y.transform), "viewportScale" in y && n(7, u = y.viewportScale), "style" in y && n(8, h = y.style);
+    "addEventListener" in y && n(3, r = y.addEventListener), "drawingMode" in y && n(4, s = y.drawingMode), "annotation" in y && n(5, f = y.annotation), "transform" in y && n(6, a = y.transform), "viewportScale" in y && n(7, c = y.viewportScale), "style" in y && n(8, m = y.style);
   }, e.$$.update = () => {
     e.$$.dirty & /*viewportScale*/
     128, e.$$.dirty & /*annotation, style*/
-    288 && n(2, o = pe(f, h, c));
+    288 && n(2, o = pe(f, m, u));
   }, [
     d,
     p,
@@ -3472,8 +3472,8 @@ function pi(e, t, n) {
     s,
     f,
     a,
-    u,
-    h
+    c,
+    m
   ];
 }
 class yi extends Q {
@@ -3512,7 +3512,7 @@ function Nt(e) {
         "y2",
         /*y2*/
         e[4]
-      ), l(t, "marker-end", "url(#arrow)"), l(n, "class", "a9s-inner"), l(
+      ), l(n, "class", "a9s-inner"), l(
         n,
         "x1",
         /*x1*/
@@ -3532,7 +3532,7 @@ function Nt(e) {
         "y2",
         /*y2*/
         e[4]
-      ), l(n, "marker-end", "url(#arrow)");
+      );
     },
     m(o, i) {
       O(o, t, i), O(o, n, i);
@@ -3594,69 +3594,69 @@ function Nt(e) {
   };
 }
 function _i(e) {
-  let t, n, o, i, r = (
+  let t, n = (
     /*origin*/
     e[0] && Nt(e)
   );
   return {
     c() {
-      t = I("g"), n = I("defs"), o = I("marker"), i = I("path"), r && r.c(), l(i, "d", "M 0 0 L 10 5 L 0 10 z"), l(o, "id", "arrow"), l(o, "viewBox", "0 0 10 10"), l(o, "refX", "0"), l(o, "refY", "0"), l(o, "markerWidth", "6"), l(o, "markerHeight", "6"), l(o, "orient", "auto-start-reverse"), l(t, "class", "a9s-annotation a9s-rubberband");
+      t = I("g"), n && n.c(), l(t, "class", "a9s-annotation a9s-rubberband");
     },
-    m(s, f) {
-      O(s, t, f), ee(t, n), ee(n, o), ee(o, i), r && r.m(t, null);
+    m(o, i) {
+      O(o, t, i), n && n.m(t, null);
     },
-    p(s, [f]) {
+    p(o, [i]) {
       /*origin*/
-      s[0] ? r ? r.p(s, f) : (r = Nt(s), r.c(), r.m(t, null)) : r && (r.d(1), r = null);
+      o[0] ? n ? n.p(o, i) : (n = Nt(o), n.c(), n.m(t, null)) : n && (n.d(1), n = null);
     },
     i: V,
     o: V,
-    d(s) {
-      s && k(t), r && r.d();
+    d(o) {
+      o && k(t), n && n.d();
     }
   };
 }
 function wi(e, t, n) {
   const o = me();
-  let { addEventListener: i } = t, { drawingMode: r } = t, { transform: s } = t, f, a, u, h, c, m, d;
+  let { addEventListener: i } = t, { drawingMode: r } = t, { transform: s } = t, f, a, c, m, u, h, d;
   const p = (g) => {
-    f = performance.now(), r === "drag" && (n(0, a = s.elementToImage(g.offsetX, g.offsetY)), u = a, n(1, h = a[0]), n(2, c = a[1]), n(3, m = a[0] + 1), n(4, d = a[1] + 1));
+    f = performance.now(), r === "drag" && (n(0, a = s.elementToImage(g.offsetX, g.offsetY)), c = a, n(1, m = a[0]), n(2, u = a[1]), n(3, h = a[0] + 1), n(4, d = a[1] + 1));
   }, A = (g) => {
-    a && (u = s.elementToImage(g.offsetX, g.offsetY), n(3, m = u[0]), n(4, d = u[1]));
+    a && (c = s.elementToImage(g.offsetX, g.offsetY), n(3, h = c[0]), n(4, d = c[1]));
   }, E = (g) => {
     const y = performance.now() - f;
     if (r === "click") {
       if (y > 300)
         return;
-      g.stopPropagation(), a ? _() : (n(0, a = s.elementToImage(g.offsetX, g.offsetY)), u = a, n(1, h = a[0]), n(2, c = a[1]), n(3, m = a[0] + 1), n(4, d = a[1] + 1));
+      g.stopPropagation(), a ? _() : (n(0, a = s.elementToImage(g.offsetX, g.offsetY)), c = a, n(1, m = a[0]), n(2, u = a[1]), n(3, h = a[0] + 1), n(4, d = a[1] + 1));
     } else
-      a && (y > 300 || Math.sqrt(Math.pow(m - h, 2) + Math.pow(d - c, 2)) > 8 ? (g.stopPropagation(), _()) : (n(0, a = null), u = null));
+      a && (y > 300 || Math.sqrt(Math.pow(h - m, 2) + Math.pow(d - u, 2)) > 8 ? (g.stopPropagation(), _()) : (n(0, a = null), c = null));
   }, _ = () => {
-    if (Math.sqrt(Math.pow(m - h, 2) + Math.pow(d - c, 2)) > 8) {
+    if (Math.sqrt(Math.pow(h - m, 2) + Math.pow(d - u, 2)) > 8) {
       const g = {
         type: F.LINE,
         geometry: {
           bounds: {
-            minX: Math.min(h, m),
-            minY: Math.min(c, d),
-            maxX: Math.max(h, m),
-            maxY: Math.max(c, d)
+            minX: Math.min(m, h),
+            minY: Math.min(u, d),
+            maxX: Math.max(m, h),
+            maxY: Math.max(u, d)
           },
-          x1: h,
-          y1: c,
-          x2: m,
+          x1: m,
+          y1: u,
+          x2: h,
           y2: d
         }
       };
       o("create", g);
     }
-    n(0, a = null), u = null;
+    n(0, a = null), c = null;
   };
   return ge(() => {
     i("pointerdown", p), i("pointermove", A), i("pointerup", E, !0);
   }), e.$$set = (g) => {
     "addEventListener" in g && n(5, i = g.addEventListener), "drawingMode" in g && n(6, r = g.drawingMode), "transform" in g && n(7, s = g.transform);
-  }, [a, h, c, m, d, i, r, s];
+  }, [a, m, u, h, d, i, r, s];
 }
 class bi extends Q {
   constructor(t) {
@@ -3752,13 +3752,13 @@ function Ai(e) {
 }
 function Si(e, t, n) {
   let o, { annotation: i } = t, { geom: r } = t, { style: s = void 0 } = t;
-  const { cx: f, cy: a, rx: u, ry: h } = r;
-  return e.$$set = (c) => {
-    "annotation" in c && n(0, i = c.annotation), "geom" in c && n(6, r = c.geom), "style" in c && n(7, s = c.style);
+  const { cx: f, cy: a, rx: c, ry: m } = r;
+  return e.$$set = (u) => {
+    "annotation" in u && n(0, i = u.annotation), "geom" in u && n(6, r = u.geom), "style" in u && n(7, s = u.style);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
     129 && n(1, o = pe(i, s));
-  }, [i, o, f, a, u, h, r, s];
+  }, [i, o, f, a, c, m, r, s];
 }
 class Mi extends Q {
   constructor(t) {
@@ -3952,14 +3952,14 @@ function Pi(e) {
   };
 }
 function Ii(e, t, n) {
-  let o, i, r, s, f, { annotation: a } = t, { geom: u } = t, { style: h = void 0 } = t;
-  return e.$$set = (c) => {
-    "annotation" in c && n(0, a = c.annotation), "geom" in c && n(6, u = c.geom), "style" in c && n(7, h = c.style);
+  let o, i, r, s, f, { annotation: a } = t, { geom: c } = t, { style: m = void 0 } = t;
+  return e.$$set = (u) => {
+    "annotation" in u && n(0, a = u.annotation), "geom" in u && n(6, c = u.geom), "style" in u && n(7, m = u.style);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
-    129 && n(5, o = pe(a, h)), e.$$.dirty & /*geom*/
-    64 && n(4, { x: i, y: r, w: s, h: f } = u, i, (n(3, r), n(6, u)), (n(2, s), n(6, u)), (n(1, f), n(6, u)));
-  }, [a, f, s, r, i, o, u, h];
+    129 && n(5, o = pe(a, m)), e.$$.dirty & /*geom*/
+    64 && n(4, { x: i, y: r, w: s, h: f } = c, i, (n(3, r), n(6, c)), (n(2, s), n(6, c)), (n(1, f), n(6, c)));
+  }, [a, f, s, r, i, o, c, m];
 }
 class Di extends Q {
   constructor(t) {
@@ -4012,13 +4012,13 @@ function Bi(e) {
 }
 function Yi(e, t, n) {
   let o, i, { annotation: r } = t, { geom: s } = t, { style: f = void 0 } = t, a = { fillOpacity: 1 };
-  const { points: u } = s;
-  return e.$$set = (h) => {
-    "annotation" in h && n(0, r = h.annotation), "geom" in h && n(3, s = h.geom), "style" in h && n(4, f = h.style);
+  const { points: c } = s;
+  return e.$$set = (m) => {
+    "annotation" in m && n(0, r = m.annotation), "geom" in m && n(3, s = m.geom), "style" in m && n(4, f = m.style);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
     17 && n(2, o = pe(r, f, a));
-  }, n(1, i = Xe(u, gt, !0)), [r, i, o, s, f];
+  }, n(1, i = Xe(c, gt, !0)), [r, i, o, s, f];
 }
 class Xi extends Q {
   constructor(t) {
@@ -4026,138 +4026,138 @@ class Xi extends Q {
   }
 }
 function Ri(e) {
-  let t, n, o, i, r;
+  let t, n, o, i, r, s, f, a;
   return {
     c() {
-      t = I("g"), n = I("line"), i = I("line"), l(n, "class", "a9s-outer"), l(n, "style", o = /*computedStyle*/
+      t = I("g"), n = I("defs"), o = I("marker"), i = I("path"), r = I("line"), f = I("line"), l(i, "d", "M 0 0 L 10 5 L 0 10 z"), l(o, "class", "arrow"), l(o, "viewBox", "0 0 10 10"), l(o, "refX", "6"), l(o, "refY", "6"), l(o, "markerWidth", "6"), l(o, "markerHeight", "6"), l(o, "orient", "auto-start-reverse"), l(r, "class", "a9s-outer"), l(r, "style", s = /*computedStyle*/
       e[5] ? "display:none;" : void 0), l(
-        n,
+        r,
         "x1",
         /*x1*/
         e[4]
       ), l(
-        n,
+        r,
         "y1",
         /*y1*/
         e[3]
       ), l(
-        n,
+        r,
         "x2",
         /*x2*/
         e[2]
       ), l(
-        n,
+        r,
         "y2",
         /*y2*/
         e[1]
-      ), l(i, "class", "a9s-inner"), l(
-        i,
+      ), l(r, "marker-end", "url(.arrow)"), l(f, "class", "a9s-inner"), l(
+        f,
         "style",
         /*computedStyle*/
         e[5]
       ), l(
-        i,
+        f,
         "x1",
         /*x1*/
         e[4]
       ), l(
-        i,
+        f,
         "y1",
         /*y1*/
         e[3]
       ), l(
-        i,
+        f,
         "x2",
         /*x2*/
         e[2]
       ), l(
-        i,
+        f,
         "y2",
         /*y2*/
         e[1]
-      ), l(t, "data-id", r = /*annotation*/
+      ), l(f, "marker-end", "url(.arrow)"), l(t, "data-id", a = /*annotation*/
       e[0].id);
     },
-    m(s, f) {
-      O(s, t, f), ee(t, n), ee(t, i);
+    m(c, m) {
+      O(c, t, m), ee(t, n), ee(n, o), ee(o, i), ee(t, r), ee(t, f);
     },
-    p(s, [f]) {
-      f & /*computedStyle*/
-      32 && o !== (o = /*computedStyle*/
-      s[5] ? "display:none;" : void 0) && l(n, "style", o), f & /*x1*/
+    p(c, [m]) {
+      m & /*computedStyle*/
+      32 && s !== (s = /*computedStyle*/
+      c[5] ? "display:none;" : void 0) && l(r, "style", s), m & /*x1*/
       16 && l(
-        n,
+        r,
         "x1",
         /*x1*/
-        s[4]
-      ), f & /*y1*/
+        c[4]
+      ), m & /*y1*/
       8 && l(
-        n,
+        r,
         "y1",
         /*y1*/
-        s[3]
-      ), f & /*x2*/
+        c[3]
+      ), m & /*x2*/
       4 && l(
-        n,
+        r,
         "x2",
         /*x2*/
-        s[2]
-      ), f & /*y2*/
+        c[2]
+      ), m & /*y2*/
       2 && l(
-        n,
+        r,
         "y2",
         /*y2*/
-        s[1]
-      ), f & /*computedStyle*/
+        c[1]
+      ), m & /*computedStyle*/
       32 && l(
-        i,
+        f,
         "style",
         /*computedStyle*/
-        s[5]
-      ), f & /*x1*/
+        c[5]
+      ), m & /*x1*/
       16 && l(
-        i,
+        f,
         "x1",
         /*x1*/
-        s[4]
-      ), f & /*y1*/
+        c[4]
+      ), m & /*y1*/
       8 && l(
-        i,
+        f,
         "y1",
         /*y1*/
-        s[3]
-      ), f & /*x2*/
+        c[3]
+      ), m & /*x2*/
       4 && l(
-        i,
+        f,
         "x2",
         /*x2*/
-        s[2]
-      ), f & /*y2*/
+        c[2]
+      ), m & /*y2*/
       2 && l(
-        i,
+        f,
         "y2",
         /*y2*/
-        s[1]
-      ), f & /*annotation*/
-      1 && r !== (r = /*annotation*/
-      s[0].id) && l(t, "data-id", r);
+        c[1]
+      ), m & /*annotation*/
+      1 && a !== (a = /*annotation*/
+      c[0].id) && l(t, "data-id", a);
     },
     i: V,
     o: V,
-    d(s) {
-      s && k(t);
+    d(c) {
+      c && k(t);
     }
   };
 }
 function Ni(e, t, n) {
-  let o, i, r, s, f, { annotation: a } = t, { geom: u } = t, { style: h = void 0 } = t;
-  return e.$$set = (c) => {
-    "annotation" in c && n(0, a = c.annotation), "geom" in c && n(6, u = c.geom), "style" in c && n(7, h = c.style);
+  let o, i, r, s, f, { annotation: a } = t, { geom: c } = t, { style: m = void 0 } = t;
+  return e.$$set = (u) => {
+    "annotation" in u && n(0, a = u.annotation), "geom" in u && n(6, c = u.geom), "style" in u && n(7, m = u.style);
   }, e.$$.update = () => {
     e.$$.dirty & /*annotation, style*/
-    129 && n(5, o = pe(a, h)), e.$$.dirty & /*geom*/
-    64 && n(4, { x1: i, y1: r, x2: s, y2: f } = u, i, (n(3, r), n(6, u)), (n(2, s), n(6, u)), (n(1, f), n(6, u)));
-  }, [a, f, s, r, i, o, u, h];
+    129 && n(5, o = pe(a, m)), e.$$.dirty & /*geom*/
+    64 && n(4, { x1: i, y1: r, x2: s, y2: f } = c, i, (n(3, r), n(6, c)), (n(2, s), n(6, c)), (n(1, f), n(6, c)));
+  }, [a, f, s, r, i, o, c, m];
 }
 class Ci extends Q {
   constructor(t) {
@@ -4178,8 +4178,8 @@ const pr = {
   let o;
   return { onPointerDown: () => o = performance.now(), onPointerUp: (s) => {
     if (performance.now() - o < Hi) {
-      const { x: a, y: u } = Gi(s, e), h = t.getAt(a, u);
-      h ? n("click", { originalEvent: s, annotation: h }) : n("click", { originalEvent: s });
+      const { x: a, y: c } = Gi(s, e), m = t.getAt(a, c);
+      m ? n("click", { originalEvent: s, annotation: m }) : n("click", { originalEvent: s });
     }
   } };
 }, Gi = (e, t) => {
@@ -4463,7 +4463,7 @@ function Ft(e) {
     zi,
     Vi
   ], s = [];
-  function f(a, u) {
+  function f(a, c) {
     return (
       /*selector*/
       a[35].type === F.ELLIPSE ? 0 : (
@@ -4485,14 +4485,14 @@ function Ft(e) {
     c() {
       n && n.c(), o = de();
     },
-    m(a, u) {
-      ~t && s[t].m(a, u), O(a, o, u), i = !0;
+    m(a, c) {
+      ~t && s[t].m(a, c), O(a, o, c), i = !0;
     },
-    p(a, u) {
-      let h = t;
-      t = f(a), t === h ? ~t && s[t].p(a, u) : (n && (ce(), G(s[h], 1, 1, () => {
-        s[h] = null;
-      }), ue()), ~t ? (n = s[t], n ? n.p(a, u) : (n = s[t] = r[t](a), n.c()), H(n, 1), n.m(o.parentNode, o)) : n = null);
+    p(a, c) {
+      let m = t;
+      t = f(a), t === m ? ~t && s[t].p(a, c) : (n && (ce(), G(s[m], 1, 1, () => {
+        s[m] = null;
+      }), ue()), ~t ? (n = s[t], n ? n.p(a, c) : (n = s[t] = r[t](a), n.c()), H(n, 1), n.m(o.parentNode, o)) : n = null);
     },
     i(a) {
       i || (H(n), i = !0);
@@ -4543,7 +4543,7 @@ function Gt(e) {
 function Vt(e) {
   let t, n, o, i;
   const r = [Zi, Wi], s = [];
-  function f(a, u) {
+  function f(a, c) {
     return (
       /*editableAnnotations*/
       a[6] ? 0 : (
@@ -4557,14 +4557,14 @@ function Vt(e) {
     c() {
       n && n.c(), o = de();
     },
-    m(a, u) {
-      ~t && s[t].m(a, u), O(a, o, u), i = !0;
+    m(a, c) {
+      ~t && s[t].m(a, c), O(a, o, c), i = !0;
     },
-    p(a, u) {
-      let h = t;
-      t = f(a), t === h ? ~t && s[t].p(a, u) : (n && (ce(), G(s[h], 1, 1, () => {
-        s[h] = null;
-      }), ue()), ~t ? (n = s[t], n ? n.p(a, u) : (n = s[t] = r[t](a), n.c()), H(n, 1), n.m(o.parentNode, o)) : n = null);
+    p(a, c) {
+      let m = t;
+      t = f(a), t === m ? ~t && s[t].p(a, c) : (n && (ce(), G(s[m], 1, 1, () => {
+        s[m] = null;
+      }), ue()), ~t ? (n = s[t], n ? n.p(a, c) : (n = s[t] = r[t](a), n.c()), H(n, 1), n.m(o.parentNode, o)) : n = null);
     },
     i(a) {
       i || (H(n), i = !0);
@@ -4633,8 +4633,8 @@ function Zi(e) {
         s[6];
         let a;
         for (a = 0; a < o.length; a += 1) {
-          const u = Ct(s, o, a);
-          i[a] ? (i[a].p(u, f), H(i[a], 1)) : (i[a] = qt(u), i[a].c(), H(i[a], 1), i[a].m(t.parentNode, t));
+          const c = Ct(s, o, a);
+          i[a] ? (i[a].p(c, f), H(i[a], 1)) : (i[a] = qt(c), i[a].c(), H(i[a], 1), i[a].m(t.parentNode, t));
         }
         for (ce(), a = o.length; a < i.length; a += 1)
           r(a);
@@ -4830,32 +4830,32 @@ function Ji(e) {
     /*$store*/
     e[13]
   ), a = [];
-  for (let c = 0; c < f.length; c += 1)
-    a[c] = Gt(Ut(e, f, c));
-  const u = (c) => G(a[c], 1, 1, () => {
-    a[c] = null;
+  for (let u = 0; u < f.length; u += 1)
+    a[u] = Gt(Ut(e, f, u));
+  const c = (u) => G(a[u], 1, 1, () => {
+    a[u] = null;
   });
-  let h = (
+  let m = (
     /*drawingEl*/
     e[4] && Vt(e)
   );
   return {
     c() {
       t = I("svg"), n = I("g");
-      for (let c = 0; c < a.length; c += 1)
-        a[c].c();
-      o = I("g"), h && h.c(), l(o, "class", "drawing"), l(t, "class", "a9s-annotationlayer"), Et(
+      for (let u = 0; u < a.length; u += 1)
+        a[u].c();
+      o = I("g"), m && m.c(), l(o, "class", "drawing"), l(t, "class", "a9s-annotationlayer"), Et(
         t,
         "drawing",
         /*tool*/
         e[12]
       );
     },
-    m(c, m) {
-      O(c, t, m), ee(t, n);
+    m(u, h) {
+      O(u, t, h), ee(t, n);
       for (let d = 0; d < a.length; d += 1)
         a[d] && a[d].m(n, null);
-      ee(t, o), h && h.m(o, null), e[25](o), e[26](t), i = !0, r || (s = [
+      ee(t, o), m && m.m(o, null), e[25](o), e[26](t), i = !0, r || (s = [
         j(t, "pointerup", function() {
           z(
             /*onPointerUp*/
@@ -4870,25 +4870,25 @@ function Ji(e) {
         })
       ], r = !0);
     },
-    p(c, m) {
-      if (e = c, m[0] & /*$store, style, isEditable*/
+    p(u, h) {
+      if (e = u, h[0] & /*$store, style, isEditable*/
       8322) {
         f = /*$store*/
         e[13];
         let d;
         for (d = 0; d < f.length; d += 1) {
           const p = Ut(e, f, d);
-          a[d] ? (a[d].p(p, m), H(a[d], 1)) : (a[d] = Gt(p), a[d].c(), H(a[d], 1), a[d].m(n, null));
+          a[d] ? (a[d].p(p, h), H(a[d], 1)) : (a[d] = Gt(p), a[d].c(), H(a[d], 1), a[d].m(n, null));
         }
         for (ce(), d = f.length; d < a.length; d += 1)
-          u(d);
+          c(d);
         ue();
       }
       /*drawingEl*/
-      e[4] ? h ? (h.p(e, m), m[0] & /*drawingEl*/
-      16 && H(h, 1)) : (h = Vt(e), h.c(), H(h, 1), h.m(o, null)) : h && (ce(), G(h, 1, 1, () => {
-        h = null;
-      }), ue()), (!i || m[0] & /*tool*/
+      e[4] ? m ? (m.p(e, h), h[0] & /*drawingEl*/
+      16 && H(m, 1)) : (m = Vt(e), m.c(), H(m, 1), m.m(o, null)) : m && (ce(), G(m, 1, 1, () => {
+        m = null;
+      }), ue()), (!i || h[0] & /*tool*/
       4096) && Et(
         t,
         "drawing",
@@ -4896,31 +4896,31 @@ function Ji(e) {
         e[12]
       );
     },
-    i(c) {
+    i(u) {
       if (!i) {
-        for (let m = 0; m < f.length; m += 1)
-          H(a[m]);
-        H(h), i = !0;
+        for (let h = 0; h < f.length; h += 1)
+          H(a[h]);
+        H(m), i = !0;
       }
     },
-    o(c) {
+    o(u) {
       a = a.filter(Boolean);
-      for (let m = 0; m < a.length; m += 1)
-        G(a[m]);
-      G(h), i = !1;
+      for (let h = 0; h < a.length; h += 1)
+        G(a[h]);
+      G(m), i = !1;
     },
-    d(c) {
-      c && k(t), mt(a, c), h && h.d(), e[25](null), e[26](null), r = !1, ae(s);
+    d(u) {
+      u && k(t), mt(a, u), m && m.d(), e[25](null), e[26](null), r = !1, ae(s);
     }
   };
 }
 function Qi(e, t, n) {
-  let o, i, r, s, f, a, u, h, c, m, d = V, p = () => (d(), d = Qt(w, (N) => n(14, m = N)), w);
+  let o, i, r, s, f, a, c, m, u, h, d = V, p = () => (d(), d = Qt(w, (N) => n(14, h = N)), w);
   e.$$.on_destroy.push(() => d());
   let { drawingEnabled: A } = t, { image: E } = t, { preferredDrawingMode: _ } = t, { state: g } = t, { style: y = void 0 } = t, { toolName: M = dt().length > 0 ? dt()[0] : void 0 } = t, { user: L } = t, X, R, w;
   ge(() => p(n(5, w = li(E, R))));
   const { selection: b, store: S } = g;
-  bt(e, b, (N) => n(24, h = N)), bt(e, S, (N) => n(13, c = N));
+  bt(e, b, (N) => n(24, m = N)), bt(e, S, (N) => n(13, u = N));
   let v = null, B = null;
   const D = (N) => {
     S.unobserve(v);
@@ -4970,8 +4970,8 @@ function Qi(e, t, n) {
     9437184 && n(11, r = (i == null ? void 0 : i.drawingMode) || _), e.$$.dirty[0] & /*svgEl*/
     8 && n(10, s = Ui(R)), e.$$.dirty[0] & /*svgEl*/
     8 && n(9, { onPointerDown: f, onPointerUp: a } = Fi(R, S), f, (n(8, a), n(3, R))), e.$$.dirty[0] & /*$selection*/
-    16777216 && n(7, u = (N) => h.selected.find(($) => $.id === N.id && $.editable)), e.$$.dirty[0] & /*$selection*/
-    16777216 && D(h.selected);
+    16777216 && n(7, c = (N) => m.selected.find(($) => $.id === N.id && $.editable)), e.$$.dirty[0] & /*$selection*/
+    16777216 && D(m.selected);
   }, [
     A,
     y,
@@ -4980,14 +4980,14 @@ function Qi(e, t, n) {
     X,
     w,
     B,
-    u,
+    c,
     a,
     f,
     s,
     r,
     o,
-    c,
-    m,
+    u,
+    h,
     b,
     S,
     P,
@@ -4997,7 +4997,7 @@ function Qi(e, t, n) {
     g,
     L,
     i,
-    h,
+    m,
     be,
     Oe
   ];
@@ -5030,17 +5030,17 @@ function $i(e, t, n, o, i) {
 function un(e, t, n, o, i) {
   for (; o > n; ) {
     if (o - n > 600) {
-      var r = o - n + 1, s = t - n + 1, f = Math.log(r), a = 0.5 * Math.exp(2 * f / 3), u = 0.5 * Math.sqrt(f * a * (r - a) / r) * (s - r / 2 < 0 ? -1 : 1), h = Math.max(n, Math.floor(t - s * a / r + u)), c = Math.min(o, Math.floor(t + (r - s) * a / r + u));
-      un(e, t, h, c, i);
+      var r = o - n + 1, s = t - n + 1, f = Math.log(r), a = 0.5 * Math.exp(2 * f / 3), c = 0.5 * Math.sqrt(f * a * (r - a) / r) * (s - r / 2 < 0 ? -1 : 1), m = Math.max(n, Math.floor(t - s * a / r + c)), u = Math.min(o, Math.floor(t + (r - s) * a / r + c));
+      un(e, t, m, u, i);
     }
-    var m = e[t], d = n, p = o;
-    for (ve(e, n, t), i(e[o], m) > 0 && ve(e, n, o); d < p; ) {
-      for (ve(e, d, p), d++, p--; i(e[d], m) < 0; )
+    var h = e[t], d = n, p = o;
+    for (ve(e, n, t), i(e[o], h) > 0 && ve(e, n, o); d < p; ) {
+      for (ve(e, d, p), d++, p--; i(e[d], h) < 0; )
         d++;
-      for (; i(e[p], m) > 0; )
+      for (; i(e[p], h) > 0; )
         p--;
     }
-    i(e[n], m) === 0 ? ve(e, n, p) : (p++, ve(e, p, o)), p <= t && (n = p + 1), t <= p && (o = p - 1);
+    i(e[n], h) === 0 ? ve(e, n, p) : (p++, ve(e, p, o)), p <= t && (n = p + 1), t <= p && (o = p - 1);
   }
 }
 function ve(e, t, n) {
@@ -5123,14 +5123,14 @@ class tr {
       return this;
     let o = this.data;
     const i = this.toBBox(t), r = [], s = [];
-    let f, a, u;
+    let f, a, c;
     for (; o || r.length; ) {
-      if (o || (o = r.pop(), a = r[r.length - 1], f = s.pop(), u = !0), o.leaf) {
-        const h = nr(t, o.children, n);
-        if (h !== -1)
-          return o.children.splice(h, 1), r.push(o), this._condense(r), this;
+      if (o || (o = r.pop(), a = r[r.length - 1], f = s.pop(), c = !0), o.leaf) {
+        const m = nr(t, o.children, n);
+        if (m !== -1)
+          return o.children.splice(m, 1), r.push(o), this._condense(r), this;
       }
-      !u && !o.leaf && lt(o, i) ? (r.push(o), s.push(f), f = 0, a = o, o = o.children[0]) : a ? (f++, o = a.children[f], u = !1) : o = null;
+      !c && !o.leaf && lt(o, i) ? (r.push(o), s.push(f), f = 0, a = o, o = o.children[0]) : a ? (f++, o = a.children[f], c = !1) : o = null;
     }
     return this;
   }
@@ -5161,14 +5161,14 @@ class tr {
     if (r <= s)
       return f = Le(t.slice(n, o + 1)), Me(f, this.toBBox), f;
     i || (i = Math.ceil(Math.log(r) / Math.log(s)), s = Math.ceil(r / Math.pow(s, i - 1))), f = Le([]), f.leaf = !1, f.height = i;
-    const a = Math.ceil(r / s), u = a * Math.ceil(Math.sqrt(s));
-    Kt(t, n, o, u, this.compareMinX);
-    for (let h = n; h <= o; h += u) {
-      const c = Math.min(h + u - 1, o);
-      Kt(t, h, c, a, this.compareMinY);
-      for (let m = h; m <= c; m += a) {
-        const d = Math.min(m + a - 1, c);
-        f.children.push(this._build(t, m, d, i - 1));
+    const a = Math.ceil(r / s), c = a * Math.ceil(Math.sqrt(s));
+    Kt(t, n, o, c, this.compareMinX);
+    for (let m = n; m <= o; m += c) {
+      const u = Math.min(m + c - 1, o);
+      Kt(t, m, u, a, this.compareMinY);
+      for (let h = m; h <= u; h += a) {
+        const d = Math.min(h + a - 1, u);
+        f.children.push(this._build(t, h, d, i - 1));
       }
     }
     return Me(f, this.toBBox), f;
@@ -5177,8 +5177,8 @@ class tr {
     for (; i.push(n), !(n.leaf || i.length - 1 === o); ) {
       let r = 1 / 0, s = 1 / 0, f;
       for (let a = 0; a < n.children.length; a++) {
-        const u = n.children[a], h = st(u), c = rr(t, u) - h;
-        c < s ? (s = c, r = h < r ? h : r, f = u) : c === s && h < r && (r = h, f = u);
+        const c = n.children[a], m = st(c), u = rr(t, c) - m;
+        u < s ? (s = u, r = m < r ? m : r, f = c) : u === s && m < r && (r = m, f = c);
       }
       n = f || n.children[0];
     }
@@ -5203,8 +5203,8 @@ class tr {
   _chooseSplitIndex(t, n, o) {
     let i, r = 1 / 0, s = 1 / 0;
     for (let f = n; f <= o - n; f++) {
-      const a = Pe(t, 0, f, this.toBBox), u = Pe(t, f, o, this.toBBox), h = sr(a, u), c = st(a) + st(u);
-      h < r ? (r = h, i = f, s = c < s ? c : s) : h === r && c < s && (s = c, i = f);
+      const a = Pe(t, 0, f, this.toBBox), c = Pe(t, f, o, this.toBBox), m = sr(a, c), u = st(a) + st(c);
+      m < r ? (r = m, i = f, s = u < s ? u : s) : m === r && u < s && (s = u, i = f);
     }
     return i || o - n;
   }
@@ -5218,13 +5218,13 @@ class tr {
     t.children.sort(i);
     const r = this.toBBox, s = Pe(t, 0, n, r), f = Pe(t, o - n, o, r);
     let a = We(s) + We(f);
-    for (let u = n; u < o - n; u++) {
-      const h = t.children[u];
-      Ie(s, t.leaf ? r(h) : h), a += We(s);
+    for (let c = n; c < o - n; c++) {
+      const m = t.children[c];
+      Ie(s, t.leaf ? r(m) : m), a += We(s);
     }
-    for (let u = o - n - 1; u >= n; u--) {
-      const h = t.children[u];
-      Ie(f, t.leaf ? r(h) : h), a += We(f);
+    for (let c = o - n - 1; c >= n; c--) {
+      const m = t.children[c];
+      Ie(f, t.leaf ? r(m) : m), a += We(f);
     }
     return a;
   }
@@ -5307,59 +5307,59 @@ function Kt(e, t, n, o, i) {
 const lr = () => {
   const e = new tr(), t = /* @__PURE__ */ new Map(), n = () => [...t.values()], o = () => {
     e.clear(), t.clear();
-  }, i = (c) => {
-    const { minX: m, minY: d, maxX: p, maxY: A } = c.selector.geometry.bounds, E = { minX: m, minY: d, maxX: p, maxY: A, target: c };
-    e.insert(E), t.set(c.annotation, E);
-  }, r = (c) => {
-    const m = t.get(c.annotation);
-    e.remove(m), t.delete(c.annotation);
+  }, i = (u) => {
+    const { minX: h, minY: d, maxX: p, maxY: A } = u.selector.geometry.bounds, E = { minX: h, minY: d, maxX: p, maxY: A, target: u };
+    e.insert(E), t.set(u.annotation, E);
+  }, r = (u) => {
+    const h = t.get(u.annotation);
+    e.remove(h), t.delete(u.annotation);
   };
   return {
     all: n,
     clear: o,
-    getAt: (c, m) => {
+    getAt: (u, h) => {
       const p = e.search({
-        minX: c,
-        minY: m,
-        maxX: c,
-        maxY: m
-      }).map((A) => A.target).filter((A) => A.selector.type === F.RECTANGLE || Tn(A.selector, c, m));
+        minX: u,
+        minY: h,
+        maxX: u,
+        maxY: h
+      }).map((A) => A.target).filter((A) => A.selector.type === F.RECTANGLE || Tn(A.selector, u, h));
       if (p.length > 0)
         return p.sort((A, E) => ct(A.selector) - ct(E.selector)), p[0];
     },
-    getIntersecting: (c, m, d, p) => e.search({
-      minX: c,
-      minY: m,
-      maxX: c + d,
-      maxY: m + p
+    getIntersecting: (u, h, d, p) => e.search({
+      minX: u,
+      minY: h,
+      maxX: u + d,
+      maxY: h + p
     }).map((A) => A.target),
     insert: i,
     remove: r,
-    set: (c, m = !0) => {
-      m && o();
-      const d = c.map((p) => {
+    set: (u, h = !0) => {
+      h && o();
+      const d = u.map((p) => {
         const { minX: A, minY: E, maxX: _, maxY: g } = p.selector.geometry.bounds;
         return { minX: A, minY: E, maxX: _, maxY: g, target: p };
       });
       d.forEach((p) => t.set(p.target.annotation, p)), e.load(d);
     },
     size: () => e.all().length,
-    update: (c, m) => {
-      r(c), i(m);
+    update: (u, h) => {
+      r(u), i(h);
     }
   };
 }, ar = (e) => {
   const t = ao(), n = lr(), o = xn(t, e.pointerSelectAction), i = Qn(t), r = ho();
   return t.observe(({ changes: a }) => {
-    n.set(a.created.map((u) => u.target), !1), a.deleted.forEach((u) => n.remove(u.target)), a.updated.forEach(({ oldValue: u, newValue: h }) => n.update(u.target, h.target));
+    n.set(a.created.map((c) => c.target), !1), a.deleted.forEach((c) => n.remove(c.target)), a.updated.forEach(({ oldValue: c, newValue: m }) => n.update(c.target, m.target));
   }), {
     store: {
       ...t,
-      getAt: (a, u) => {
-        const h = n.getAt(a, u);
-        return h ? t.getAnnotation(h.annotation) : void 0;
+      getAt: (a, c) => {
+        const m = n.getAt(a, c);
+        return m ? t.getAnnotation(m.annotation) : void 0;
       },
-      getIntersecting: (a, u, h, c) => n.getIntersecting(a, u, h, c).map((m) => t.getAnnotation(m.annotation))
+      getIntersecting: (a, c, m, u) => n.getIntersecting(a, c, m, u).map((h) => t.getAnnotation(h.annotation))
     },
     selection: o,
     hover: i,
@@ -5382,8 +5382,8 @@ const lr = () => {
   let o = 0;
   for (let i = 1; i < 10; i++)
     for (let r = 1; r < 10; r++) {
-      const s = Math.round(r * t.width / 10), f = Math.round(i * t.height / 10), a = n.getImageData(s, f, 1, 1).data, u = (0.299 * a[0] + 0.587 * a[1] + 0.114 * a[2]) / 255;
-      o += u;
+      const s = Math.round(r * t.width / 10), f = Math.round(i * t.height / 10), a = n.getImageData(s, f, 1, 1).data, c = (0.299 * a[0] + 0.587 * a[1] + 0.114 * a[2]) / 255;
+      o += c;
     }
   return o / 81;
 }, ur = (e) => {
@@ -5420,36 +5420,36 @@ const yr = (e, t = {}) => {
     f,
     o.adapter,
     o.autoSave
-  ), u = document.createElement("DIV");
-  u.style.position = "relative", u.style.display = "inline-block", n.style.display = "block", n.parentNode.insertBefore(u, n), u.appendChild(n);
-  const h = mr(f);
-  let c = Ao();
-  Wt(n, u, o.theme);
-  const m = new xi({
-    target: u,
+  ), c = document.createElement("DIV");
+  c.style.position = "relative", c.style.display = "inline-block", n.style.display = "block", n.parentNode.insertBefore(c, n), c.appendChild(n);
+  const m = mr(f);
+  let u = Ao();
+  Wt(n, c, o.theme);
+  const h = new xi({
+    target: c,
     props: {
       drawingEnabled: o.drawingEnabled,
       image: n,
       preferredDrawingMode: o.drawingMode,
       state: i,
       style: o.style,
-      user: c
+      user: u
     }
   });
-  m.$on("click", (w) => {
+  h.$on("click", (w) => {
     const { originalEvent: b, annotation: S } = w.detail;
     S ? r.clickSelect(S.id, b) : r.isEmpty() || r.clear();
   });
   const d = yo(i, f, o.adapter), p = () => {
-    m.$destroy(), u.parentNode.insertBefore(n, u), u.parentNode.removeChild(u), h.destroy(), f.destroy();
-  }, A = () => c, E = (w, b, S) => Ei(w, b, S), _ = (w, b) => Wo(w, b), g = (w) => {
+    h.$destroy(), c.parentNode.insertBefore(n, c), c.parentNode.removeChild(c), m.destroy(), f.destroy();
+  }, A = () => u, E = (w, b, S) => Ei(w, b, S), _ = (w, b) => Wo(w, b), g = (w) => {
     if (!cn(w))
       throw `No drawing tool named ${w}`;
-    m.$set({ toolName: w });
-  }, y = (w) => m.$set({ drawingEnabled: w }), M = (w) => {
+    h.$set({ toolName: w });
+  }, y = (w) => h.$set({ drawingEnabled: w }), M = (w) => {
     console.warn("Filter not implemented yet");
-  }, L = (w) => m.$set({ style: w }), X = (w) => Wt(n, u, w), R = (w) => {
-    c = w, m.$set({ user: w });
+  }, L = (w) => h.$set({ style: w }), X = (w) => Wt(n, c, w), R = (w) => {
+    u = w, h.$set({ user: w });
   };
   return {
     ...d,

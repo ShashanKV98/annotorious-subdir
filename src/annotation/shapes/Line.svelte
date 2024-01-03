@@ -14,13 +14,27 @@
 </script>
 
 <g data-id={annotation.id}>
+    <defs>
+    <!-- A marker to be used as an arrowhead -->
+    <marker
+      class="arrow"
+      viewBox={`0 0 10 10`}
+      refX = "6"
+      refY = "6"
+      markerWidth={`6`}
+      markerHeight={`6`}
+      orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+  </defs>
   <line
     class="a9s-outer"
     style={computedStyle ? 'display:none;' : undefined}
     x1={x1} 
     y1={y1} 
     x2={x2} 
-    y2={y2} />
+    y2={y2} 
+    marker-end="url(.arrow)"/>
 
   <line
     class="a9s-inner"
@@ -28,5 +42,6 @@
     x1={x1} 
     y1={y1} 
     x2={x2} 
-    y2={y2} />
+    y2={y2}
+    marker-end="url(.arrow)" />
 </g>
