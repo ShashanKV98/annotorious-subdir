@@ -83,34 +83,24 @@
   </defs>
   <line 
     class="a9s-outer"
-    stroke = 'blue'
-    stroke-width = '3'
-    style={computedStyle ? 'display:none;' : 'stroke: black'}
+    style={computedStyle ? 'display:none;' : undefined}
     on:pointerdown={grab(Handle.SHAPE)}
     x1={geom.x1} y1={geom.y1} x2={geom.x2} y2={geom.y2} marker-end="url(.arrow)"/>
 
   <line 
     class="a9s-inner a9s-shape-handle"
-    stroke = 'blue'
-    stroke-width = '3'
-    style={'stroke: black' || computedStyle}
+    style={computedStyle}
     on:pointerdown={grab(Handle.SHAPE)}
     x1={geom.x1} y1={geom.y1} x2={geom.x2} y2={geom.y2} />
 
     <circle 
         class="a9s-corner-handle"
-        stroke = "blue"
-        stroke-width = "2"
-        fill = "white"
         on:pointerdown={grab(Handle.LEFT)}
         cx={geom.x1} cy={geom.y1}
         r={handleSize / 2} />
 
     <circle 
         class="a9s-corner-handle"
-        stroke = "blue"
-        stroke-width = "2"
-        fill = "white"
         on:pointerdown={grab(Handle.RIGHT)}
         cx={geom.x2} cy={geom.y2} r={handleSize / 2}/>
 </Editor>
