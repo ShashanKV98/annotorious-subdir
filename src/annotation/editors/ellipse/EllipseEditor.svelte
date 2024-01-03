@@ -2,7 +2,6 @@
   import { Handle, Editor } from '..';
   import type { Transform } from '../../Transform';
   import type { Ellipse } from '../../../model';
-  import type { Transform } from '../../Transform';
 
   export let shape: Ellipse;
 
