@@ -57,7 +57,7 @@
     if (isDrawing){
       const point = transform.elementToImage(evt.offsetX, evt.offsetY);
       points.push([...point,evt.pressure])
-      pathData = getSmoothPathData(points,options)
+      pathData = getSmoothPathData(points,options,true)
     }
   }
 

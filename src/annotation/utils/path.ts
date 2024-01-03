@@ -97,9 +97,9 @@ export function getSmoothPathData(
   options: GenericObject,
   simplifyPath: Boolean = false
 ) {
-  const stroke = getStroke(points, options)
+  // const stroke = getStroke(points, options)
   const pathData = getSvgPathFromStroke(
-    simplifyPath ? simplify(stroke,0.25) : stroke
+    simplifyPath ? simplify(points,1) : points
   )
   return pathData
 }
