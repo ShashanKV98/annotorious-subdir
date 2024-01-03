@@ -109,6 +109,8 @@
   {#if origin}
     <line
       class="a9s-outer"
+      stroke = 'blue'
+        stroke-width = '3'
       x1={x1} 
       y1={y1} 
       x2={x2} 
@@ -116,6 +118,8 @@
 
     <line
       class="a9s-inner"
+      stroke = 'blue'
+        stroke-width = '3'
       x1={x1} 
       y1={y1} 
       x2={x2} 
