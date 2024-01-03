@@ -45,8 +45,8 @@
 .a9s-corner-handle {
   cursor: grab;
   stroke-width: 1;
-  stroke: rgb(22, 69, 200);
-  fill: rgb(44, 40, 40);
+  stroke: rgba(39, 75, 171,0.5);
+  fill: rgb(228, 219, 219);
 }
 
 .a9s-corner-handle:active {
@@ -73,27 +73,27 @@
 .a9s-corner-handle.a9s-corner-handle-topleft {
   cursor: nw-resize;
   stroke-width: 1;
-  stroke: rgb(22, 69, 200);
-  fill: rgb(44, 40, 40);
+  stroke: rgba(39, 75, 171,0.5);
+  fill: rgb(228, 219, 219);
 }
 
 .a9s-corner-handle.a9s-corner-handle-topright {
   cursor: ne-resize;
   stroke-width: 1;
-  stroke: rgb(22, 69, 200);
-  fill: rgb(44, 40, 40);
+  stroke: rgba(39, 75, 171,0.5);
+  fill: rgb(228, 219, 219);
 }
 
 .a9s-corner-handle.a9s-corner-handle-bottomright {
   cursor: se-resize; 
   stroke-width: 1;
-  stroke: rgb(22, 69, 200);
-  fill: rgb(44, 40, 40);
+  stroke: rgba(39, 75, 171,0.5);
+  fill: rgb(228, 219, 219);
 }
 
 .a9s-corner-handle.a9s-corner-handle-bottomleft {
   cursor: sw-resize;
   stroke-width: 1;
-  stroke: rgb(22, 69, 200);
-  fill: rgb(44, 40, 40);
+  stroke: rgba(39, 75, 171,0.5);
+  fill: rgb(228, 219, 219);
 }

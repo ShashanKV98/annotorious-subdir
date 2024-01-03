@@ -17,7 +17,7 @@
     <defs>
     <!-- A marker to be used as an arrowhead -->
     <marker
-      class="arrow"
+      id="arrow"
       viewBox={`0 0 10 10`}
       refX = "6"
       refY = "6"
@@ -34,7 +34,7 @@
     y1={y1} 
     x2={x2} 
     y2={y2} 
-    marker-end="url(.arrow)"/>
+    marker-end="url(#arrow)"/>
 
   <line
     class="a9s-inner"
@@ -43,5 +43,5 @@
     y1={y1} 
     x2={x2} 
     y2={y2}
-    marker-end="url(.arrow)" />
+    marker-end="url(#arrow)" />
 </g>
