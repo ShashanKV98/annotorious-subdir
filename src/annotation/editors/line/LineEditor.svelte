@@ -85,11 +85,11 @@
     <circle 
         class="a9s-corner-handle a9s-shape-handle"
         on:pointerdown={grab(Handle.LEFT)}
-        cx={geom.x1 - handleSize / 2} cy={geom.y1 - handleSize / 2}
+        cx={geom.x1} cy={geom.y1}
         r={handleSize / 2} />
 
     <circle 
         class="a9s-corner-handle a9s-shape-handle"
         on:pointerdown={grab(Handle.RIGHT)}
-        cx={geom.x2 - handleSize / 2} cy={geom.y2 - handleSize / 2} r={handleSize / 2}/>
+        cx={geom.x2} cy={geom.y2} r={handleSize / 2}/>
 </Editor>
