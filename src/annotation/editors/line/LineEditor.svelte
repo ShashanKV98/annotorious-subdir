@@ -75,6 +75,8 @@
     <marker
       class="arrow"
       viewBox={`0 0 ${handleSize/2} ${handleSize/2}`}
+      refX = {`${handleSize/2}`}
+      refY = {`${handleSize/2}`}
       markerWidth={`${handleSize/2}`}
       markerHeight={`${handleSize/2}`}
       orient="auto-start-reverse">
