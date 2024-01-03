@@ -5,7 +5,7 @@
   import { ShapeType } from '../model';
   import type { ImageAnnotation, Shape} from '../model';
   import { getEditor, EditorMount } from './editors';
-  import { Ellipse, Polygon, Rectangle,Freehand} from './shapes';
+  import { Ellipse, Polygon, Rectangle,Freehand,Line} from './shapes';
   import { getTool, listDrawingTools, ToolMount } from './tools';
   import { enableResponsive } from './utils';
   import { createSVGTransform } from './Transform';
@@ -134,6 +134,8 @@
             <Polygon annotation={annotation} geom={selector.geometry} style={style} />
           {:else if (selector.type === ShapeType.FREEHAND)}
             <Freehand annotation={annotation} geom={selector.geometry} style={style} />
+          {:else if (selector.type === ShapeType.LINE)}
+            <Line annotation={annotation} geom={selector.geometry} style={style} />
           {/if}
         {/key}
       {/if}
