@@ -73,7 +73,7 @@
   <defs>
     <!-- A marker to be used as an arrowhead -->
     <marker
-      class="arrow"
+      id="arrow"
       viewBox={`0 0 ${handleSize/2} ${handleSize/2}`}
       refX = {`${handleSize/2}`}
       refY = {`${handleSize/2}`}
@@ -87,12 +87,13 @@
     class="a9s-outer"
     style={computedStyle ? 'display:none;' : undefined}
     on:pointerdown={grab(Handle.SHAPE)}
-    x1={geom.x1} y1={geom.y1} x2={geom.x2} y2={geom.y2} marker-end="url(.arrow)"/>
+    x1={geom.x1} y1={geom.y1} x2={geom.x2} y2={geom.y2} marker-end="url(#arrow)"/>
 
   <line 
     class="a9s-inner a9s-shape-handle"
     style={computedStyle}
     on:pointerdown={grab(Handle.SHAPE)}
+    marker-end="url(#arrow)"
     x1={geom.x1} y1={geom.y1} x2={geom.x2} y2={geom.y2} />
 
     <circle 
