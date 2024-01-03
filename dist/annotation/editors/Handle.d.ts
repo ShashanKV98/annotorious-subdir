@@ -10,5 +10,7 @@ export declare const Handle: {
     TOP_RIGHT: string;
     BOTTOM_RIGHT: string;
     BOTTOM_LEFT: string;
+    START: string;
+    END: string;
 };
 //# sourceMappingURL=Handle.d.ts.map

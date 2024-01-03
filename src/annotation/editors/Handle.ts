@@ -19,3 +19,7 @@ Handle.TOP_RIGHT = 'TOP_RIGHT';
 Handle.BOTTOM_RIGHT = 'BOTTOM_RIGHT';
 
 Handle.BOTTOM_LEFT = 'BOTTOM_LEFT';
+
+Handle.START = 'START';
+
+Handle.END = 'END';

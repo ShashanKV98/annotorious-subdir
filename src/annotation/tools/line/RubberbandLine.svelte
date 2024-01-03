@@ -37,10 +37,8 @@
     if (origin) {
       anchor = transform.elementToImage(evt.offsetX, evt.offsetY);
 
-      x1 = Math.min(anchor[0], origin[0]);
-      y1 = Math.min(anchor[1], origin[1]);
-      x2= Math.max(anchor[0], origin[0]);
-      y2 = Math.max(anchor[1], origin[1]);
+      x2= anchor[0]
+      y2 =anchor[1]
     }
   }
     
