@@ -22,7 +22,7 @@
 .a9s-annotationlayer ellipse, 
 .a9s-annotationlayer polygon,
 .a9s-annotationlayer rect,
- .a9s-annotationlayer line, {
+ .a9s-annotationlayer line {
   fill: transparent;
   shape-rendering: geometricPrecision;
   vector-effect: non-scaling-stroke;
