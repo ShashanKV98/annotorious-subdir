@@ -35,12 +35,21 @@
 }
 
 .a9s-shape-handle {
-  cursor: move;
+  cursor: grab;
+}
+
+.a9s-shape-handle:active {
+  cursor: grabbing;
 }
 
 .a9s-corner-handle {
-  cursor: move;
+  cursor: grab;
 }
+
+.a9s-corner-handle:active {
+  cursor: grabbing;
+}
+
 
 .a9s-edge-handle-top {
   cursor: n-resize;
