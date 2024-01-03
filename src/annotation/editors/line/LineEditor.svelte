@@ -74,11 +74,11 @@
     <!-- A marker to be used as an arrowhead -->
     <marker
       id="arrow"
-      viewBox={`0 0 ${handleSize/4} ${handleSize/4}`}
+      viewBox={`0 0 10 10`}
       refX = "0"
       refY = "0"
-      markerWidth={`${handleSize/6}`}
-      markerHeight={`${handleSize/6}`}
+      markerWidth={`6`}
+      markerHeight={`6`}
       orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" />
     </marker>
@@ -100,10 +100,10 @@
         class="a9s-corner-handle"
         on:pointerdown={grab(Handle.LEFT)}
         cx={geom.x1} cy={geom.y1}
-        r={handleSize / 2} />
+        r={handleSize / 3} />
 
     <circle 
         class="a9s-corner-handle"
         on:pointerdown={grab(Handle.RIGHT)}
-        cx={geom.x2} cy={geom.y2} r={handleSize / 2}/>
+        cx={geom.x2} cy={geom.y2} r={handleSize / 3}/>
 </Editor>
