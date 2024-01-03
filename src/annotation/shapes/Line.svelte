@@ -19,12 +19,14 @@
     <marker
       id="arrow"
       viewBox={`0 0 10 10`}
-      refX = "6"
-      refY = "6"
+      refX = "5"
+      refY = "5"
       markerWidth={`6`}
       markerHeight={`6`}
       orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" />
+      
+    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+
     </marker>
   </defs>
   <line
