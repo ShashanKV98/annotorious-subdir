@@ -4,7 +4,7 @@ import simplify from './simplify'
 type GenericObject = Record<string,unknown>
 
 export const options = {
-  size: 4,
+  size: 2,
   thinning: 0.3,
   smoothing: 0.5,
   streamline: 0.5,
@@ -82,10 +82,11 @@ export function getSvgPathFromStroke(stroke) {
   const d = stroke.reduce(
     (acc, [x0, y0], i, arr) => {
       const [x1, y1] = arr[(i + 1) % arr.length]
-      acc.push(x0, y0, (x0 + x1) / 2, (y0 + y1) / 2)
+      // acc.push(x0, y0, (x0 + x1) / 2, (y0 + y1) / 2)
+      acc.push(x0, y0, x1,y1)
       return acc
     },
-    ['M', ...stroke[0], 'Q']
+    ['M', ...stroke[0], 'L']
   )
 
   d.push('Z')
@@ -97,9 +98,9 @@ export function getSmoothPathData(
   options: GenericObject,
   simplifyPath: Boolean = false
 ) {
-  // const stroke = getStroke(points, options)
+  const stroke = getStroke(points, options)
   const pathData = getSvgPathFromStroke(
-    simplifyPath ? simplify(points,1) : points
+    simplifyPath ? simplify(stroke, 0.2) : stroke
   )
   return pathData
 }

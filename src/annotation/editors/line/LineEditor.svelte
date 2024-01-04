@@ -70,19 +70,6 @@
   on:release
   let:grab={grab}>
 
-  <defs>
-    <!-- A marker to be used as an arrowhead -->
-    <marker
-      id="arrow"
-      viewBox={`0 0 10 10`}
-      refX = "9"
-      refY = "5"
-      markerWidth={`6`}
-      markerHeight={`6`}
-      orient="auto-start-reverse">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 10 5 L 0 10 z" />
-    </marker>
-  </defs>
   <line 
     class="a9s-outer"
     stroke-linecap="round" stroke-linejoin="round"
@@ -102,10 +89,23 @@
         class="a9s-corner-handle"
         on:pointerdown={grab(Handle.LEFT)}
         cx={geom.x1} cy={geom.y1}
-        r={handleSize / 5} />
+        r={handleSize / 2} />
 
     <circle 
         class="a9s-corner-handle"
         on:pointerdown={grab(Handle.RIGHT)}
-        cx={geom.x2} cy={geom.y2} r={handleSize / 5}/>
+        cx={geom.x2} cy={geom.y2} r={handleSize / 2}/>
 </Editor>
+
+  <!-- <defs>
+    <marker
+      id="arrow"
+      viewBox={`0 0 10 10`}
+      refX = "9"
+      refY = "5"
+      markerWidth={`6`}
+      markerHeight={`6`}
+      orient="auto-start-reverse">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 10 5 L 0 10 z" />
+    </marker>
+  </defs> -->
