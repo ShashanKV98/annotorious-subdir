@@ -114,6 +114,8 @@
       y1={y1} 
       x2={x2} 
       y2={y2}
+      stroke-linecap="round" 
+      stroke-linejoin="round"
       />
 
     <line
@@ -122,6 +124,8 @@
       y1={y1} 
       x2={x2} 
       y2={y2}
+      stroke-linecap="round" 
+      stroke-linejoin="round"
        />
   {/if}
 </g>

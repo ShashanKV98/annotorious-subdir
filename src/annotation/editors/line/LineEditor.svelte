@@ -75,16 +75,17 @@
     <marker
       id="arrow"
       viewBox={`0 0 10 10`}
-      refX = "5"
+      refX = "9"
       refY = "5"
       markerWidth={`6`}
       markerHeight={`6`}
       orient="auto-start-reverse">
-      <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      <path stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 10 5 L 0 10 z" />
     </marker>
   </defs>
   <line 
     class="a9s-outer"
+    stroke-linecap="round" stroke-linejoin="round"
     style={computedStyle ? 'display:none;' : undefined}
     on:pointerdown={grab(Handle.SHAPE)}
     x1={geom.x1} y1={geom.y1} x2={geom.x2} y2={geom.y2} marker-end="url(#arrow)"/>
@@ -92,6 +93,7 @@
   <line 
     class="a9s-inner a9s-shape-handle"
     style={computedStyle}
+    stroke-linecap="round" stroke-linejoin="round"
     on:pointerdown={grab(Handle.SHAPE)}
     marker-end="url(#arrow)"
     x1={geom.x1} y1={geom.y1} x2={geom.x2} y2={geom.y2} />
@@ -100,10 +102,10 @@
         class="a9s-corner-handle"
         on:pointerdown={grab(Handle.LEFT)}
         cx={geom.x1} cy={geom.y1}
-        r={handleSize / 3} />
+        r={handleSize / 5} />
 
     <circle 
         class="a9s-corner-handle"
         on:pointerdown={grab(Handle.RIGHT)}
-        cx={geom.x2} cy={geom.y2} r={handleSize / 3}/>
+        cx={geom.x2} cy={geom.y2} r={handleSize / 5}/>
 </Editor>

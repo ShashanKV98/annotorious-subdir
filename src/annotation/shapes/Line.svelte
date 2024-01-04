@@ -19,31 +19,33 @@
     <marker
       id="arrow"
       viewBox={`0 0 10 10`}
-      refX = "5"
+      refX = "9"
       refY = "5"
       markerWidth={`6`}
       markerHeight={`6`}
       orient="auto-start-reverse">
       
-    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+    <path stroke-linecap="round" stroke-linejoin="round" d="M 0 0 L 10 5 L 0 10 z" />
 
     </marker>
   </defs>
   <line
     class="a9s-outer"
-    style={computedStyle ? 'display:none;' : undefined}
+    style={computedStyle ? 'display:none;' : 'stroke-width: 3'}
     x1={x1} 
     y1={y1} 
     x2={x2} 
     y2={y2} 
+    stroke-linecap="round" stroke-linejoin="round"
     marker-end="url(#arrow)"/>
 
   <line
     class="a9s-inner"
-    style={computedStyle}
-    x1={x1} 
+    style={computedStyle || 'stroke-width: 3'}
+    x1={x1}
     y1={y1} 
     x2={x2} 
     y2={y2}
+    stroke-linecap="round" stroke-linejoin="round"
     marker-end="url(#arrow)" />
 </g>
