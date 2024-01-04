@@ -609,9 +609,9 @@ function fo(e) {
   const t = e.reduce(
     (n, [o, i], r, s) => {
       const [a, l] = s[(r + 1) % s.length];
-      return n.push(o, i, a, l), n;
+      return n.push(o, i, (o + a) / 2, (i + l) / 2), n;
     },
-    ["M", ...e[0], "L"]
+    ["M", ...e[0], "Q"]
   );
   return t.push("Z"), t.join(" ");
 }
